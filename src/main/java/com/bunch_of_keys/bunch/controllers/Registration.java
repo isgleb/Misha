@@ -1,9 +1,14 @@
 package com.bunch_of_keys.bunch.controllers;
 
+import com.bunch_of_keys.bunch.domain.OrderDao;
+import com.bunch_of_keys.bunch.services.OrderService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
 
 
 @Controller
@@ -26,5 +31,17 @@ public class Registration {
         model.addAttribute("title", "главная страничка");
         return "tables";
     }
+
+    @GetMapping("/orders/request")
+    public ResponseEntity getOrders (Model model) {
+        OrderService os = new OrderService();
+        os.setOrders();
+
+        List<OrderDao> ordersResp = os.getOrders();
+
+        return new ResponseEntity(ordersResp, HttpStatus.OK);
+    }
+
+
 
 }
