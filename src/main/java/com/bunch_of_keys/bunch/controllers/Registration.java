@@ -21,4 +21,10 @@ public class Registration {
         return "dashboard";
     }
 
+    @GetMapping("/orders")
+    public String orders (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "tables";
+    }
+
 }
