@@ -494,17 +494,17 @@
                             <div class="card-body">
                                 <h5 class="card-title">Basic Datatable</h5>
                                 <div class="table-responsive">
-                                    <table id="zero_config" class="table table-striped table-bordered">
-<!--                                        <thead>-->
-<!--                                            <tr>-->
-<!--                                                <th>Name</th>-->
-<!--                                                <th>Position</th>-->
-<!--                                                <th>Office</th>-->
-<!--                                                <th>Age</th>-->
-<!--                                                <th>Start date</th>-->
-<!--                                                <th>Salary</th>-->
-<!--                                            </tr>-->
-<!--                                        </thead>-->
+                                    <table id="zero_config" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th scope="id">id</th>
+                                                <th scope="name">name</th>
+                                                <th scope="summ">summ</th>
+<!--                                                <th>id</th>-->
+<!--                                                <th>name</th>-->
+<!--                                                <th>summ</th>-->
+                                            </tr>
+                                        </thead>
 <!--                                        <tbody>-->
 <!--                                            <tr>-->
 <!--                                                <td>Tiger Nixon</td>-->
@@ -1039,6 +1039,7 @@
 
 
         $('#zero_config').DataTable( {
+
     ajax: {
         url: '/orders/request',
         dataSrc: ''
@@ -1048,6 +1049,7 @@
         { data: 'customer' },
         { data: 'price' }
     ]
+
 } );
     </script>
 
