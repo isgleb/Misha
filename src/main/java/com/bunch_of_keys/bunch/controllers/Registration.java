@@ -42,6 +42,12 @@ public class Registration {
         return new ResponseEntity(ordersResp, HttpStatus.OK);
     }
 
+    @GetMapping("/alter")
+    public String alter (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "example2";
+    }
+
 
 
 }
