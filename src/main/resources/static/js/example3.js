@@ -7,35 +7,23 @@ $(document).ready(function() {
         type: "readonly"
         },
         {
-        data: "name",
-        title: "Name"
+        data: "customer",
+        title: "Customer"
         },
         {
-        data: "position",
-        title: "Position"
+        data: "price",
+        title: "Price"
         },
         {
-        data: "office",
-        title: "Office"
-        },
-        {
-        data: "extension",
-        title: "Extn."
-        },
-        {
-        data: "startDate",
-        title: "Start date"
-        },
-        {
-        data: "salary",
-        title: "Salary"
+        data: "address",
+        title: "Address"
         }
     ];
 
     var myTable;
 
-    var url_ws_mock_get = './mock_svc_load.json';
-    var url_ws_mock_ok = './mock_svc_ok.json';
+    var url_ws_mock_get = "./orders/request";
+    var url_ws_mock_ok = "./orders/request";
     if (location.href.startsWith("file://")) {
         // local URL's are not allowed
         url_ws_mock_get = 'https://luca-vercelli.github.io/DataTable-AltEditor/example/03_ajax_objects/mock_svc_load.json';
@@ -105,6 +93,4 @@ $(document).ready(function() {
             });
         }
     });
-
-
 });

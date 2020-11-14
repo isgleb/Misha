@@ -5,11 +5,23 @@ public class OrderDao {
     private int id;
     private String customer;
     private int price;
+    private String address;
 
-    public OrderDao(int id, String customer, int price) {
+
+
+    public OrderDao(int id, String customer, int price, String address) {
         this.id = id;
         this.customer = customer;
         this.price = price;
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getId() {

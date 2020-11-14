@@ -39,13 +39,36 @@ public class Registration {
 
         List<OrderDao> ordersResp = os.getOrders();
 
+        System.out.println(ordersResp);
+
         return new ResponseEntity(ordersResp, HttpStatus.OK);
     }
+
+    @GetMapping("/orders/request/change")
+    public ResponseEntity change (Model model) {
+        OrderService os = new OrderService();
+        os.setOrders();
+
+        List<OrderDao> ordersResp = os.getOrders();
+
+        System.out.println(ordersResp);
+
+        return new ResponseEntity(ordersResp, HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/alter")
     public String alter (Model model) {
         model.addAttribute("title", "главная страничка");
         return "example2";
+    }
+
+
+    @GetMapping("/alteranother")
+    public String alterAnother (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "example3";
     }
 
 

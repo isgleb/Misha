@@ -16,10 +16,10 @@ public class OrderService {
     }
 
     public void setOrders() {
-        this.orders.add(new OrderDao(1, "Dave", 100));
-        this.orders.add(new OrderDao(2, "Carl", 300));
-        this.orders.add(new OrderDao(3, "Pete", 200));
-        this.orders.add(new OrderDao(4, "Kevin", 800));
+        this.orders.add(new OrderDao(1, "Dave", 100, "new york"));
+        this.orders.add(new OrderDao(2, "Carl", 300,"new york"));
+        this.orders.add(new OrderDao(3, "Pete", 200,"new york"));
+        this.orders.add(new OrderDao(4, "Kevin", 800,"new york"));
 
     }
 }
