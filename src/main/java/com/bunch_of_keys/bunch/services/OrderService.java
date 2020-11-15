@@ -24,9 +24,12 @@ public class OrderService {
     }
 
 
-    public List<OrderDao> getOrders () {
-        return orderBase.getOrders();
-    }
+//    public List<OrderDao> getOrders () {
+//        return orderBase.getOrders();
+//    }
+//    public void deleteOrder(String id) {
+//        orderBase.
+//    }
 
     public void setSomeOrders() {
         this.orderBase.addOrder(new OrderDao(1, "Dave", 100, "new york"));

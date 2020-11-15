@@ -57,11 +57,11 @@ $(document).ready(function() {
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
                 // a tipycal url would be / with type='PUT' ссылка передается  корректно
-                url: '/orders/requestok',
+                url: '/orders/request',
                 type: 'POST',
                 dataType: "json",
                 contentType: "application/json",
-                data: JSON.stringify({"id": 23, "customer": "Gleb", "price": 10010, "address": "Moskow"}),
+                data: JSON.stringify(rowdata),
                 cache: false,
                 processData: false,
                 success: success,
@@ -71,8 +71,8 @@ $(document).ready(function() {
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
                 // a tipycal url would be /{id} with type='DELETE'
-                url: url_ws_mock_ok,
-                type: 'GET',
+                url: '/orders/request/' + rowdata[0],
+                type: 'DELETE',
                 data: rowdata,
                 success: success,
                 error: error
