@@ -70,10 +70,25 @@ $(document).ready(function() {
         },
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
+
                 // a tipycal url would be /{id} with type='DELETE'
-                url: '/orders/request/' + rowdata[0],
+
+//                url: '/orders/request?' + $.param({id: JSON.stringify(rowdata[0])}),
+//   вроде не работает
+
+// влияет порно режим, перезагрузка страниц и подключение к интернету
+
+
+//                url: '/orders/request?' + $.param({id: "3"}),
+//                работает
+
+
+                url: '/orders/request?' + $.param({id: rowdata}), // выдает null
+//                вроде null
                 type: 'DELETE',
-                data: rowdata,
+//                data: "id=" + rowdata[0],
+                cache: false,
+                processData: false,
                 success: success,
                 error: error
             });

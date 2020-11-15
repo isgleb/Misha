@@ -18,7 +18,7 @@ public class OrdersController {
 
     @GetMapping("/orders/request")
     public ResponseEntity getOrders () {
-//        orderService.setSomeOrders();
+        orderService.setSomeOrders();
 
         List<OrderDao> ordersResp = orderService.getOrders();
 
@@ -27,16 +27,18 @@ public class OrdersController {
 
     @PostMapping("/orders/request")
     public ResponseEntity deleteOrder (@RequestBody NewOrderRequest newOrderRequest) {
-        System.out.println(newOrderRequest.getCustomer());
         orderService.newOrder(newOrderRequest);
-        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
+        return new ResponseEntity(newOrderRequest, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
 
-//    @DeleteMapping("/orders/request")
-//    public ResponseEntity deleteOrder (@RequestParam String id) {
+    @DeleteMapping("/orders/request")
+    public void deleteOrder (String id) { // ResponseEntity - эта штука работает
+    public void deleteOrder (@RequestParam Integer id) { // работает с postman
+        System.out.println(id);
+    }
+
+//    public void deleteOrder (@RequestParam Integer id) { // работает с postman
 //        System.out.println(id);
-//        orderService.newOrder(newOrderRequest);
-//        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
 //    }
 
 }

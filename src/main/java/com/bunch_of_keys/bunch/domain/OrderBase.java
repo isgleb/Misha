@@ -1,5 +1,6 @@
 package com.bunch_of_keys.bunch.domain;
 
+import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class OrderBase {
     }
 
 
-
-
+    public void deleteOrder(NewOrderRequest createOrderRequest) {
+        orders.remove(createOrderRequest);
+    }
 }
