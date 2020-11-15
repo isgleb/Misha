@@ -1,18 +1,20 @@
 package com.bunch_of_keys.bunch.controllers;
 
 import com.bunch_of_keys.bunch.domain.OrderDao;
+import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import com.bunch_of_keys.bunch.services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @Controller
-public class Registration {
+public class PagesController {
 
     @GetMapping("/")
     public String home (Model model) {
@@ -26,38 +28,11 @@ public class Registration {
         return "dashboard";
     }
 
-    @GetMapping("/orders")
-    public String orders (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "tables";
-    }
-
-    @GetMapping("/orders/request")
-    public ResponseEntity getOrders (Model model) {
-        OrderService os = new OrderService();
-        os.setOrders();
-
-        List<OrderDao> ordersResp = os.getOrders();
-
-        System.out.println(ordersResp);
-
-        return new ResponseEntity(ordersResp, HttpStatus.OK);
-    }
-
-    @GetMapping("/orders/request/change")
-    public ResponseEntity change (Model model) {
-        OrderService os = new OrderService();
-        os.setOrders();
-
-        List<OrderDao> ordersResp = os.getOrders();
-
-        System.out.println(ordersResp);
-
-        return new ResponseEntity(ordersResp, HttpStatus.OK);
-    }
-
-
-
+//    @GetMapping("/orders")
+//    public String orders (Model model) {
+//        model.addAttribute("title", "главная страничка");
+//        return "tables";
+//    }
     @GetMapping("/alter")
     public String alter (Model model) {
         model.addAttribute("title", "главная страничка");
@@ -71,6 +46,9 @@ public class Registration {
         return "example3";
     }
 
-
-
+//    @GetMapping("/alterthree")
+//    public String alterthree (Model model) {
+//        model.addAttribute("title", "главная страничка");
+//        return "alterthree";
+//    }
 }

@@ -1,23 +1,12 @@
-package com.bunch_of_keys.bunch.domain;
+package com.bunch_of_keys.bunch.dto;
 
-import org.springframework.stereotype.Service;
-
-
-public class OrderDao {
+public class NewOrderRequest {
 
     private int id;
     private String customer;
     private int price;
     private String address;
 
-
-
-    public OrderDao(int id, String customer, int price, String address) {
-        this.id = id;
-        this.customer = customer;
-        this.price = price;
-        this.address = address;
-    }
 
     public String getAddress() {
         return address;
@@ -51,3 +40,6 @@ public class OrderDao {
         this.price = price;
     }
 }
+
+
+

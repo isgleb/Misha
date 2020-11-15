@@ -41,7 +41,7 @@ $(document).ready(function() {
         dom: 'Bfrtip',        // Needs button container
         select: 'single',
         responsive: true,
-        altEditor: true,     // Enable altEditor
+        altEditor: true,  // Enable altEditor
         buttons: [
             {
                 text: 'Add',
@@ -65,8 +65,9 @@ $(document).ready(function() {
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
                 // a tipycal url would be / with type='PUT'
+                // rowdata - дата строки
                 url: url_ws_mock_ok,
-                type: 'GET',
+                type: 'PUT',
                 data: rowdata,
                 success: success,
                 error: error
@@ -75,8 +76,8 @@ $(document).ready(function() {
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
                 // a tipycal url would be /{id} with type='DELETE'
-                url: url_ws_mock_ok,
-                type: 'GET',
+                url: url_ws_mock_ok + /{id},
+                type: 'DELETE',
                 data: rowdata,
                 success: success,
                 error: error
