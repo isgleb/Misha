@@ -76,7 +76,7 @@ $(document).ready(function() {
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
                 // a tipycal url would be /{id} with type='DELETE'
-                url: url_ws_mock_ok + /{id},
+                url: url_ws_mock_ok,
                 type: 'DELETE',
                 data: rowdata,
                 success: success,

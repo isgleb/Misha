@@ -1,12 +1,10 @@
 package com.bunch_of_keys.bunch.controllers;
 
 import com.bunch_of_keys.bunch.domain.OrderDao;
-import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import com.bunch_of_keys.bunch.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +24,12 @@ public class OrdersController {
 
 
     @GetMapping("/orders/request")
-    public ResponseEntity getOrders (Model model) {
+    public ResponseEntity getOrders () {
         orderService.setSomeOrders();
 
         List<OrderDao> ordersResp = orderService.getOrders();
 
-        return new ResponseEntity(ordersResp, HttpStatus.CREATED);
+        return new ResponseEntity(ordersResp, HttpStatus.OK);
     }
 
     @PutMapping("/orders/request")
