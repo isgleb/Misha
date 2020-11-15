@@ -7,25 +7,45 @@ $(document).ready(function() {
         type: "readonly"
         },
         {
-        data: "customer",
-        title: "Customer"
+        data: "name",
+        title: "Name"
         },
         {
-        data: "price",
-        title: "Price"
+        data: "position",
+        title: "Position"
         },
         {
-        data: "address",
-        title: "Address"
+        data: "office",
+        title: "Office"
+        },
+        {
+        data: "extension",
+        title: "Extn."
+        },
+        {
+        data: "startDate",
+        title: "Start date"
+        },
+        {
+        data: "salary",
+        title: "Salary"
         }
     ];
 
     var myTable;
 
+//    var url_ws_mock_get = './mock_svc_load.json';
+//    var url_ws_mock_ok = './mock_svc_ok.json';
+//    if (location.href.startsWith("file://")) {
+//        // local URL's are not allowed
+       var url_ws_mock_get = 'https://luca-vercelli.github.io/DataTable-AltEditor/example/03_ajax_objects/mock_svc_load.json';
+       var url_ws_mock_ok = 'https://luca-vercelli.github.io/DataTable-AltEditor/example/03_ajax_objects/mock_svc_ok.json';
+//    }
+
     myTable = $('#example').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
-            url : '/orders/request',
+            url : url_ws_mock_get,
             // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
             dataSrc : ''
         },
@@ -56,14 +76,10 @@ $(document).ready(function() {
         ],
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                // a tipycal url would be / with type='PUT' ссылка передается  корректно
-                url: '/orders/requestok',
-                type: 'POST',
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify({"id": 23, "customer": "Gleb", "price": 10010, "address": "Moskow"}),
-                cache: false,
-                processData: false,
+                // a tipycal url would be / with type='PUT'
+                url: url_ws_mock_ok,
+                type: 'GET',
+                data: rowdata,
                 success: success,
                 error: error
             });
@@ -82,13 +98,8 @@ $(document).ready(function() {
             $.ajax({
                 // a tipycal url would be /{id} with type='POST'
                 url: url_ws_mock_ok,
-                type: 'POST',
-                data: {
-                          "id": 23,
-                          "customer": "Gleb",
-                          "price": 10010,
-                          "address": "Moskow"
-                      },
+                type: 'GET',
+                data: rowdata,
                 success: success,
                 error: error
             });
@@ -97,3 +108,5 @@ $(document).ready(function() {
 
 
 });
+
+

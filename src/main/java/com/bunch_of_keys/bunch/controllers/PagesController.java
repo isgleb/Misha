@@ -45,6 +45,11 @@ public class PagesController {
         model.addAttribute("title", "главная страничка");
         return "example3";
     }
+    @GetMapping("/alterf")
+    public String alterF (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "example4";
+    }
 
 //    @GetMapping("/alterthree")
 //    public String alterthree (Model model) {

@@ -1,6 +1,7 @@
 package com.bunch_of_keys.bunch.controllers;
 
 import com.bunch_of_keys.bunch.domain.OrderDao;
+import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import com.bunch_of_keys.bunch.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,21 +33,26 @@ public class OrdersController {
         return new ResponseEntity(ordersResp, HttpStatus.OK);
     }
 
-    @PutMapping("/orders/request")
-    public ResponseEntity addOrder (@RequestBody String model) {
-        System.out.println(model);
-//        System.out.println(newOrderRequest.getCustomer());
-//        orderService.newOrder(newOrderRequest);
+//    @PutMapping("/orders/request")
+//    public ResponseEntity addOrder (String model) {
+////        сам запрос проходит и ловится здесь но тело пустое в chrome тоже
+//
+//        System.out.println(model);
+////        System.out.println(newOrderRequest.getCustomer());
+////        orderService.newOrder(newOrderRequest);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+
+    @PostMapping("/orders/requestok")
+    public ResponseEntity deleteOrder (@RequestBody NewOrderRequest newOrderRequest) {
+        System.out.println(newOrderRequest.getCustomer());
+        orderService.newOrder(newOrderRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @DeleteMapping("/orders/request")
-    public ResponseEntity deleteOrder (@RequestBody String model) {
-        System.out.println(model);
-//        System.out.println(newOrderRequest.getCustomer());
-//        orderService.newOrder(newOrderRequest);
-        return new ResponseEntity(HttpStatus.OK);
-    }
+
+//    может быть для js тянется версия с компа а надо загружать новую версию datatable
+//    попробуй создать чистый проект
 
 
 
