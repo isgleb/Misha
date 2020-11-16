@@ -54,9 +54,10 @@ $(document).ready(function() {
                 name: 'refresh'      // do not change name
             }
         ],
+
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                // a tipycal url would be / with type='PUT' ссылка передается  корректно
+                // a tipycal url would be
                 url: '/orders/request',
                 type: 'POST',
                 dataType: "json",
@@ -68,25 +69,11 @@ $(document).ready(function() {
                 error: error
             });
         },
+
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
-
-                // a tipycal url would be /{id} with type='DELETE'
-
-//                url: '/orders/request?' + $.param({id: JSON.stringify(rowdata[0])}),
-//   вроде не работает
-
-// влияет порно режим, перезагрузка страниц и подключение к интернету
-
-
-//                url: '/orders/request?' + $.param({id: "3"}),
-//                работает
-
-
                 url: '/orders/request?' + $.param({id: rowdata.id}), // выдает null
-//                вроде null
                 type: 'DELETE',
-//                data: "id=" + rowdata[0],
                 cache: false,
                 processData: false,
                 success: success,
@@ -94,23 +81,15 @@ $(document).ready(function() {
             });
         },
 
-
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                // a tipycal url would be /{id} with type='POST'
-                url: url_ws_mock_ok,
-                type: 'POST',
-                data: {
-                          "id": 23,
-                          "customer": "Gleb",
-                          "price": 10010,
-                          "address": "Moskow"
-                      },
+                url: '/orders/request?' + $.param({id: rowdata.id}),
+                type: 'PUT',
+                cache: false,
+                processData: false,
                 success: success,
                 error: error
             });
         }
     });
-
-
 });

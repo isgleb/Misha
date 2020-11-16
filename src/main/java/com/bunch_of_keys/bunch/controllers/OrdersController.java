@@ -26,19 +26,20 @@ public class OrdersController {
     }
 
     @PostMapping("/orders/request")
-    public ResponseEntity deleteOrder (@RequestBody NewOrderRequest newOrderRequest) {
+    public ResponseEntity newOrder (@RequestBody NewOrderRequest newOrderRequest) {
         orderService.newOrder(newOrderRequest);
         return new ResponseEntity(newOrderRequest, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
 
     @DeleteMapping("/orders/request")
-    public void deleteOrder (String id) { // ResponseEntity - эта штука работает
-//    public void deleteOrder (@RequestParam Integer id) { // работает с postman
+    public void deleteOrder (@RequestParam Integer id) { // работает с postman
         System.out.println(id);
     }
 
-//    public void deleteOrder (@RequestParam Integer id) { // работает с postman
-//        System.out.println(id);
-//    }
-
+    @PutMapping("/orders/request")
+    public ResponseEntity editOrder (@RequestParam Integer id) { // работает с postman
+        System.out.println(id);
+        orderService.newOrder(newOrderRequest);
+        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
+    }
 }
