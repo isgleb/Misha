@@ -83,7 +83,7 @@ $(document).ready(function() {
 //                работает
 
 
-                url: '/orders/request?' + $.param({id: rowdata}), // выдает null
+                url: '/orders/request?' + $.param({id: rowdata.id}), // выдает null
 //                вроде null
                 type: 'DELETE',
 //                data: "id=" + rowdata[0],
@@ -93,6 +93,8 @@ $(document).ready(function() {
                 error: error
             });
         },
+
+
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
                 // a tipycal url would be /{id} with type='POST'

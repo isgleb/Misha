@@ -33,7 +33,7 @@ public class OrdersController {
 
     @DeleteMapping("/orders/request")
     public void deleteOrder (String id) { // ResponseEntity - эта штука работает
-    public void deleteOrder (@RequestParam Integer id) { // работает с postman
+//    public void deleteOrder (@RequestParam Integer id) { // работает с postman
         System.out.println(id);
     }
 
