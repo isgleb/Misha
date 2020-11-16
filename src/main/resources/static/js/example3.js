@@ -57,14 +57,10 @@ $(document).ready(function() {
 
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                // a tipycal url would be
                 url: '/orders/request',
                 type: 'POST',
-                dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
-                cache: false,
-                processData: false,
                 success: success,
                 error: error
             });
@@ -74,8 +70,6 @@ $(document).ready(function() {
             $.ajax({
                 url: '/orders/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
-                cache: false,
-                processData: false,
                 success: success,
                 error: error
             });
@@ -85,8 +79,6 @@ $(document).ready(function() {
             $.ajax({
                 url: '/orders/request?' + $.param({id: rowdata.id}),
                 type: 'PUT',
-                cache: false,
-                processData: false,
                 success: success,
                 error: error
             });

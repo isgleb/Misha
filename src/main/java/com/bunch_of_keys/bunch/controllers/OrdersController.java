@@ -37,9 +37,9 @@ public class OrdersController {
     }
 
     @PutMapping("/orders/request")
-    public ResponseEntity editOrder (@RequestParam Integer id) { // работает с postman
+    public void editOrder (@RequestParam Integer id) { // работает с postman
         System.out.println(id);
-        orderService.newOrder(newOrderRequest);
-        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
+//        orderService.newOrder(newOrderRequest);
+//        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
     }
 }
