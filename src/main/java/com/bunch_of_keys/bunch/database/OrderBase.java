@@ -2,6 +2,7 @@ package com.bunch_of_keys.bunch.database;
 
 import com.bunch_of_keys.bunch.domain.OrderDao;
 import com.bunch_of_keys.bunch.dto.NewOrderRequest;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.GeneratedValue;
@@ -17,20 +18,26 @@ public class OrderBase {
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    private List<OrderDao> orders = new ArrayList<>();
+    private long id = 0;
+
+    private Map<Long, OrderDao> orders = new HashMap<>();
 
     public void addOrder(OrderDao newOrder) {
-
-        this.orders.add(newOrder);
+        id+=1;
+        this.orders.put(id, newOrder);
     }
 
-    public List<OrderDao> getOrders() {
+
+    public Map<Long, OrderDao> getOrders() {
         return orders;
     }
 
 
     public void deleteOrder(Long id) {
+        orders.remove(id);
+    }
 
-        orders.remove();
+    public void changeOrder(Long id, OrderDao order) {
+        orders.put(id, order);
     }
 }

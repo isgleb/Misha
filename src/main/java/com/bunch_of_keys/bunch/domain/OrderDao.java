@@ -16,7 +16,7 @@ public class OrderDao {
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+//    private long id;
     private String status;
     private int customerID;
     private int cleanigServicesID; // one to many connection/  to test - only one
@@ -25,8 +25,7 @@ public class OrderDao {
     String datetimeOrder;
     int totalPrice;
 
-    public OrderDao(Integer id, String status, int customerID, int cleanigServicesID, String address, String dateRecieved, String datetimeOrder, int totalPrice) {
-        this.id = id;
+    public OrderDao(String status, int customerID, int cleanigServicesID, String address, String dateRecieved, String datetimeOrder, int totalPrice) {
         this.status = status;
         this.customerID = customerID;
         this.cleanigServicesID = cleanigServicesID;

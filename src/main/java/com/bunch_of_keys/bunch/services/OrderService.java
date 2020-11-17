@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,6 @@ public class OrderService {
 
     @Autowired
     private OrderBase orderBase;
-
-    Integer id = 1;
 //    здесь должен быть service, он работает с DTO
 //    DTO - состоит из примитивов, чистыми переаваемыми контроллеру
 //    Service слепляет этот DTO из более сложных классов.
@@ -24,38 +23,55 @@ public class OrderService {
     public void newOrder(NewOrderRequest newOrderRequest) {
 
         OrderDao orderDao = new OrderDao(
-                                    id++,
                                     newOrderRequest.getStatus(),
                                     newOrderRequest.getCustomerID(),
                                     newOrderRequest.getCleanigServicesID(),
                                     newOrderRequest.getAddress(),
                                     newOrderRequest.getDateRecieved(),
-                                    newOrderRequest.getDatetimeOrder(),
+                                    newOrderRequest.getDateTimeOrder(),
                                     newOrderRequest.getTotalPrice()
         );
 
         orderBase.addOrder(orderDao);
     }
 
-    public List<OrderDao> getOrders () {
+    public List<NewOrderRequest> getOrders () {
+        List<NewOrderRequest> orderRequest = new ArrayList();
 
-//        for(Object entryObj : orderBase.getOrders().entrySet()){
-//            Map.Entry entry =(Map.Entry) entryObj;
-//            System.out.println(entry.getKey());
-//            System.out.println(entry.getValue());
-//        }
+        for (Map.Entry<Long, OrderDao> entry : orderBase.getOrders().entrySet()) {
+            Long key = entry.getKey();
+            OrderDao value = entry.getValue();
 
-        return orderBase.getOrders();
+            orderRequest.add(new NewOrderRequest(
+                    key,
+                    value.getStatus(),
+                    value.getCustomerID(),
+                    value.getCleanigServicesID(),
+                    value.getAddress(),
+                    value.getDateRecieved(),
+                    value.getDatetimeOrder(),
+                    value.getTotalPrice()));
+        }
+        return orderRequest;
     }
 
     public void deleteOrder(Long id) {
         orderBase.deleteOrder(id);
     }
 
-//    public void setSomeOrders() {
-//        this.orderBase.addOrder(new OrderDao(1, "Dave", 100, "new york"));
-//        this.orderBase.addOrder(new OrderDao(2, "Carl", 300,"new york"));
-//        this.orderBase.addOrder(new OrderDao(3, "Pete", 200,"new york"));
-//        this.orderBase.addOrder(new OrderDao(4, "Kevin", 800,"new york"));
-//    }
+    public NewOrderRequest editOrder(NewOrderRequest newOrderRequest) {
+
+        OrderDao orderDao = new OrderDao(
+                newOrderRequest.getStatus(),
+                newOrderRequest.getCustomerID(),
+                newOrderRequest.getCleanigServicesID(),
+                newOrderRequest.getAddress(),
+                newOrderRequest.getDateRecieved(),
+                newOrderRequest.getDateTimeOrder(),
+                newOrderRequest.getTotalPrice()
+        );
+
+        orderBase.changeOrder(newOrderRequest.getId(), orderDao);
+        return newOrderRequest;
+    }
 }

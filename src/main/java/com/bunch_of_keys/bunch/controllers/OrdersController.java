@@ -3,11 +3,14 @@ package com.bunch_of_keys.bunch.controllers;
 import com.bunch_of_keys.bunch.domain.OrderDao;
 import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import com.bunch_of_keys.bunch.services.OrderService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +29,7 @@ public class OrdersController {
     public ResponseEntity getOrders () {
 //        orderService.setSomeOrders();
 
-        List<OrderDao> ordersResp = orderService.getOrders();
+        List<NewOrderRequest> ordersResp = orderService.getOrders();
 
         return new ResponseEntity(ordersResp, HttpStatus.OK);
     }
@@ -43,8 +46,9 @@ public class OrdersController {
     }
 
     @PutMapping("/orders/request")
-    public void editOrder (@RequestParam Integer id) { // работает с postman
-        System.out.println(id);
+    public ResponseEntity editOrder (@RequestBody NewOrderRequest newOrderRequest) { // работает с postman
+        return new ResponseEntity(orderService.editOrder(newOrderRequest), HttpStatus.OK);
+
 //        orderService.newOrder(newOrderRequest);
 //        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
     }

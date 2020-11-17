@@ -35,8 +35,8 @@ $(document).ready(function() {
         title: "dateRecieved"
         },
         {
-        data: "dateRecieved",
-        title: "dateRecieved"
+        data: "dateTimeOrder",
+        title: "dateTimeOrder"
         },
         {
         data: "totalPrice",
@@ -102,8 +102,10 @@ $(document).ready(function() {
 
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/orders/request?' + $.param({id: rowdata.id}),
+                url: '/orders/request',
                 type: 'PUT',
+                contentType: "application/json",
+                data: JSON.stringify(rowdata),
                 success: success,
                 error: error
             });

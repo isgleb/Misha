@@ -18,9 +18,23 @@ public class NewOrderRequest {
     private int cleanigServicesID; // one to many connection/  to test - only one
     private String address;
     String dateRecieved;
-    String datetimeOrder;
+    String dateTimeOrder;
     int totalPrice;
+
+    public NewOrderRequest(long id, String status, int customerID, int cleanigServicesID, String address, String dateRecieved, String dateTimeOrder, int totalPrice) {
+        this.id = id;
+        this.status = status;
+        this.customerID = customerID;
+        this.cleanigServicesID = cleanigServicesID;
+        this.address = address;
+        this.dateRecieved = dateRecieved;
+        this.dateTimeOrder = dateTimeOrder;
+        this.totalPrice = totalPrice;
+
+    }
 }
+
+
 
 
 
