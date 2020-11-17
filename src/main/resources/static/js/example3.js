@@ -1,3 +1,6 @@
+var statusOptions = { "принят" : "принят", "выполнен" : "выполнен"};
+
+
 $(document).ready(function() {
 
     var columnDefs = [
@@ -14,9 +17,17 @@ $(document).ready(function() {
         title: "Id",
         type: "readonly"
         },
+
         {
         data: "status",
-        title: "Status"
+        title: "Status",
+        type : "select",
+        options : statusOptions,
+        select1 : { width: "100%"},
+        render: function (data, type, row, meta) {
+            if (data == null || !(data in statusOptions)) return null;
+            return statusOptions[data];
+            }
         },
         {
         data: "customerID",

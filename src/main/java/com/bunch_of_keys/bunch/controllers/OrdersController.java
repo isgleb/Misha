@@ -36,6 +36,7 @@ public class OrdersController {
 
     @PostMapping("/orders/request")
     public ResponseEntity newOrder (@RequestBody NewOrderRequest newOrderRequest) {
+        System.out.println("newOrderRequest");
         orderService.newOrder(newOrderRequest);
         return new ResponseEntity(newOrderRequest, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
