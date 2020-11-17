@@ -2,6 +2,11 @@ package com.bunch_of_keys.bunch.dto;
 
 public class NewOrderRequest {
 
+//    в заказе вложенный Enum статусов заказов
+//    этот класс и является одним из классов типа DTO
+//    переименовать в OrderDTO
+//    объект состоит из DAO????
+
     private int id;
     private String customer;
     private int price;

@@ -16,6 +16,9 @@ public class OrderService {
 
     @Autowired
     private OrderBase orderBase;
+//    здесь должен быть service, он работает с DTO
+//    DTO - состоит из примитивов, чистыми переаваемыми контроллеру
+//    Service слепляет этот DTO из более сложных классов.
 
     public void newOrder(NewOrderRequest createOrderRequest) {
 

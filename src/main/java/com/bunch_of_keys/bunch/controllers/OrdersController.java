@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// @RestController работает как @Controller но как бы добавляет к каждому методу аннотацию  @ResponceBody
+// аннотации @ResponceBody конвертирует java объект в JSON, @RequestBody конвертирует входной JSON в  объект Java
+
 @RestController
 public class OrdersController {
 
     @Autowired
     private OrderService orderService;
+    //    service работает с DTO. он будет принимать id и возвращать объект DTO либо List<DTO>
+//    service реализует всю бизнеслогику
 
     @GetMapping("/orders/request")
     public ResponseEntity getOrders () {
