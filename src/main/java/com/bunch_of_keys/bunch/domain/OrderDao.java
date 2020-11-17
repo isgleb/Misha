@@ -1,53 +1,51 @@
 package com.bunch_of_keys.bunch.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+
+@Getter
+@Setter
 public class OrderDao {
 
-    private int id;
-    private String customer;
-    private int price;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String status;
+    private int customerID;
+    private int cleanigServicesID; // one to many connection/  to test - only one
     private String address;
+    String dateRecieved;
+    String datetimeOrder;
+    int totalPrice;
 
-
-
-    public OrderDao(int id, String customer, int price, String address) {
+    public OrderDao(Integer id, String status, int customerID, int cleanigServicesID, String address, String dateRecieved, String datetimeOrder, int totalPrice) {
         this.id = id;
-        this.customer = customer;
-        this.price = price;
+        this.status = status;
+        this.customerID = customerID;
+        this.cleanigServicesID = cleanigServicesID;
         this.address = address;
+        this.dateRecieved = dateRecieved;
+        this.datetimeOrder = datetimeOrder;
+        this.totalPrice = totalPrice;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    @Override
+    public String toString() {
+        return "OrderDao{" +
+                "status='" + status + '\'' +
+                ", customerID=" + customerID +
+                ", cleanigServicesID=" + cleanigServicesID +
+                ", address='" + address + '\'' +
+                ", dateRecieved='" + dateRecieved + '\'' +
+                ", datetimeOrder='" + datetimeOrder + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }

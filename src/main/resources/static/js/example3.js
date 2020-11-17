@@ -1,23 +1,48 @@
 $(document).ready(function() {
 
     var columnDefs = [
+
+//        private long id;
+//        private String status;
+//        private int customerID;
+//        private int cleanigServicesID; // one to many connection/  to test - only one
+//        private String address;
+//        String dateRecieved;
+//        String datetimeOrder;
         {
         data: "id",
         title: "Id",
         type: "readonly"
         },
         {
-        data: "customer",
-        title: "Customer"
+        data: "status",
+        title: "Status"
         },
         {
-        data: "price",
-        title: "Price"
+        data: "customerID",
+        title: "CustomerID"
+        },
+        {
+        data: "cleanigServicesID",
+        title: "cleanigServicesID"
         },
         {
         data: "address",
         title: "Address"
-        }
+        },
+        {
+        data: "dateRecieved",
+        title: "dateRecieved"
+        },
+        {
+        data: "dateRecieved",
+        title: "dateRecieved"
+        },
+        {
+        data: "totalPrice",
+        title: "totalPrice"
+        },
+
     ];
 
     var myTable;

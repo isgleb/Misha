@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 // @RestController работает как @Controller но как бы добавляет к каждому методу аннотацию  @ResponceBody
 // аннотации @ResponceBody конвертирует java объект в JSON, @RequestBody конвертирует входной JSON в  объект Java
@@ -23,7 +24,7 @@ public class OrdersController {
 
     @GetMapping("/orders/request")
     public ResponseEntity getOrders () {
-        orderService.setSomeOrders();
+//        orderService.setSomeOrders();
 
         List<OrderDao> ordersResp = orderService.getOrders();
 
@@ -37,8 +38,8 @@ public class OrdersController {
     }
 
     @DeleteMapping("/orders/request")
-    public void deleteOrder (@RequestParam Integer id) { // работает с postman
-        System.out.println(id);
+    public void deleteOrder (@RequestParam Long id) { // работает с postman
+        orderService.deleteOrder(id);
     }
 
     @PutMapping("/orders/request")
