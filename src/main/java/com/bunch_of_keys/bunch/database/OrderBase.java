@@ -3,6 +3,7 @@ package com.bunch_of_keys.bunch.database;
 import com.bunch_of_keys.bunch.domain.OrderDao;
 import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import org.apache.naming.factory.MailSessionFactory;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,15 @@ public class OrderBase {
 
 
     public Map<Long, OrderDao> getOrders() {
+
+        SessionFactory
+
+
+
+
+
+
+
         return orders;
     }
 
