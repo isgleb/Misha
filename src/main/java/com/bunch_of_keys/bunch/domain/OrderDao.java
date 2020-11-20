@@ -27,6 +27,9 @@ public class OrderDao {
     String datetimeOrder;
     int totalPrice;
 
+    public OrderDao() {
+    }
+
     public OrderDao(String status, int customerID, int cleanigServicesID, String address, String dateRecieved, String datetimeOrder, int totalPrice) {
         this.status = status;
         this.customerID = customerID;
@@ -37,8 +40,6 @@ public class OrderDao {
         this.totalPrice = totalPrice;
     }
 
-    public OrderDao() {
-    }
 
     @Override
     public String toString() {

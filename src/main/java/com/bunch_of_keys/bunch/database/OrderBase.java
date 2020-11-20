@@ -31,8 +31,6 @@ public class OrderBase {
 
     public Map<Long, OrderDao> getOrders() {
 
-        SessionFactory
-
 
 
 
