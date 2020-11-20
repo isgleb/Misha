@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,11 +13,12 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
+@Entity
 public class OrderDao {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String status;
     private int customerID;
     private int cleanigServicesID; // one to many connection/  to test - only one
@@ -33,6 +35,9 @@ public class OrderDao {
         this.dateRecieved = dateRecieved;
         this.datetimeOrder = datetimeOrder;
         this.totalPrice = totalPrice;
+    }
+
+    public OrderDao() {
     }
 
     @Override
