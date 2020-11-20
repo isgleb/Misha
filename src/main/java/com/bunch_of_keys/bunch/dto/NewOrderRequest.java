@@ -7,27 +7,22 @@ import lombok.Setter;
 @Setter
 public class NewOrderRequest {
 
-//    в заказе вложенный Enum статусов заказов
-//    этот класс и является одним из классов типа DTO
-//    переименовать в OrderDTO
-//    объект состоит из DAO????
-
     private long id;
     private String status;
     private int customerID;
-    private int cleanigServicesID; // one to many connection/  to test - only one
+    private int cleaningServicesID;
     private String address;
-    String dateRecieved;
+    String dateReceived;
     String dateTimeOrder;
     int totalPrice;
 
-    public NewOrderRequest(long id, String status, int customerID, int cleanigServicesID, String address, String dateRecieved, String dateTimeOrder, int totalPrice) {
+    public NewOrderRequest(long id, String status, int customerID, int cleaningServicesID, String address, String dateReceived, String dateTimeOrder, int totalPrice) {
         this.id = id;
         this.status = status;
         this.customerID = customerID;
-        this.cleanigServicesID = cleanigServicesID;
+        this.cleaningServicesID = cleaningServicesID;
         this.address = address;
-        this.dateRecieved = dateRecieved;
+        this.dateReceived = dateReceived;
         this.dateTimeOrder = dateTimeOrder;
         this.totalPrice = totalPrice;
 

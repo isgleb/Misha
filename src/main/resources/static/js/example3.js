@@ -5,13 +5,16 @@ $(document).ready(function() {
 
     var columnDefs = [
 
-//        private long id;
-//        private String status;
-//        private int customerID;
-//        private int cleanigServicesID; // one to many connection/  to test - only one
-//        private String address;
-//        String dateRecieved;
-//        String datetimeOrder;
+//            private long id;
+//            private String status;
+//            private int customerID;
+//            private int cleaningServicesID; // one to many connection/  to test - only one
+//            private String address;
+//            String dateReceived;
+//            String datetimeOrder;
+//            int totalPrice;
+
+
         {
         data: "id",
         title: "Id",
@@ -34,16 +37,16 @@ $(document).ready(function() {
         title: "CustomerID"
         },
         {
-        data: "cleanigServicesID",
-        title: "cleanigServicesID"
+        data: "cleaningServicesID",
+        title: "cleaningServicesID"
         },
         {
         data: "address",
         title: "Address"
         },
         {
-        data: "dateRecieved",
-        title: "dateRecieved"
+        data: "dateReceived",
+        title: "dateReceived"
         },
         {
         data: "dateTimeOrder",
