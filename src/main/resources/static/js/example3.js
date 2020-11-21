@@ -1,6 +1,6 @@
 var statusOptions = { "принят" : "принят", "выполнен" : "выполнен"};
 
-
+// вызов базовой функции jQuery
 $(document).ready(function() {
 
     var columnDefs = [

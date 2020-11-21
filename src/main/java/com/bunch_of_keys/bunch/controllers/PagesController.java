@@ -19,7 +19,7 @@ public class PagesController {
     @GetMapping("/")
     public String home (Model model) {
         model.addAttribute("title", "главная страничка");
-        return "home";
+        return "index2";
     }
 
     @GetMapping("/main")
@@ -28,11 +28,35 @@ public class PagesController {
         return "dashboard";
     }
 
-//    @GetMapping("/orders")
-//    public String orders (Model model) {
-//        model.addAttribute("title", "главная страничка");
-//        return "tables";
-//    }
+    @GetMapping("/d.html")
+    public String d (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "d";
+    }
+
+    @GetMapping("/c.html")
+    public String c (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "c";
+    }
+
+    @GetMapping("/index")
+    public String index (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "index";
+    }
+
+    @GetMapping("/page1.html")
+    public String pagefirst () {
+        return "page1";
+    }
+
+    @GetMapping("/page2.html")
+    public String pagesecond () {
+        return "page2";
+    }
+
+
     @GetMapping("/alter")
     public String alter (Model model) {
         model.addAttribute("title", "главная страничка");
@@ -50,10 +74,4 @@ public class PagesController {
         model.addAttribute("title", "главная страничка");
         return "example4";
     }
-
-//    @GetMapping("/alterthree")
-//    public String alterthree (Model model) {
-//        model.addAttribute("title", "главная страничка");
-//        return "alterthree";
-//    }
 }
