@@ -1,7 +1,20 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Dynamic Load Content</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Nixie+One|Open+Sans' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Dynamic Load Content</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Nixie+One|Open+Sans' rel='stylesheet' type='text/css' />
@@ -26,27 +39,35 @@ google_ad_height = 90;
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script></div>
+</script>
+</div>
 <div class="jquery-script-clear"></div>
 </div>
 </div>
 	<h1 style="margin-top:150px;"><span>jQuery</span> Dynamic Load Content</h1>
 	<nav class="main">
-		<a href="page1.html">Page 1</a>
+		<ul>
+		<a href="orders/table.html">Page 1</a>
 		<a href="page2.html">Page 2</a>
 		<a href="page3.html">Page 3</a>
 		<a href="page4.html">Page 4</a>
 		<a href="page5.html">Page 5</a>
+		</ul>
 	</nav>
 
-	<section id="dynamic"><p><span>//</span> Click <span>on</span> Main Menu <span>links to load contents, please.</span></p></section>
-
+	<section id="dynamic">
+		<p>
+			<span>//</span> Click
+			<span>on</span> Main Menu
+			<span>links to load contents, please.</span>
+		</p>
+	</section>
 
 
 <script>
 
 	$(document).ready(function(){
-		$('nav.main > a').click(function(e){
+		$('nav.main > ul > a').click(function(e){
 			e.preventDefault();
 			$("#dynamic").load($(this).attr('href'));
 		});

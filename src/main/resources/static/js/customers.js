@@ -7,46 +7,25 @@ $(document).ready(function() {
 
         {
         data: "id",
-        title: "Id",
+        title: "id",
         type: "readonly"
         },
-
         {
-        data: "status",
-        title: "Status",
-        type : "select",
-        options : statusOptions,
-        select1 : { width: "100%"},
-        render: function (data, type, row, meta) {
-            if (data == null || !(data in statusOptions)) return null;
-            return statusOptions[data];
-            }
+        data: "name",
+        title: "Имя",
         },
         {
-        data: "customerID",
-        title: "CustomerID"
+        data: "surname",
+        title: "Фамилия"
         },
         {
-        data: "cleaningServicesID",
-        title: "cleaningServicesID"
+        data: "email",
+        title: "email"
         },
         {
-        data: "address",
-        title: "Address"
+        data: "telephone",
+        title: "Телефон"
         },
-        {
-        data: "dateReceived",
-        title: "dateReceived"
-        },
-        {
-        data: "dateTimeOrder",
-        title: "dateTimeOrder"
-        },
-        {
-        data: "totalPrice",
-        title: "totalPrice"
-        },
-
     ];
 
     var myTable;
@@ -54,7 +33,7 @@ $(document).ready(function() {
     myTable = $('#example').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
-            url : '/orders/request',
+            url : '/customers/request',
             // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
             dataSrc : ''
         },
@@ -86,7 +65,7 @@ $(document).ready(function() {
 
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/orders/request',
+                url: '/customers/request',
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
@@ -97,7 +76,7 @@ $(document).ready(function() {
 
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/orders/request?' + $.param({id: rowdata.id}), // выдает null
+                url: '/customers/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
                 success: success,
                 error: error
@@ -106,7 +85,7 @@ $(document).ready(function() {
 
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/orders/request',
+                url: '/customers/request',
                 type: 'PUT',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),

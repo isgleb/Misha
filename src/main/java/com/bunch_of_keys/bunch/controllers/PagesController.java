@@ -16,29 +16,51 @@ import java.util.List;
 @Controller
 public class PagesController {
 
-    @GetMapping("/")
+    @GetMapping("/no")
     public String home (Model model) {
         model.addAttribute("title", "главная страничка");
         return "index2";
     }
 
-    @GetMapping("/main")
-    public String dashboard (Model model) {
+    @GetMapping("/")
+    public String main (Model model) {
         model.addAttribute("title", "главная страничка");
-        return "dashboard";
+        return "main";
     }
 
-    @GetMapping("/d.html")
-    public String d (Model model) {
+    @GetMapping("/orders")
+    public String tabelorders (Model model) {
         model.addAttribute("title", "главная страничка");
-        return "d";
+        return "tableorders";
     }
 
-    @GetMapping("/c.html")
-    public String c (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "c";
+    @GetMapping("/order")
+    public String orderpage () {
+        return "order-page";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/index")
     public String index (Model model) {
@@ -46,9 +68,14 @@ public class PagesController {
         return "index";
     }
 
-    @GetMapping("/page1.html")
+    @GetMapping("/orders/table.html")
     public String pagefirst () {
-        return "page1";
+        return "ordertable";
+    }
+
+    @GetMapping("/bread.html")
+    public String bread () {
+        return "bread";
     }
 
     @GetMapping("/page2.html")

@@ -1,6 +1,7 @@
 package com.bunch_of_keys.bunch.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 public class OrderDao {
 
@@ -24,9 +26,6 @@ public class OrderDao {
     String dateReceived;
     String dateTimeOrder;
     int totalPrice;
-
-    public OrderDao() {
-    }
 
     public OrderDao(Long id, String status, int customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
         this.id = id;
