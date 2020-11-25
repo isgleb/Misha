@@ -20,14 +20,14 @@ public class OrderDao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String status;
-    private int customerID;
+    private Long customerID;
     private int cleaningServicesID;
     private String address;
     String dateReceived;
     String dateTimeOrder;
     int totalPrice;
 
-    public OrderDao(Long id, String status, int customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
+    public OrderDao(Long id, String status, Long customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
         this.id = id;
         this.status = status;
         this.customerID = customerID;
@@ -38,7 +38,7 @@ public class OrderDao {
         this.totalPrice = totalPrice;
     }
 
-    public OrderDao(String status, int customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
+    public OrderDao(String status, Long customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
         this.status = status;
         this.customerID = customerID;
         this.cleaningServicesID = cleaningServicesID;

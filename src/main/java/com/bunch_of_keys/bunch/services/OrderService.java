@@ -1,10 +1,13 @@
 package com.bunch_of_keys.bunch.services;
 
+import com.bunch_of_keys.bunch.domain.CustomerDao;
 import com.bunch_of_keys.bunch.domain.OrderDao;
 import com.bunch_of_keys.bunch.domain.OrderDaoRepository;
 import com.bunch_of_keys.bunch.dto.NewOrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -32,6 +35,12 @@ public class OrderService {
         return orderRequest;
     }
 
+    public Long getCustomerId (Long orderId) {
+        OrderDao theOrder= orderDaoRepository.findById(orderId).get();
+        Long customerId = theOrder.getCustomerID();
+        return customerId;
+    }
+
     public void deleteOrder(Long id) {
         orderDaoRepository.deleteById(id);
     }
@@ -39,7 +48,6 @@ public class OrderService {
     public NewOrderRequest editOrder(NewOrderRequest newOrderRequest) {
 
         OrderDao orderDao = new OrderDao(
-                newOrderRequest.getId(),
                 newOrderRequest.getStatus(),
                 newOrderRequest.getCustomerID(),
                 newOrderRequest.getCleaningServicesID(),

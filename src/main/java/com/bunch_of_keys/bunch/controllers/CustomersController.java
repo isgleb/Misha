@@ -1,7 +1,10 @@
 package com.bunch_of_keys.bunch.controllers;
 
+import com.bunch_of_keys.bunch.domain.CustomerDao;
 import com.bunch_of_keys.bunch.domain.OrderDao;
+import com.bunch_of_keys.bunch.dto.CustomerDto;
 import com.bunch_of_keys.bunch.dto.NewOrderRequest;
+import com.bunch_of_keys.bunch.services.CustomerService;
 import com.bunch_of_keys.bunch.services.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,32 +24,40 @@ import java.util.Map;
 public class CustomersController {
 
     @Autowired
+    private CustomerService customerService;
+
+    @Autowired
     private OrderService orderService;
 
     @GetMapping("/customers/request")
-    public ResponseEntity getOrders () {
+    public ResponseEntity getCustomers () {
 
-        Iterable<OrderDao> ordersResp = orderService.getOrders();
+        Iterable<CustomerDao> customersResp = customerService.getCustomers();
 
-        return new ResponseEntity(ordersResp, HttpStatus.OK);
+        return new ResponseEntity(customersResp, HttpStatus.OK);
+    }
+
+    @GetMapping("/order/customer")
+    public CustomerDto getTheCustomer (@RequestParam Long id) {
+        Long theCustomerId = orderService.getCustomerId(id);
+        CustomerDto customer = customerService.getTheCustomer(theCustomerId);
+        return customer;
     }
 
     @PostMapping("/customers/request")
-    public ResponseEntity newOrder (@RequestBody NewOrderRequest newOrderRequest) {
-        orderService.newOrder(newOrderRequest);
-        return new ResponseEntity(newOrderRequest, HttpStatus.OK); // статусы поменять в соответствии с RESTful
+    public ResponseEntity newOrder (@RequestBody CustomerDto customerDto) {
+        customerService.addCustomer(customerDto);
+        return new ResponseEntity(customerDto, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
 
     @DeleteMapping("/customers/request")
-    public void deleteOrder (@RequestParam Long id) { // работает с postman
-        orderService.deleteOrder(id);
+    public void deleteCustomer (@RequestParam Long id) { // работает с postman
+        customerService.deleteCustomer(id);
     }
 
     @PutMapping("/customers/request")
-    public ResponseEntity editOrder (@RequestBody NewOrderRequest newOrderRequest) { // работает с postman
-        return new ResponseEntity(orderService.editOrder(newOrderRequest), HttpStatus.OK);
+    public ResponseEntity editOrder (@RequestBody CustomerDto customerDto) {
+        return new ResponseEntity(customerService.editCustomer(customerDto), HttpStatus.OK);
 
-//        orderService.newOrder(newOrderRequest);
-//        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
     }
 }

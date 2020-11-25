@@ -3,6 +3,21 @@ var statusOptions = { "принят" : "принят", "выполнен" : "в�
 // вызов базовой функции jQuery
 $(document).ready(function() {
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    var orderId = urlParams.get('id');
+
+    var customer;
+
+    $.ajax({
+          type: 'GET',
+          url: '/order/customer?' + $.param({id: orderId}),
+          async: false,
+          success: function (response) {customer = response;}
+          });
+
+    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+
     var columnDefs = [
 
         {
@@ -30,7 +45,7 @@ $(document).ready(function() {
 
     var myTable;
 
-    myTable = $('#example').DataTable({
+    myTable = $('#order-customer').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
             url : '/customers/request',
@@ -94,4 +109,17 @@ $(document).ready(function() {
             });
         }
     });
+
+    $('#choose').click( function () {
+
+        var selectedCustomerId = myTable.row('.selected').data().id;
+
+//        $.ajax({
+//               url: '/order/customer?' + $.param({id: orderId}{customerId: selectedCustomerId}), // выдает null
+//               type: 'PUT'
+//                });
+
+
+    });
+
 });

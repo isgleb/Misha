@@ -26,7 +26,7 @@ public class OrdersController {
 //    service реализует всю бизнеслогику
 
     @GetMapping("/orders/request")
-    public ResponseEntity getOrders () {
+    public ResponseEntity getOrders() {
 //        orderService.setSomeOrders();
 
         Iterable<OrderDao> ordersResp = orderService.getOrders();
@@ -35,21 +35,27 @@ public class OrdersController {
     }
 
     @PostMapping("/orders/request")
-    public ResponseEntity newOrder (@RequestBody NewOrderRequest newOrderRequest) {
+    public ResponseEntity newOrder(@RequestBody NewOrderRequest newOrderRequest) {
         orderService.newOrder(newOrderRequest);
         return new ResponseEntity(newOrderRequest, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
 
     @DeleteMapping("/orders/request")
-    public void deleteOrder (@RequestParam Long id) { // работает с postman
+    public void deleteOrder(@RequestParam Long id) { // работает с postman
         orderService.deleteOrder(id);
     }
 
     @PutMapping("/orders/request")
-    public ResponseEntity editOrder (@RequestBody NewOrderRequest newOrderRequest) { // работает с postman
+    public ResponseEntity editOrder(@RequestBody NewOrderRequest newOrderRequest) { // работает с postman
         return new ResponseEntity(orderService.editOrder(newOrderRequest), HttpStatus.OK);
+    }
 
-//        orderService.newOrder(newOrderRequest);
-//        return new ResponseEntity(newOrderRequest, HttpStatus.OK);
+
+    @PutMapping("/order/customer")
+    public void editClientId (@RequestParam Long orderId, Long customerId) {
+        System.out.println(orderId);
+        System.out.println(customerId);
+//        orderService.changeCustomer
+
     }
 }
