@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface CustomerDaoRepository extends CrudRepository<CustomerDao, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 //    CustomerDao findBy
 //public interface ExpensesRepository extends JpaRepository< Expenses, Long> {

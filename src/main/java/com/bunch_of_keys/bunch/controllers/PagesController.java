@@ -1,16 +1,9 @@
 package com.bunch_of_keys.bunch.controllers;
 
-import com.bunch_of_keys.bunch.domain.OrderDao;
-import com.bunch_of_keys.bunch.dto.NewOrderRequest;
-import com.bunch_of_keys.bunch.services.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.bunch_of_keys.bunch.domain.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Controller

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class NewOrderRequest {
+public class OrderDto {
 
     private long id;
     private String status;

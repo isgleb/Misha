@@ -1,64 +1,76 @@
 package com.bunch_of_keys.bunch.services;
 
-import com.bunch_of_keys.bunch.domain.CustomerDao;
-import com.bunch_of_keys.bunch.domain.OrderDao;
-import com.bunch_of_keys.bunch.domain.OrderDaoRepository;
-import com.bunch_of_keys.bunch.dto.NewOrderRequest;
+import com.bunch_of_keys.bunch.domain.Order;
+import com.bunch_of_keys.bunch.domain.OrderRepository;
+import com.bunch_of_keys.bunch.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
 
     @Autowired
-    private OrderDaoRepository orderDaoRepository;
+    private OrderRepository orderRepository;
 
-    public void newOrder(NewOrderRequest newOrderRequest) {
+    public void newOrder(OrderDto orderDto) {
 
-        OrderDao orderDao = new OrderDao(
-                                    newOrderRequest.getStatus(),
-                                    newOrderRequest.getCustomerID(),
-                                    newOrderRequest.getCleaningServicesID(),
-                                    newOrderRequest.getAddress(),
-                                    newOrderRequest.getDateReceived(),
-                                    newOrderRequest.getDateTimeOrder(),
-                                    newOrderRequest.getTotalPrice()
+        Order order = new Order(
+                                    orderDto.getStatus(),
+                                    orderDto.getCustomerID(),
+                                    orderDto.getCleaningServicesID(),
+                                    orderDto.getAddress(),
+                                    orderDto.getDateReceived(),
+                                    orderDto.getDateTimeOrder(),
+                                    orderDto.getTotalPrice()
         );
-        orderDaoRepository.save(orderDao);
+        orderRepository.save(order);
 
     }
 
-    public Iterable<OrderDao> getOrders () {
-        Iterable<OrderDao> orderRequest = orderDaoRepository.findAll();
-        return orderRequest;
+    public List<OrderDto> getOrders () {
+        Iterable<Order> orders = orderRepository.findAll();
+        List<OrderDto> ordersResponse = new ArrayList<>();
+
+        for (Order order : orders) {
+            ordersResponse.add(new OrderDto(order.getId(),
+                    order.getStatus(),
+                    order.getCustomerID(),
+                    order.getCleaningServicesID(),
+                    order.getAddress(),
+                    order.getDateReceived(),
+                    order.getDateTimeOrder(),
+                    order.getTotalPrice()));
+        }
+        return ordersResponse;
     }
 
     public Long getCustomerId (Long orderId) {
-        OrderDao theOrder= orderDaoRepository.findById(orderId).get();
+        Order theOrder= orderRepository.findById(orderId).get();
         Long customerId = theOrder.getCustomerID();
         return customerId;
     }
 
     public void deleteOrder(Long id) {
-        orderDaoRepository.deleteById(id);
+        orderRepository.deleteById(id);
     }
 
-    public NewOrderRequest editOrder(NewOrderRequest newOrderRequest) {
+    public OrderDto editOrder(OrderDto orderDto) {
 
-        OrderDao orderDao = new OrderDao(
-                newOrderRequest.getStatus(),
-                newOrderRequest.getCustomerID(),
-                newOrderRequest.getCleaningServicesID(),
-                newOrderRequest.getAddress(),
-                newOrderRequest.getDateReceived(),
-                newOrderRequest.getDateTimeOrder(),
-                newOrderRequest.getTotalPrice()
+        Order order = new Order(
+                orderDto.getStatus(),
+                orderDto.getCustomerID(),
+                orderDto.getCleaningServicesID(),
+                orderDto.getAddress(),
+                orderDto.getDateReceived(),
+                orderDto.getDateTimeOrder(),
+                orderDto.getTotalPrice()
         );
 
-        orderDaoRepository.save(orderDao);
+        orderRepository.save(order);
 
-        return newOrderRequest;
+        return orderDto;
     }
 }

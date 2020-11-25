@@ -1,7 +1,7 @@
 package com.bunch_of_keys.bunch.services;
 
-import com.bunch_of_keys.bunch.domain.CustomerDao;
-import com.bunch_of_keys.bunch.domain.CustomerDaoRepository;
+import com.bunch_of_keys.bunch.domain.Customer;
+import com.bunch_of_keys.bunch.domain.CustomerRepository;
 import com.bunch_of_keys.bunch.dto.CustomerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,27 +10,27 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     @Autowired
-    private CustomerDaoRepository customerDaoRepository;
+    private CustomerRepository customerRepository;
 
     public void addCustomer(CustomerDto customerDto) {
 
-        CustomerDao customerDao = new CustomerDao(
+        Customer customer = new Customer(
                 customerDto.getName(),
                 customerDto.getSurname(),
                 customerDto.getEmail(),
                 customerDto.getTelephone()
         );
-        customerDaoRepository.save(customerDao);
+        customerRepository.save(customer);
 
     }
 
-    public Iterable<CustomerDao> getCustomers () {
-        Iterable<CustomerDao> allCustomers = customerDaoRepository.findAll();
+    public Iterable<Customer> getCustomers () {
+        Iterable<Customer> allCustomers = customerRepository.findAll();
         return allCustomers;
     }
 
     public CustomerDto getTheCustomer (Long customerId) {
-        CustomerDao theCustomer = customerDaoRepository.findById(customerId).get();
+        Customer theCustomer = customerRepository.findById(customerId).get();
         CustomerDto theCustomerDto = new CustomerDto(theCustomer.getId(),
                                                     theCustomer.getName(),
                                                     theCustomer.getSurname(),
@@ -43,12 +43,12 @@ public class CustomerService {
 
 
     public void deleteCustomer(Long id) {
-        customerDaoRepository.deleteById(id);
+        customerRepository.deleteById(id);
     }
 
     public CustomerDto editCustomer(CustomerDto customerDto) {
 
-        CustomerDao customerDao = new CustomerDao(
+        Customer customerDao = new Customer(
                 customerDto.getId(),
                 customerDto.getName(),
                 customerDto.getSurname(),
@@ -56,7 +56,7 @@ public class CustomerService {
                 customerDto.getTelephone()
         );
 
-        customerDaoRepository.save(customerDao);
+        customerRepository.save(customerDao);
 
         return customerDto;
     }

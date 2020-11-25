@@ -3,6 +3,7 @@ package com.bunch_of_keys.bunch.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,8 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @Entity
-public class CustomerDao {
+@EnableAutoConfiguration
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,14 +27,14 @@ public class CustomerDao {
     private String telephone;
 
 
-    public CustomerDao(String name, String surname, String email, String telephone) {
+    public Customer(String name, String surname, String email, String telephone) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.telephone = telephone;
     }
 
-    public CustomerDao(long id, String name, String surname, String email, String telephone) {
+    public Customer(long id, String name, String surname, String email, String telephone) {
         this.id = id;
         this.name = name;
         this.surname = surname;

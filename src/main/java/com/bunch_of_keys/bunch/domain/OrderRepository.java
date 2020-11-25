@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface OrderDaoRepository extends CrudRepository<OrderDao, Long> {
+public interface OrderRepository extends CrudRepository<Order, Long> {
 
 //    List<OrderDao> findByTag(String tag);
 
