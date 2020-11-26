@@ -5,16 +5,18 @@ $(document).ready(function() {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var orderId = urlParams.get('id');
+    var ordersId = urlParams.get('id');
 
     var customer;
 
+
     $.ajax({
           type: 'GET',
-          url: '/order/customer?' + $.param({id: orderId}),
+          url: '/order/customer?' + $.param({orderId: ordersId}),
           async: false,
           success: function (response) {customer = response;}
           });
+
 
     $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
 
@@ -114,12 +116,13 @@ $(document).ready(function() {
 
         var selectedCustomerId = myTable.row('.selected').data().id;
 
-//        $.ajax({
-//               url: '/order/customer?' + $.param({id: orderId}{customerId: selectedCustomerId}), // выдает null
-//               type: 'PUT'
-//                });
-
-
+        $.ajax({
+               url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
+               type: 'PUT',
+               success: function(){
+                    customer = myTable.row('.selected').data();
+                    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+               }
+        });
     });
-
 });

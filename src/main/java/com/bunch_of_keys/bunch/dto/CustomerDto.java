@@ -1,5 +1,6 @@
 package com.bunch_of_keys.bunch.dto;
 
+import com.bunch_of_keys.bunch.domain.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

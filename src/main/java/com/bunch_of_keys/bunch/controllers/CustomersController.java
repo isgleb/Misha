@@ -19,26 +19,16 @@ public class CustomersController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private OrderService orderService;
-
     @GetMapping("/customers/request")
     public ResponseEntity getCustomers () {
 
-        Iterable<Customer> customersResp = customerService.getCustomers();
+        Iterable<CustomerDto> customersResp = customerService.getCustomers();
 
         return new ResponseEntity(customersResp, HttpStatus.OK);
     }
 
-//    @GetMapping("/order/customer")
-//    public CustomerDto getTheCustomer (@RequestParam Long id) {
-//        Long theCustomerId = orderService.getCustomerId(id);
-//        CustomerDto customer = customerService.getTheCustomer(theCustomerId);
-//        return customer;
-//    }
-
     @PostMapping("/customers/request")
-    public ResponseEntity newOrder (@RequestBody CustomerDto customerDto) {
+    public ResponseEntity newCustomer (@RequestBody CustomerDto customerDto) {
         customerService.addCustomer(customerDto);
         return new ResponseEntity(customerDto, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
@@ -49,8 +39,19 @@ public class CustomersController {
     }
 
     @PutMapping("/customers/request")
-    public ResponseEntity editOrder (@RequestBody CustomerDto customerDto) {
+    public ResponseEntity editCustomer (@RequestBody CustomerDto customerDto) {
         return new ResponseEntity(customerService.editCustomer(customerDto), HttpStatus.OK);
 
     }
+
+    @GetMapping("/order/customer")
+    public ResponseEntity getCustomers (@RequestParam Long orderId) {
+
+        CustomerDto customersResp = customerService.getTheCustomer(orderId);
+
+        return new ResponseEntity(customersResp, HttpStatus.OK);
+    }
+
+
+
 }

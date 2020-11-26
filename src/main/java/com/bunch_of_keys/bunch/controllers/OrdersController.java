@@ -1,6 +1,7 @@
 package com.bunch_of_keys.bunch.controllers;
 
 import com.bunch_of_keys.bunch.domain.Order;
+import com.bunch_of_keys.bunch.dto.CustomerDto;
 import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import com.bunch_of_keys.bunch.services.OrderService;
@@ -19,40 +20,22 @@ public class OrdersController {
 
     @Autowired
     private OrderService orderService;
-    //    service работает с DTO. он будет принимать id и возвращать объект DTO либо List<DTO>
-//    service реализует всю бизнеслогику
+
 
     @GetMapping("/orders-table")
     public ResponseEntity getOrders() {
-//        orderService.setSomeOrders();
-
         List<TableOrderDto> tableOrderDto = orderService.getOrders();
-
         return new ResponseEntity(tableOrderDto, HttpStatus.OK);
     }
-
-//    @PostMapping("/orders/request")
-//    public ResponseEntity newOrder(@RequestBody OrderDto orderDto) {
-//        orderService.newOrder(orderDto);
-//        return new ResponseEntity(orderDto, HttpStatus.OK); // статусы поменять в соответствии с RESTful
-//    }
 
     @DeleteMapping("/orders/request")
     public void deleteOrder(@RequestParam Long id) { // работает с postman
         orderService.deleteOrder(id);
     }
 
-//    @PutMapping("/orders/request")
-//    public ResponseEntity editOrder(@RequestBody OrderDto orderDto) { // работает с postman
-//        return new ResponseEntity(orderService.editOrder(orderDto), HttpStatus.OK);
-//    }
-
 
     @PutMapping("/order/customer")
     public void editClientId (@RequestParam Long orderId, Long customerId) {
-        System.out.println(orderId);
-        System.out.println(customerId);
-//        orderService.changeCustomer
-
+        orderService.changeCustomer(orderId, customerId);
     }
 }

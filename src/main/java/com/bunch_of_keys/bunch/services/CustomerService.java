@@ -6,6 +6,9 @@ import com.bunch_of_keys.bunch.dto.CustomerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -24,13 +27,24 @@ public class CustomerService {
 
     }
 
-    public Iterable<Customer> getCustomers () {
+    public List<CustomerDto> getCustomers () {
         Iterable<Customer> allCustomers = customerRepository.findAll();
-        return allCustomers;
+        List<CustomerDto> respCustomers = new ArrayList<>();
+        for (Customer customer : allCustomers) {
+            respCustomers.add(new CustomerDto(
+                    customer.getId(),
+                    customer.getName(),
+                    customer.getSurname(),
+                    customer.getEmail(),
+                    customer.getTelephone()
+            ));
+        }
+
+        return respCustomers;
     }
 
-    public CustomerDto getTheCustomer (Long customerId) {
-        Customer theCustomer = customerRepository.findById(customerId).get();
+    public CustomerDto getTheCustomer (Long orderId) {
+        Customer theCustomer = customerRepository.findByOrders_id(orderId);
         CustomerDto theCustomerDto = new CustomerDto(theCustomer.getId(),
                                                     theCustomer.getName(),
                                                     theCustomer.getSurname(),

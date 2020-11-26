@@ -9,22 +9,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PagesController {
 
-    @GetMapping("/no")
-    public String home (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "index2";
-    }
 
     @GetMapping("/")
     public String main (Model model) {
         model.addAttribute("title", "главная страничка");
-        return "main";
+        return "table-orders";
     }
 
     @GetMapping("/orders")
-    public String tabelorders (Model model) {
+    public String tabelOrders (Model model) {
         model.addAttribute("title", "главная страничка");
-        return "tableorders";
+        return "table-orders";
     }
 
     @GetMapping("/order")
@@ -33,65 +28,4 @@ public class PagesController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @GetMapping("/index")
-    public String index (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "index";
-    }
-
-    @GetMapping("/orders/table.html")
-    public String pagefirst () {
-        return "ordertable";
-    }
-
-    @GetMapping("/bread.html")
-    public String bread () {
-        return "bread";
-    }
-
-    @GetMapping("/page2.html")
-    public String pagesecond () {
-        return "page2";
-    }
-
-
-    @GetMapping("/alter")
-    public String alter (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "example2";
-    }
-
-
-    @GetMapping("/alteranother")
-    public String alterAnother (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "example3";
-    }
-    @GetMapping("/alterf")
-    public String alterF (Model model) {
-        model.addAttribute("title", "главная страничка");
-        return "example4";
-    }
 }
