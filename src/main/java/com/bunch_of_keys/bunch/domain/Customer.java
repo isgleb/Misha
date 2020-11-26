@@ -5,10 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 
 @Getter
@@ -16,6 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 @EnableAutoConfiguration
+@Table(name = "customers")
 public class Customer {
 
     @Id
@@ -25,6 +24,9 @@ public class Customer {
     private String surname;
     private String email;
     private String telephone;
+
+    @OneToMany(mappedBy= "customer")
+    private Set<Order> orders;
 
 
     public Customer(String name, String surname, String email, String telephone) {

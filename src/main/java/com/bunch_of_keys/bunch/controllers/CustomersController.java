@@ -30,12 +30,12 @@ public class CustomersController {
         return new ResponseEntity(customersResp, HttpStatus.OK);
     }
 
-    @GetMapping("/order/customer")
-    public CustomerDto getTheCustomer (@RequestParam Long id) {
-        Long theCustomerId = orderService.getCustomerId(id);
-        CustomerDto customer = customerService.getTheCustomer(theCustomerId);
-        return customer;
-    }
+//    @GetMapping("/order/customer")
+//    public CustomerDto getTheCustomer (@RequestParam Long id) {
+//        Long theCustomerId = orderService.getCustomerId(id);
+//        CustomerDto customer = customerService.getTheCustomer(theCustomerId);
+//        return customer;
+//    }
 
     @PostMapping("/customers/request")
     public ResponseEntity newOrder (@RequestBody CustomerDto customerDto) {

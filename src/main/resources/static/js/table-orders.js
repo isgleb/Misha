@@ -3,7 +3,7 @@ $(document).ready(function() {
     var table = $('#example').DataTable( {
 //    responsive: true,
      "ajax": {
-                 "url": "orders/request",
+                 "url": "orders-table",
                  "dataSrc": ""
              },
      "columns": [
@@ -18,28 +18,16 @@ $(document).ready(function() {
                     "title": "Status",
                     },
                     {
-                    "data": "customerID",
-                    "title": "CustomerID"
+                    "data": "customerName",
+                    "title": "CustomerName"
                     },
                     {
-                    "data": "cleaningServicesID",
-                    "title": "cleaningServicesID"
+                    "data": "customerSurname",
+                    "title": "CustomerSurname"
                     },
                     {
-                    "data": "address",
-                    "title": "Address"
-                    },
-                    {
-                    "data": "dateReceived",
-                    "title": "dateReceived"
-                    },
-                    {
-                    "data": "dateTimeOrder",
-                    "title": "dateTimeOrder"
-                    },
-                    {
-                    "data": "totalPrice",
-                    "title": "totalPrice"
+                    "data": "customerTelephone",
+                    "title": "CustomerTelephone"
                     },
                 ],
     })

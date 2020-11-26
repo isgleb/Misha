@@ -7,14 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OrderDto {
-
+public class TableOrderDto {
     private long id;
     private String status;
-    private Long customerID;
+    private String customerName;
+    private String customerSurname;
+    private String customerTelephone;
 }
-
-
-
-
-

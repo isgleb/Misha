@@ -1,12 +1,13 @@
 package com.bunch_of_keys.bunch.domain;
 
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
-//    List<OrderDao> findByTag(String tag);
-
+    @Query("select o from Order o join fetch o.customer")
+    Iterable<Order> getOrdersForTable();
 }

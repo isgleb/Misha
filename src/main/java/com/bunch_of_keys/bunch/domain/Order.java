@@ -5,11 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Getter
@@ -24,45 +20,20 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String status;
-    private Long customerID;
-    private int cleaningServicesID;
-    private String address;
-    String dateReceived;
-    String dateTimeOrder;
-    int totalPrice;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable=false)
+    private Customer customer;
 
-    public Order(Long id, String status, Long customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
+
+    public Order(Long id, String status, Customer customer) {
         this.id = id;
         this.status = status;
-        this.customerID = customerID;
-        this.cleaningServicesID = cleaningServicesID;
-        this.address = address;
-        this.dateReceived = dateReceived;
-        this.dateTimeOrder = datetimeOrder;
-        this.totalPrice = totalPrice;
+        this.customer = customer;
     }
 
-    public Order(String status, Long customerID, int cleaningServicesID, String address, String dateReceived, String datetimeOrder, int totalPrice) {
+    public Order(String status, Customer customer) {
         this.status = status;
-        this.customerID = customerID;
-        this.cleaningServicesID = cleaningServicesID;
-        this.address = address;
-        this.dateReceived = dateReceived;
-        this.dateTimeOrder = datetimeOrder;
-        this.totalPrice = totalPrice;
+        this.customer = customer;
     }
 
-
-    @Override
-    public String toString() {
-        return "OrderDao{" +
-                "status='" + status + '\'' +
-                ", customerID=" + customerID +
-                ", cleaningServicesID=" + cleaningServicesID +
-                ", address='" + address + '\'' +
-                ", dateReceived='" + dateReceived + '\'' +
-                ", datetimeOrder='" + dateTimeOrder + '\'' +
-                ", totalPrice=" + totalPrice +
-                '}';
-    }
 }
