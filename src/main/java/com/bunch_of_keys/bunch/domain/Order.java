@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -23,6 +24,11 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable=false)
     private Customer customer;
+
+
+    @OneToMany
+//  должно быть каскадное удаление
+    List<Position> positions;
 
 
     public Order(Long id, String status, Customer customer) {
