@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var table = $('#example').DataTable( {
-//    responsive: true,
+    responsive: true,
      "ajax": {
                  "url": "orders-table",
                  "dataSrc": ""
@@ -15,22 +15,23 @@ $(document).ready(function() {
 
                     {
                     "data": "status",
-                    "title": "Status",
+                    "title": "Статус",
                     },
                     {
                     "data": "customerName",
-                    "title": "CustomerName"
+                    "title": "Имя"
                     },
                     {
                     "data": "customerSurname",
-                    "title": "CustomerSurname"
+                    "title": "Фамилия"
                     },
                     {
                     "data": "customerTelephone",
-                    "title": "CustomerTelephone"
+                    "title": "Телефон"
                     },
                 ],
     })
+
 
     $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {

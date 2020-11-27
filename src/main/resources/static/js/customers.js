@@ -61,22 +61,37 @@ $(document).ready(function() {
         altEditor: true,     // Enable altEditor
         buttons: [
             {
-                text: 'Add',
+                text: 'Новый',
                 name: 'add'        // do not change name
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Edit',
+                text: 'Изменить данные',
                 name: 'edit'        // do not change name
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Delete',
+                text: 'Удалить',
                 name: 'delete'      // do not change name
             },
             {
-                text: 'Refresh',
+                text: 'Обновить таблицу',
                 name: 'refresh'      // do not change name
+            },
+            {
+                text: 'Выбрать клиента',
+                name: 'choose',
+                action: function () {
+                                var selectedCustomerId = myTable.row('.selected').data().id;
+                                $.ajax({
+                                       url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
+                                       type: 'PUT',
+                                       success: function(){
+                                            customer = myTable.row('.selected').data();
+                                            $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+                                       }
+                                });
+                            }
             }
         ],
 
@@ -112,17 +127,17 @@ $(document).ready(function() {
         }
     });
 
-    $('#choose').click( function () {
-
-        var selectedCustomerId = myTable.row('.selected').data().id;
-
-        $.ajax({
-               url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
-               type: 'PUT',
-               success: function(){
-                    customer = myTable.row('.selected').data();
-                    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-               }
-        });
-    });
+//    $('#choose').click( function () {
+//
+//        var selectedCustomerId = myTable.row('.selected').data().id;
+//
+//        $.ajax({
+//               url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
+//               type: 'PUT',
+//               success: function(){
+//                    customer = myTable.row('.selected').data();
+//                    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+//               }
+//        });
+//    });
 });
