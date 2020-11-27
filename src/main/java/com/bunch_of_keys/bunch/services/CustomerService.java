@@ -1,5 +1,6 @@
 package com.bunch_of_keys.bunch.services;
 
+import com.bunch_of_keys.bunch.domain.CleaningService;
 import com.bunch_of_keys.bunch.domain.Customer;
 import com.bunch_of_keys.bunch.domain.CustomerRepository;
 import com.bunch_of_keys.bunch.dto.CustomerDto;
@@ -61,16 +62,13 @@ public class CustomerService {
     }
 
     public CustomerDto editCustomer(CustomerDto customerDto) {
-
-        Customer customerDao = new Customer(
-                customerDto.getId(),
-                customerDto.getName(),
-                customerDto.getSurname(),
-                customerDto.getEmail(),
-                customerDto.getTelephone()
-        );
-
-        customerRepository.save(customerDao);
+        long id = customerDto.getId();
+        Customer customer = customerRepository.getOne(id);
+        customer.setName(customerDto.getName());
+        customer.setSurname(customerDto.getSurname());
+        customer.setEmail(customerDto.getEmail());
+        customer.setTelephone(customerDto.getTelephone());
+        customerRepository.save(customer);
 
         return customerDto;
     }

@@ -45,7 +45,7 @@ public class CustomersController {
     }
 
     @GetMapping("/order/customer")
-    public ResponseEntity getCustomers (@RequestParam Long orderId) {
+    public ResponseEntity getCustomer (@RequestParam Long orderId) {
 
         CustomerDto customersResp = customerService.getTheCustomer(orderId);
 

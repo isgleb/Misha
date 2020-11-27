@@ -32,5 +32,9 @@ public class PagesController {
     public String template () {
         return "template";
     }
+    @GetMapping("/services")
+    public String services () {
+        return "services";
+    }
 
 }
