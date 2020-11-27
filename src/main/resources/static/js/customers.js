@@ -81,17 +81,7 @@ $(document).ready(function() {
             {
                 text: 'Выбрать клиента',
                 name: 'choose',
-                action: function () {
-                                var selectedCustomerId = myTable.row('.selected').data().id;
-                                $.ajax({
-                                       url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
-                                       type: 'PUT',
-                                       success: function(){
-                                            customer = myTable.row('.selected').data();
-                                            $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-                                       }
-                                });
-                            }
+                action: changeClient
             }
         ],
 
@@ -127,17 +117,15 @@ $(document).ready(function() {
         }
     });
 
-//    $('#choose').click( function () {
-//
-//        var selectedCustomerId = myTable.row('.selected').data().id;
-//
-//        $.ajax({
-//               url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
-//               type: 'PUT',
-//               success: function(){
-//                    customer = myTable.row('.selected').data();
-//                    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-//               }
-//        });
-//    });
+    function changeClient () {
+            var selectedCustomerId = myTable.row('.selected').data().id;
+            $.ajax({
+                   url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
+                   type: 'PUT',
+                   success: function(){
+                        customer = myTable.row('.selected').data();
+                        $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+                   }
+            });
+    }
 });

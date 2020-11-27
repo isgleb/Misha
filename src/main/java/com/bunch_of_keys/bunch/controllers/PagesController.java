@@ -30,8 +30,7 @@ public class PagesController {
 
     @GetMapping("/template")
     public String template () {
-        System.out.println("index2");
-        return "index2";
+        return "template";
     }
 
 }
