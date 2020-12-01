@@ -11,7 +11,9 @@ public class OrderDto {
 
     private long id;
     private String status;
-    private Long customerID;
+    private long customerID;
+
+
 }
 
 
