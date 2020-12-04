@@ -97,11 +97,15 @@ $(document).ready(function() {
         ],
 
         onAddRow: function(datatable, rowdata, success, error) {
+        var position = {serviceDto: services.find(item => item.id == rowdata.serviceDto),
+                        quantity : rowdata.quantity,
+                        totalPrice : rowdata.totalPrice};
+        console.log(position);
             $.ajax({
-                url: '/customers/request',
+                url: '/positions/request',
                 type: 'POST',
                 contentType: "application/json",
-                data: JSON.stringify(rowdata),
+                data: JSON.stringify(position),
                 success: success,
                 error: error
             });

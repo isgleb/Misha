@@ -8,12 +8,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ServiceDto {
 
-    long id;
+    Long id;
     String serviceType;
     String priceModel;
     int price;
+
 }

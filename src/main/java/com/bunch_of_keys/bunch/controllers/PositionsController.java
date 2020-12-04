@@ -6,6 +6,7 @@ import com.bunch_of_keys.bunch.dto.ServiceDto;
 import com.bunch_of_keys.bunch.services.CleaningServService;
 import com.bunch_of_keys.bunch.services.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +27,11 @@ public class PositionsController {
         return new ResponseEntity(positionDtos, HttpStatus.OK);
     }
 
-//    @PostMapping("/positions/request")
-//    public ResponseEntity newService (@RequestBody PositionDto positionDto) {
-//        positionService.addPosition(positionDto);
-//        return new ResponseEntity(positionDto, HttpStatus.OK);
-//    }
+    @PostMapping("/positions/request")
+    public ResponseEntity newService (@RequestBody PositionDto positionDto) {
+        positionService.addPosition(positionDto);
+        return new ResponseEntity(positionDto, HttpStatus.OK);
+    }
 //
 //    @DeleteMapping("/positions/request")
 //    public void deleteService (@RequestParam Long id) { // работает с postman

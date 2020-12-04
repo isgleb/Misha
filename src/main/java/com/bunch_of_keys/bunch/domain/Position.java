@@ -24,4 +24,20 @@ public class Position {
     CleaningService cleaningService;
     int quantity;
     int totalPrice;
+
+    public Position(CleaningService cleaningService, int quantity, int totalPrice) {
+        this.cleaningService = cleaningService;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "id=" + id +
+                ", cleaningService=" + cleaningService +
+                ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

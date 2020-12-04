@@ -1,6 +1,7 @@
 package com.bunch_of_keys.bunch.domain;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "cleaning_services")
 public class CleaningService {
@@ -26,5 +28,16 @@ public class CleaningService {
         this.serviceType = serviceType;
         this.priceModel = priceModel;
         this.price = price;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CleaningService{" +
+                "id=" + id +
+                ", serviceType='" + serviceType + '\'' +
+                ", priceModel='" + priceModel + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

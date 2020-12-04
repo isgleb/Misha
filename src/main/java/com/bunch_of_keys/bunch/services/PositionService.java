@@ -40,15 +40,22 @@ public class PositionService {
         return positionDtos;
     }
 
-//    public void addPosition(PositionDto positionDto) {
-//        Position position = new Position(
-//                positionDto.getCleaningService(),
-//                positionDto.getQuantity(),
-//                positionDto.getTotalPrice());
-//
-//        cleaningServiceRepository.save(cleaningService);
+    public void addPosition(PositionDto positionDto) {
 
-//    }
+        CleaningService service = new CleaningService(
+                positionDto.getServiceDto().getId(),
+                positionDto.getServiceDto().getServiceType(),
+                positionDto.getServiceDto().getPriceModel(),
+                positionDto.getServiceDto().getPrice());
+
+        Position position = new Position(
+                service,
+                positionDto.getQuantity(),
+                positionDto.getTotalPrice());
+
+        positionRepository.save(position);
+
+    }
 
 
 //    public void addService (ServiceDto serviceDto){
