@@ -18,6 +18,9 @@ public class PositionService {
     @Autowired
     PositionRepository positionRepository;
 
+    @Autowired
+    CleaningServiceRepository cleaningServiceRepository;
+
 
     public List<PositionDto> getPositions (){
         List<Position> positions = positionRepository.findAll();
@@ -58,29 +61,24 @@ public class PositionService {
     }
 
 
-//    public void addService (ServiceDto serviceDto){
-//
-//        CleaningService cleaningService = new CleaningService(
-//                serviceDto.getServiceType(),
-//                serviceDto.getPriceModel(),
-//                serviceDto.getPrice());
-//
-//        cleaningServiceRepository.save(cleaningService);
-//    }
-//
-//    public void deleteService (Long id) {
-//        cleaningServiceRepository.deleteById(id);
-//    }
-//
-//
-//    public ServiceDto editService (ServiceDto serviceDto){
-//        long id = serviceDto.getId();
-//        CleaningService cleaningService = cleaningServiceRepository.getOne(id);
-//        cleaningService.setPrice(serviceDto.getPrice());
-//        cleaningService.setPriceModel(serviceDto.getPriceModel());
-//        cleaningService.setServiceType(serviceDto.getServiceType());
-//        cleaningServiceRepository.save(cleaningService);
-//        return serviceDto;
-//    }
+    public void deleteService (Long id) {
+        positionRepository.deleteById(id);
+    }
 
+    public Object editService(PositionDto positionDto) {
+
+        long id = positionDto.getId();
+        Position position = positionRepository.getOne(id);
+        long cleaningServiceId = positionDto.getServiceDto().getId();
+
+        CleaningService cleaningService = cleaningServiceRepository.getOne(cleaningServiceId);
+
+        position.setQuantity(positionDto.getQuantity());
+        position.setTotalPrice(positionDto.getTotalPrice());
+        position.setCleaningService(cleaningService);
+
+
+        positionRepository.save(position);
+        return positionDto;
+    }
 }

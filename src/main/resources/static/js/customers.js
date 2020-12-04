@@ -46,8 +46,12 @@ $(document).ready(function() {
         options : servicesOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
-            console.log(data)
-            if (data == null || !(data.id in servicesOptions)) return null;
+//            console.log(data.id + " это " + servicesOptions[data.id])
+            if (data == null || !(data.id in servicesOptions)) {
+            console.log("вот и приехали");
+            return null;
+            }
+
             return servicesOptions[data.id];
             }
         },
@@ -100,7 +104,7 @@ $(document).ready(function() {
         var position = {serviceDto: services.find(item => item.id == rowdata.serviceDto),
                         quantity : rowdata.quantity,
                         totalPrice : rowdata.totalPrice};
-        console.log(position);
+
             $.ajax({
                 url: '/positions/request',
                 type: 'POST',
@@ -113,7 +117,7 @@ $(document).ready(function() {
 
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/customers/request?' + $.param({id: rowdata.id}), // выдает null
+                url: '/positions/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
                 success: success,
                 error: error
@@ -121,11 +125,18 @@ $(document).ready(function() {
         },
 
         onEditRow: function(datatable, rowdata, success, error) {
+
+            var position = {id: rowdata.id,
+                            serviceDto: services.find(item => item.id == rowdata.serviceDto),
+                            quantity : rowdata.quantity,
+                            totalPrice : rowdata.totalPrice};
+            console.log(position);
+
             $.ajax({
-                url: '/customers/request',
+                url: '/positions/request',
                 type: 'PUT',
                 contentType: "application/json",
-                data: JSON.stringify(rowdata),
+                data: JSON.stringify(position),
                 success: success,
                 error: error
             });

@@ -20,7 +20,7 @@ public class PositionsController {
     private PositionService positionService;
 
     @GetMapping("/positions/request")
-    public ResponseEntity getServices () {
+    public ResponseEntity getPositios() {
 
         List<PositionDto> positionDtos = positionService.getPositions();
 
@@ -28,19 +28,32 @@ public class PositionsController {
     }
 
     @PostMapping("/positions/request")
-    public ResponseEntity newService (@RequestBody PositionDto positionDto) {
+    public ResponseEntity newPosition(@RequestBody PositionDto positionDto) {
         positionService.addPosition(positionDto);
         return new ResponseEntity(positionDto, HttpStatus.OK);
     }
-//
-//    @DeleteMapping("/positions/request")
-//    public void deleteService (@RequestParam Long id) { // работает с postman
-//        cleaningServService.deleteService(id);
-//    }
-//
+
+    @DeleteMapping("/positions/request")
+    public void deletePosition(@RequestParam Long id) { // работает с postman
+        positionService.deleteService(id);
+    }
+
+    @PutMapping("/positions/request")
+    public ResponseEntity editService(@RequestBody PositionDto positionDto) {
+        return new ResponseEntity(positionService.editService(positionDto), HttpStatus.OK);
+    }
+
+
+
+
 //    @PutMapping("/positions/request")
-//    public ResponseEntity editService (@RequestBody ServiceDto serviceDto) {
-//        return new ResponseEntity(cleaningServService.editService(serviceDto), HttpStatus.OK);
+//    public void editService (HttpEntity<String> httpEntity) {
+//        String json = httpEntity.getBody();
+//        System.out.println(json);
+//        return new ResponseEntity(positionService.editService(positionDto), HttpStatus.OK);
 //    }
+
+
+
 
 }
