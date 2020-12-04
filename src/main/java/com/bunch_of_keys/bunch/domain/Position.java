@@ -1,10 +1,18 @@
 package com.bunch_of_keys.bunch.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "positions")
+@EnableAutoConfiguration
 public class Position {
 
     @Id
@@ -12,6 +20,7 @@ public class Position {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "service_id", nullable=false)
     CleaningService cleaningService;
     int quantity;
     int totalPrice;
