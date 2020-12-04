@@ -5,7 +5,6 @@
 $(document).ready(function() {
 
     var services;
-    var servicesOptionsMap = new Map();
     var serviceMap = new Map();
 
     $.ajax({
@@ -16,11 +15,10 @@ $(document).ready(function() {
             });
 
     services.forEach(function(service){
-        servicesOptionsMap.set(service.serviceType, service.serviceType);
         serviceMap.set(service.id, service.serviceType);
         })
 
-    var servicesOptions = Object.fromEntries(servicesOptionsMap.entries());
+    var servicesOptions = Object.fromEntries(serviceMap.entries());
 
 
     $.ajax({
@@ -41,15 +39,16 @@ $(document).ready(function() {
         type: "readonly"
         },
         {
-        data: "cleaningService",
+        data: "serviceDto",
         title: "Услуга",
         type : "select",
 
         options : servicesOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
-            if (data == null || !(data in servicesOptions)) return null;
-            return servicesOptions[data];
+            console.log(data)
+            if (data == null || !(data.id in servicesOptions)) return null;
+            return servicesOptions[data.id];
             }
         },
         {

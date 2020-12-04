@@ -24,9 +24,14 @@ public class PositionService {
         List<PositionDto> positionDtos = new ArrayList<>();
 
         for (Position position: positions) {
+            ServiceDto serviceDto = new ServiceDto(position.getCleaningService().getId(),
+                    position.getCleaningService().getServiceType(),
+                    position.getCleaningService().getPriceModel(),
+                    position.getCleaningService().getPrice());
+
             positionDtos.add(new PositionDto(
                     position.getId(),
-                    position.getCleaningService().getServiceType(),
+                    serviceDto,
                     position.getQuantity(),
                     position.getTotalPrice()
             ));

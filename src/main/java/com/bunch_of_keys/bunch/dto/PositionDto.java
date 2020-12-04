@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class PositionDto {
 
     private long id;
-    String cleaningService;
+    ServiceDto serviceDto;
     int quantity;
     int totalPrice;
 }
