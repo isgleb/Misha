@@ -11,14 +11,19 @@ $(document).ready(function() {
         {
         data: "serviceType",
         title: "Вид услуги",
+        required: true,
+        unique: true
         },
         {
         data: "priceModel",
-        title: "Модель ценообразования"
+        title: "Модель ценообразования",
+        required: true,
         },
         {
         data: "price",
-        title: "Стоимость"
+        title: "Стоимость",
+        type: "number",
+        required: true,
         },
     ];
 

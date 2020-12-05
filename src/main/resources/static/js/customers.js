@@ -42,13 +42,13 @@ $(document).ready(function() {
         data: "serviceDto",
         title: "Услуга",
         type : "select",
-
         options : servicesOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
 //            console.log(data.id + " это " + servicesOptions[data.id])
+
+            console.log(!(data.id in servicesOptions));
             if (data == null || !(data.id in servicesOptions)) {
-            console.log("вот и приехали");
             return null;
             }
 
@@ -57,11 +57,18 @@ $(document).ready(function() {
         },
         {
         data: "quantity",
-        title: "Количество"
+        title: "Количество",
+        type: "number",
+        required: true,
         },
         {
         data: "totalPrice",
-        title: "сумма"
+        title: "сумма",
+        render: function ( data, type, row, meta ) {
+        console.log(row.serviceDto.price + row.quantity)
+        console.log(data)
+        return row.serviceDto.price * row.quantity;
+        }
         },
     ];
 
