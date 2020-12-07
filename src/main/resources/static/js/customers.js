@@ -4,8 +4,11 @@
 // вызов базовой функции jQuery
 $(document).ready(function() {
 
+    var ordersId = parseInt((window.location.href.split("/").pop()));
+
     var services;
     var serviceMap = new Map();
+
 
     $.ajax({
             type: 'GET',
@@ -28,9 +31,6 @@ $(document).ready(function() {
           success: function (response) {customer = response;}
           });
 
-
-//    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-
     var columnDefs = [
 
         {
@@ -45,8 +45,6 @@ $(document).ready(function() {
         options : servicesOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
-//            console.log(data.id + " это " + servicesOptions[data.id])
-
 
             if (data == null || !(data in servicesOptions)) {
             return null;
@@ -75,7 +73,7 @@ $(document).ready(function() {
     serviceTable = $('#positions').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
-            url : '/positions/request',
+            url : '/positions/request?' + $.param({orderId: ordersId}),
             // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
             dataSrc : ''
         },
@@ -178,7 +176,7 @@ $(document).ready(function() {
 
 
 
-    var ordersId = parseInt((window.location.href.split("/").pop()));
+
 
 
     var customer;

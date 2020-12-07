@@ -20,9 +20,9 @@ public class PositionsController {
     private PositionService positionService;
 
     @GetMapping("/positions/request")
-    public ResponseEntity getPositios() {
+    public ResponseEntity getPositios(@RequestParam Long orderId) {
 
-        List<PositionDto> positionDtos = positionService.getPositions();
+        List<PositionDto> positionDtos = positionService.getPositions(orderId);
 
         return new ResponseEntity(positionDtos, HttpStatus.OK);
     }

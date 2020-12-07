@@ -22,7 +22,10 @@ public class PositionService {
     CleaningServiceRepository cleaningServiceRepository;
 
 
-    public List<PositionDto> getPositions (){
+    public List<PositionDto> getPositions (Long orderId){
+        System.out.println(orderId);
+
+
         List<Position> positions = positionRepository.findAll();
         List<PositionDto> positionDtos = new ArrayList<>();
 
