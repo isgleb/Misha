@@ -57,7 +57,7 @@ $(document).ready(function() {
 
     $('#edit').click( function () {
         var id = table.row('.selected').data().id;
-        return location.href = '/order?' + $.param({id: table.row('.selected').data().id})
+        return location.href = '/order/' + table.row('.selected').data().id
 //        вместа параметра использовать @pathvariable
     } );
 

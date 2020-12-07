@@ -63,18 +63,18 @@ public class PositionService {
 
     public Object editService(PositionDto positionDto) {
 
-//        long id = positionDto.getId();
-//        Position position = positionRepository.getOne(id);
-//        long cleaningServiceId = positionDto.getServiceDto().getId();
-//
-//        CleaningService cleaningService = cleaningServiceRepository.getOne(cleaningServiceId);
-//
-//        position.setQuantity(positionDto.getQuantity());
-//        position.setTotalPrice(positionDto.getTotalPrice());
-//        position.setCleaningService(cleaningService);
-//
-//
-//        positionRepository.save(position);
+        long id = positionDto.getId();
+        Position position = positionRepository.getOne(id);
+        long cleaningServiceId = positionDto.getServiceId();
+
+        CleaningService cleaningService = cleaningServiceRepository.getOne(cleaningServiceId);
+
+        position.setQuantity(positionDto.getQuantity());
+        position.setTotalPrice(positionDto.getTotalPrice());
+        position.setCleaningService(cleaningService);
+
+
+        positionRepository.save(position);
         return positionDto;
     }
 }

@@ -46,7 +46,7 @@ $(document).ready(function() {
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
 //            console.log(data.id + " это " + servicesOptions[data.id])
-            console.log(servicesOptions[data] + data)
+
 
             if (data == null || !(data in servicesOptions)) {
             return null;
@@ -106,8 +106,6 @@ $(document).ready(function() {
         ],
 
         onAddRow: function(datatable, rowdata, success, error) {
-//        console.log(rowdata);
-//        console.log("rowdata");
 
         var position = {serviceId: rowdata.serviceId,
                         quantity : rowdata.quantity,
@@ -137,7 +135,7 @@ $(document).ready(function() {
         onEditRow: function(datatable, rowdata, success, error) {
 
             var position = {id: rowdata.id,
-                            serviceDto: rowdata.serviceId,
+                            serviceId: rowdata.serviceId,
                             quantity : rowdata.quantity,
                             totalPrice : rowdata.totalPrice};
 
@@ -173,14 +171,15 @@ $(document).ready(function() {
 
 
 
+   console.log(window.location.href.split("/").pop());
+
+//   document.location.href.substring( document.location.href.lastIndexOf( '/' ) )
 
 
 
 
+    var ordersId = parseInt((window.location.href.split("/").pop()));
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var ordersId = urlParams.get('id');
 
     var customer;
 

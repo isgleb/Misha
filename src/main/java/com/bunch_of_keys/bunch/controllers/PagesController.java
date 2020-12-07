@@ -22,7 +22,7 @@ public class PagesController {
         return "table-orders";
     }
 
-    @GetMapping("/order")
+    @GetMapping("/order/{orderId}")
     public String orderpage () {
         return "order-page";
     }
