@@ -22,6 +22,12 @@ public class PagesController {
         return "table-orders";
     }
 
+    @GetMapping("/customers")
+    public String customers (Model model) {
+        model.addAttribute("title", "главная страничка");
+        return "customers";
+    }
+
     @GetMapping("/order/{orderId}")
     public String orderpage () {
         return "order-page";

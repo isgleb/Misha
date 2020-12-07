@@ -1,9 +1,6 @@
 package com.bunch_of_keys.bunch.services;
 
-import com.bunch_of_keys.bunch.domain.CleaningService;
-import com.bunch_of_keys.bunch.domain.CleaningServiceRepository;
-import com.bunch_of_keys.bunch.domain.Position;
-import com.bunch_of_keys.bunch.domain.PositionRepository;
+import com.bunch_of_keys.bunch.domain.*;
 import com.bunch_of_keys.bunch.dto.PositionDto;
 import com.bunch_of_keys.bunch.dto.ServiceDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,9 @@ public class PositionService {
 
     @Autowired
     CleaningServiceRepository cleaningServiceRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
 
 
     public List<PositionDto> getPositions (Long orderId){
@@ -46,10 +46,11 @@ public class PositionService {
 
         CleaningService service = cleaningServiceRepository.getOne(positionDto.getServiceId());
 
-        Position position = new Position(
-                service,
-                positionDto.getQuantity(),
-                positionDto.getTotalPrice());
+        Position position = new Position();
+        position.setQuantity(positionDto.getQuantity());
+        position.setCleaningService(service);
+        position.setTotalPrice(positionDto.getTotalPrice());
+        position.setOrder(orderRepository.getOne(orderId));
 
         positionRepository.save(position);
 
@@ -60,18 +61,19 @@ public class PositionService {
         positionRepository.deleteById(id);
     }
 
-    public Object editService(PositionDto positionDto) {
+    public Object editService(PositionDto positionDto, Long orderId) {
 
         long id = positionDto.getId();
         Position position = positionRepository.getOne(id);
         long cleaningServiceId = positionDto.getServiceId();
-
         CleaningService cleaningService = cleaningServiceRepository.getOne(cleaningServiceId);
+
+        Order order = orderRepository.getOne(orderId);
 
         position.setQuantity(positionDto.getQuantity());
         position.setTotalPrice(positionDto.getTotalPrice());
         position.setCleaningService(cleaningService);
-
+        position.setOrder(order);
 
         positionRepository.save(position);
         return positionDto;

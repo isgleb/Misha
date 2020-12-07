@@ -28,8 +28,8 @@ public class PositionsController {
     }
 
     @PostMapping("/positions/request")
-    public ResponseEntity newPosition(@RequestBody PositionDto positionDto) {
-        positionService.addPosition(positionDto);
+    public ResponseEntity newPosition(@RequestBody PositionDto positionDto, @RequestParam Long orderId) {
+        positionService.addPosition(positionDto, orderId);
         return new ResponseEntity(positionDto, HttpStatus.OK);
     }
 
@@ -39,8 +39,8 @@ public class PositionsController {
     }
 
     @PutMapping("/positions/request")
-    public ResponseEntity editService(@RequestBody PositionDto positionDto) {
-        return new ResponseEntity(positionService.editService(positionDto), HttpStatus.OK);
+    public ResponseEntity editService(@RequestBody PositionDto positionDto, @RequestParam Long orderId) {
+        return new ResponseEntity(positionService.editService(positionDto, orderId), HttpStatus.OK);
     }
 
 
