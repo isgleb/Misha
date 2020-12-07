@@ -18,12 +18,12 @@ import javax.persistence.*;
 public class PositionDto {
 
     private long id;
-    ServiceDto serviceDto;
+    long serviceId;
     int quantity;
     int totalPrice;
 
-    public PositionDto(ServiceDto serviceDto, int quantity, int totalPrice) {
-        this.serviceDto = serviceDto;
+    public PositionDto(long serviceId, int quantity, int totalPrice) {
+        this.serviceId = serviceId;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
     }

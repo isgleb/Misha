@@ -34,7 +34,7 @@ public class PositionService {
 
             positionDtos.add(new PositionDto(
                     position.getId(),
-                    serviceDto,
+                    position.getCleaningService().getId(),
                     position.getQuantity(),
                     position.getTotalPrice()
             ));
@@ -45,11 +45,7 @@ public class PositionService {
 
     public void addPosition(PositionDto positionDto) {
 
-        CleaningService service = new CleaningService(
-                positionDto.getServiceDto().getId(),
-                positionDto.getServiceDto().getServiceType(),
-                positionDto.getServiceDto().getPriceModel(),
-                positionDto.getServiceDto().getPrice());
+        CleaningService service = cleaningServiceRepository.getOne(positionDto.getServiceId());
 
         Position position = new Position(
                 service,
@@ -67,18 +63,18 @@ public class PositionService {
 
     public Object editService(PositionDto positionDto) {
 
-        long id = positionDto.getId();
-        Position position = positionRepository.getOne(id);
-        long cleaningServiceId = positionDto.getServiceDto().getId();
-
-        CleaningService cleaningService = cleaningServiceRepository.getOne(cleaningServiceId);
-
-        position.setQuantity(positionDto.getQuantity());
-        position.setTotalPrice(positionDto.getTotalPrice());
-        position.setCleaningService(cleaningService);
-
-
-        positionRepository.save(position);
+//        long id = positionDto.getId();
+//        Position position = positionRepository.getOne(id);
+//        long cleaningServiceId = positionDto.getServiceDto().getId();
+//
+//        CleaningService cleaningService = cleaningServiceRepository.getOne(cleaningServiceId);
+//
+//        position.setQuantity(positionDto.getQuantity());
+//        position.setTotalPrice(positionDto.getTotalPrice());
+//        position.setCleaningService(cleaningService);
+//
+//
+//        positionRepository.save(position);
         return positionDto;
     }
 }

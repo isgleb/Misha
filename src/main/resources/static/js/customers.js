@@ -39,20 +39,20 @@ $(document).ready(function() {
         type: "readonly"
         },
         {
-        data: "serviceDto",
+        data: "serviceId",
         title: "Услуга",
         type : "select",
         options : servicesOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
 //            console.log(data.id + " это " + servicesOptions[data.id])
+            console.log(servicesOptions[data] + data)
 
-            console.log(!(data.id in servicesOptions));
-            if (data == null || !(data.id in servicesOptions)) {
+            if (data == null || !(data in servicesOptions)) {
             return null;
             }
 
-            return servicesOptions[data.id];
+            return servicesOptions[data];
             }
         },
         {
@@ -61,15 +61,13 @@ $(document).ready(function() {
         type: "number",
         required: true,
         },
-        {
-        data: "totalPrice",
-        title: "сумма",
-        render: function ( data, type, row, meta ) {
-        console.log(row.serviceDto.price + row.quantity)
-        console.log(data)
-        return row.serviceDto.price * row.quantity;
-        }
-        },
+//        {
+//        data: "totalPrice",
+//        title: "сумма",
+//        render: function ( data, type, row, meta ) {
+//        return row.serviceDto.price * row.quantity;
+////        }
+//        },
     ];
 
     var serviceTable;
@@ -108,9 +106,14 @@ $(document).ready(function() {
         ],
 
         onAddRow: function(datatable, rowdata, success, error) {
-        var position = {serviceDto: services.find(item => item.id == rowdata.serviceDto),
+//        console.log(rowdata);
+//        console.log("rowdata");
+
+        var position = {serviceId: rowdata.serviceId,
                         quantity : rowdata.quantity,
                         totalPrice : rowdata.totalPrice};
+
+
 
             $.ajax({
                 url: '/positions/request',
@@ -134,10 +137,10 @@ $(document).ready(function() {
         onEditRow: function(datatable, rowdata, success, error) {
 
             var position = {id: rowdata.id,
-                            serviceDto: services.find(item => item.id == rowdata.serviceDto),
+                            serviceDto: rowdata.serviceId,
                             quantity : rowdata.quantity,
                             totalPrice : rowdata.totalPrice};
-            console.log(position);
+
 
             $.ajax({
                 url: '/positions/request',
