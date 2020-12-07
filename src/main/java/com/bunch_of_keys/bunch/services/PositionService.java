@@ -26,7 +26,7 @@ public class PositionService {
         System.out.println(orderId);
 
 
-        List<Position> positions = positionRepository.findAll();
+        List<Position> positions = positionRepository.getPositionsForTable();
         List<PositionDto> positionDtos = new ArrayList<>();
 
         for (Position position: positions) {
