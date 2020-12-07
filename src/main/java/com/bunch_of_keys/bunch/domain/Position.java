@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +25,11 @@ public class Position {
     CleaningService cleaningService;
     int quantity;
     int totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name="order_id", nullable=false)
+    private Order order;
+
 
     public Position(CleaningService cleaningService, int quantity, int totalPrice) {
         this.cleaningService = cleaningService;

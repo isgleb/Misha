@@ -25,11 +25,9 @@ public class Order {
     @JoinColumn(name = "customer_id", nullable=false)
     private Customer customer;
 
-//
-//    @OneToMany
-////  должно быть каскадное удаление
-//    List<Position> positions;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    List<Position> positions;
 
     public Order(Long id, String status, Customer customer) {
         this.id = id;

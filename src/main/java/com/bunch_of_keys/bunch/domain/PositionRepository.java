@@ -10,4 +10,7 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
     @Query("select p from Position p join fetch p.cleaningService")
     List<Position> getPositionsForTable();
 
+
+    List<Position> getByOrder_id(Long orderId);
+
 }

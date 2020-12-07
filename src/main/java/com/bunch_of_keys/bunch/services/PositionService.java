@@ -23,30 +23,26 @@ public class PositionService {
 
 
     public List<PositionDto> getPositions (Long orderId){
-        System.out.println(orderId);
 
-
-        List<Position> positions = positionRepository.getPositionsForTable();
+        List<Position> positions = positionRepository.getByOrder_id(orderId);
         List<PositionDto> positionDtos = new ArrayList<>();
 
         for (Position position: positions) {
-            ServiceDto serviceDto = new ServiceDto(position.getCleaningService().getId(),
-                    position.getCleaningService().getServiceType(),
-                    position.getCleaningService().getPriceModel(),
-                    position.getCleaningService().getPrice());
 
-            positionDtos.add(new PositionDto(
-                    position.getId(),
-                    position.getCleaningService().getId(),
-                    position.getQuantity(),
-                    position.getTotalPrice()
-            ));
+            PositionDto positionDto = new PositionDto();
+
+            positionDto.setId(position.getId());
+            positionDto.setTotalPrice(position.getTotalPrice());
+            positionDto.setQuantity(position.getQuantity());
+            positionDto.setServiceId(position.getCleaningService().getId());
+
+            positionDtos.add(positionDto);
         }
 
         return positionDtos;
     }
 
-    public void addPosition(PositionDto positionDto) {
+    public void addPosition(PositionDto positionDto, Long orderId) {
 
         CleaningService service = cleaningServiceRepository.getOne(positionDto.getServiceId());
 

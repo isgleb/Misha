@@ -24,8 +24,8 @@ public class CleaningService {
     private String priceModel;
     private int price;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy= "cleaningService")
-    private Set<Position> positions;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy= "cleaningService")
+//    private Set<Position> positions;
 
 
 
