@@ -1,12 +1,13 @@
-package com.bunch_of_keys.bunch.domain;
+package com.bunch_of_keys.bunch.domain.bills;
 
+import com.bunch_of_keys.bunch.domain.bills.CleaningService;
+import com.bunch_of_keys.bunch.domain.documents.Order;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter

@@ -1,10 +1,8 @@
-package com.bunch_of_keys.bunch.domain;
+package com.bunch_of_keys.bunch.domain.contragents;
 
 
+import com.bunch_of_keys.bunch.domain.contragents.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 

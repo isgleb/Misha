@@ -1,5 +1,8 @@
-package com.bunch_of_keys.bunch.domain;
+package com.bunch_of_keys.bunch.domain.documents;
 
+//import com.bunch_of_keys.bunch.domain.bills.Cost;
+import com.bunch_of_keys.bunch.domain.contragents.Customer;
+import com.bunch_of_keys.bunch.domain.bills.Position;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @EnableAutoConfiguration
-public class Order {
+public class Order extends Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,15 +32,7 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<Position> positions;
 
-    public Order(Long id, String status, Customer customer) {
-        this.id = id;
-        this.status = status;
-        this.customer = customer;
-    }
-
-    public Order(String status, Customer customer) {
-        this.status = status;
-        this.customer = customer;
-    }
+//    @OneToMany(mappedBy = "cost", cascade = CascadeType.ALL)
+//    List<Cost> costs;
 
 }

@@ -1,8 +1,5 @@
 package com.bunch_of_keys.bunch.controllers;
 
-import com.bunch_of_keys.bunch.domain.Order;
-import com.bunch_of_keys.bunch.dto.CustomerDto;
-import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import com.bunch_of_keys.bunch.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,7 @@
 package com.bunch_of_keys.bunch.controllers;
 
-import com.bunch_of_keys.bunch.domain.Customer;
-import com.bunch_of_keys.bunch.domain.Order;
 import com.bunch_of_keys.bunch.dto.CustomerDto;
 import com.bunch_of_keys.bunch.services.CustomerService;
-import com.bunch_of_keys.bunch.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

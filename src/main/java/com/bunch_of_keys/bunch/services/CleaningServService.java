@@ -1,17 +1,13 @@
 package com.bunch_of_keys.bunch.services;
 
-import com.bunch_of_keys.bunch.domain.CleaningService;
-import com.bunch_of_keys.bunch.domain.CleaningServiceRepository;
+import com.bunch_of_keys.bunch.domain.bills.CleaningService;
+import com.bunch_of_keys.bunch.domain.bills.CleaningServiceRepository;
 import com.bunch_of_keys.bunch.dto.ServiceDto;
-import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CleaningServService {
@@ -25,25 +21,25 @@ public class CleaningServService {
         List<ServiceDto> serviceDtos = new ArrayList<>();
 
         for (CleaningService service: services) {
-            serviceDtos.add(new ServiceDto(
-                    service.getId(),
-                    service.getServiceType(),
-                    service.getPriceModel(),
-                    service.getPrice()
-            ));
-        }
 
-//        serviceDtos.add(new ServiceDto(1,"Уборка","метры",4));
+            ServiceDto serviceDto = new ServiceDto();
+            serviceDto.setId(service.getId());
+            serviceDto.setServiceType(service.getServiceType());
+            serviceDto.setPriceModel(service.getPriceModel());
+            serviceDto.setPrice(service.getPrice());
+
+            serviceDtos.add(serviceDto);
+        }
         return serviceDtos;
     }
 
 
     public void addService (ServiceDto serviceDto){
 
-        CleaningService cleaningService = new CleaningService(
-                serviceDto.getServiceType(),
-                serviceDto.getPriceModel(),
-                serviceDto.getPrice());
+        CleaningService cleaningService = new CleaningService();
+        cleaningService.setServiceType(serviceDto.getServiceType());
+        cleaningService.setPriceModel(serviceDto.getPriceModel());
+        cleaningService.setPrice(serviceDto.getPrice());
 
         cleaningServiceRepository.save(cleaningService);
     }

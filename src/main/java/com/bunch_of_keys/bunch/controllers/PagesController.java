@@ -1,6 +1,5 @@
 package com.bunch_of_keys.bunch.controllers;
 
-import com.bunch_of_keys.bunch.domain.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +37,15 @@ public class PagesController {
     public String template () {
         return "template";
     }
+
     @GetMapping("/services")
     public String services () {
         return "services";
+    }
+
+    @GetMapping("/costs")
+    public String costs () {
+        return "costs";
     }
 
 }

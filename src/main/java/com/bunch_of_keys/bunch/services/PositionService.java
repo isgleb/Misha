@@ -1,8 +1,12 @@
 package com.bunch_of_keys.bunch.services;
 
-import com.bunch_of_keys.bunch.domain.*;
+import com.bunch_of_keys.bunch.domain.bills.CleaningService;
+import com.bunch_of_keys.bunch.domain.bills.CleaningServiceRepository;
+import com.bunch_of_keys.bunch.domain.bills.Position;
+import com.bunch_of_keys.bunch.domain.bills.PositionRepository;
+import com.bunch_of_keys.bunch.domain.documents.Order;
+import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
 import com.bunch_of_keys.bunch.dto.PositionDto;
-import com.bunch_of_keys.bunch.dto.ServiceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

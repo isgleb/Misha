@@ -1,11 +1,9 @@
 package com.bunch_of_keys.bunch.services;
 
-import com.bunch_of_keys.bunch.domain.Customer;
-import com.bunch_of_keys.bunch.domain.CustomerRepository;
-import com.bunch_of_keys.bunch.domain.Order;
-import com.bunch_of_keys.bunch.domain.OrderRepository;
-import com.bunch_of_keys.bunch.dto.CustomerDto;
-import com.bunch_of_keys.bunch.dto.OrderDto;
+import com.bunch_of_keys.bunch.domain.contragents.Customer;
+import com.bunch_of_keys.bunch.domain.contragents.CustomerRepository;
+import com.bunch_of_keys.bunch.domain.documents.Order;
+import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

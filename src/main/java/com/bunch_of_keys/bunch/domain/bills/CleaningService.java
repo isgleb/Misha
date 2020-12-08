@@ -1,4 +1,4 @@
-package com.bunch_of_keys.bunch.domain;
+package com.bunch_of_keys.bunch.domain.bills;
 
 
 import lombok.AllArgsConstructor;
@@ -26,14 +26,6 @@ public class CleaningService {
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy= "cleaningService")
 //    private Set<Position> positions;
-
-
-
-    public CleaningService(String serviceType, String priceModel, int price) {
-        this.serviceType = serviceType;
-        this.priceModel = priceModel;
-        this.price = price;
-    }
 
 
     @Override
