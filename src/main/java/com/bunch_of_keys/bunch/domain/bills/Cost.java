@@ -18,10 +18,16 @@ public class Cost {
     @JoinColumn(name = "cost_type_id", nullable=false)
     CostType costType;
 
+    @ManyToOne
+    @JoinColumn(name = "invoice_id", nullable = false)
+    Invoice invoice;
+
     String comments;
 
-    int totalSum;
-    
+    int price;
+
+
+
 //    @ManyToOne
 //    @JoinColumn(name="document_id", nullable=false)
 //    private Document document;
