@@ -1,25 +1,36 @@
 package com.bunch_of_keys.bunch.domain.bills;
 
 import com.bunch_of_keys.bunch.domain.contragents.Contragent;
+import com.bunch_of_keys.bunch.domain.contragents.Stuff;
 import com.bunch_of_keys.bunch.domain.documents.Order;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "invoices")
 public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    Contragent contragent;
 
-    int sum;
-
+//    later it will be Contragent contragent;
     @ManyToOne
+    Stuff stuff;
+
+//            later it will be Document
+    @ManyToOne
+    @JoinColumn(name="order_id", nullable=false)
     Order order;
 
-
+    int sum;
 }

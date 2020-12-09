@@ -6,9 +6,125 @@ $(document).ready(function() {
 
     var ordersId = parseInt((window.location.href.split("/").pop()));
 
+
+    var stuff;
+    var stuffMap = new Map();
+    $.ajax({
+            type: 'GET',
+            url: "/stuff/request",
+            async: false,
+            success: function (response) {stuff = response;}
+            });
+
+
+    stuff.forEach(function(theStuff){
+
+        stuffMap.set(theStuff.id, theStuff.name);
+        })
+
+
+    var stuffOptions = Object.fromEntries(stuffMap.entries());
+
+    var invoiceColumns = [
+        {
+        data: "id",
+        title: "id",
+        type: "readonly"
+        },
+        {
+        data: "stuffId",
+        title: "Сотрудник",
+        type : "select",
+        options : stuffOptions,
+        select1 : { width: "100%"},
+        render: function (data, type, row, meta) {
+            if (data == null || !(data in stuffOptions)) { return null;}
+            return stuffOptions[data];
+            }
+        },
+        {
+        data: "sum",
+        title: "Сумма",
+        type: "number",
+        required: true,
+        },
+    ];
+
+    var invoiceTable;
+
+    invoiceTable = $('#invoices').DataTable({
+        "sPaginationType": "full_numbers",
+
+        ajax: {
+            url : '/invoice/request?' + $.param({orderId: ordersId}),
+            // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
+            dataSrc : ''
+        },
+        columns: invoiceColumns,
+        dom: 'Bfrtip',        // Needs button container
+        select: 'single',
+        responsive: true,
+        altEditor: true,     // Enable altEditor
+        buttons: [
+            {
+                text: 'Add',
+                name: 'add'        // do not change name
+            },
+            {
+                extend: 'selected', // Bind to Selected row
+                text: 'Edit',
+                name: 'edit'        // do not change name
+            },
+            {
+                extend: 'selected', // Bind to Selected row
+                text: 'Delete',
+                name: 'delete'      // do not change name
+            },
+            {
+                text: 'Refresh',
+                name: 'refresh'      // do not change name
+            }
+        ],
+
+        onDeleteRow: function(datatable, rowdata, success, error) {
+                    $.ajax({
+                        url: '/invoice/request?' + $.param({id: rowdata.id}), // выдает null
+                        type: 'DELETE',
+                        success: success,
+                        error: error
+                    });
+                },
+
+
+        onAddRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                url: '/invoice/request',
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(rowdata),
+                success: success,
+                error: error
+            });
+        },
+
+
+        onEditRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                url: '/invoice/request?',
+                type: 'PUT',
+                contentType: "application/json",
+                data: JSON.stringify(rowdata),
+                success: success,
+                error: error
+            });
+        }
+    });
+
+
+
+
     var services;
     var serviceMap = new Map();
-
 
     $.ajax({
             type: 'GET',
@@ -162,8 +278,8 @@ $(document).ready(function() {
 
 
 
-
-   console.log(window.location.href.split("/").pop());
+//
+//   console.log(window.location.href.split("/").pop());
 
 //   document.location.href.substring( document.location.href.lastIndexOf( '/' ) )
 

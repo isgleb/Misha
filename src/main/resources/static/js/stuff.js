@@ -1,24 +1,5 @@
-//var statusOptions = { "принят" : "принят", "выполнен" : "выполнен"};
-
 // вызов базовой функции jQuery
 $(document).ready(function() {
-
-//    const queryString = window.location.search;
-//    const urlParams = new URLSearchParams(queryString);
-//    var ordersId = urlParams.get('id');
-//
-//    var customer;
-
-
-//    $.ajax({
-//          type: 'GET',
-//          url: '/order/customer?' + $.param({orderId: ordersId}),
-//          async: false,
-//          success: function (response) {customer = response;}
-//          });
-//
-
-//    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
 
     var columnDefs = [
 
@@ -28,25 +9,29 @@ $(document).ready(function() {
         type: "readonly"
         },
         {
-        data: "cleaningService",
-        title: "Услуга",
+        data: "name",
+        title: "Имя",
         },
         {
-        data: "quantity",
-        title: "Количество"
+        data: "surname",
+        title: "Фамилия"
         },
         {
-        data: "totalPrice",
-        title: "сумма"
+        data: "email",
+        title: "email"
+        },
+        {
+        data: "telephone",
+        title: "Телефон"
         },
     ];
 
     var myTable;
 
-    myTable = $('#positions').DataTable({
+    myTable = $('#stuff-table').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
-            url : '/positions/request',
+            url : '/stuff/request',
             // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
             dataSrc : ''
         },
@@ -73,12 +58,12 @@ $(document).ready(function() {
             {
                 text: 'Обновить таблицу',
                 name: 'refresh'      // do not change name
-            }
+            },
         ],
 
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/customers/request',
+                url: 'stuff/request',
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
@@ -89,7 +74,7 @@ $(document).ready(function() {
 
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/customers/request?' + $.param({id: rowdata.id}), // выдает null
+                url: 'stuff/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
                 success: success,
                 error: error
@@ -98,7 +83,7 @@ $(document).ready(function() {
 
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/customers/request',
+                url: 'stuff/request',
                 type: 'PUT',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
@@ -107,16 +92,4 @@ $(document).ready(function() {
             });
         }
     });
-
-//    function changeClient () {
-//            var selectedCustomerId = myTable.row('.selected').data().id;
-//            $.ajax({
-//                   url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
-//                   type: 'PUT',
-//                   success: function(){
-//                        customer = myTable.row('.selected').data();
-//                        $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-//                   }
-//            });
-//    }
 });
