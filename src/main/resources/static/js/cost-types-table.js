@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     var myTable;
 
-    myTable = $('#cost-Types-table').DataTable({
+    myTable = $('#cost-types-table').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
             url : '/costs-types/request',
@@ -53,7 +53,7 @@ $(document).ready(function() {
 
         onAddRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: 'costs-types/request',
+                url: '/costs-types/request',
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: 'costs-types/request?' + $.param({id: rowdata.id}), // выдает null
+                url: '/costs-types/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
                 success: success,
                 error: error
@@ -73,7 +73,7 @@ $(document).ready(function() {
 
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: 'costs-types/request',
+                url: '/costs-types/request',
                 type: 'PUT',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),

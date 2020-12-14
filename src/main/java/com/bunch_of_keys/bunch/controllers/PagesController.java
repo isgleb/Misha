@@ -43,9 +43,9 @@ public class PagesController {
         return "services";
     }
 
-    @GetMapping("/costs")
+    @GetMapping("/cost/types")
     public String costs () {
-        return "costs";
+        return "cost-types";
     }
 
     @GetMapping("/stuff")
