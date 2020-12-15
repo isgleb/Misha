@@ -21,7 +21,7 @@ public class InvoiceDto {
     Long stuffId;
 
     //            later it will be Document
-    Long orderId;
+    Long invoiceRelatedDocumentId;
     int sum;
 
     @Override
@@ -29,7 +29,7 @@ public class InvoiceDto {
         return "InvoiceDto{" +
                 "id=" + id +
                 ", stuffId=" + stuffId +
-                ", orderId=" + orderId +
+                ", invoiceRelatedDocumentId=" + invoiceRelatedDocumentId +
                 ", sum=" + sum +
                 '}';
     }

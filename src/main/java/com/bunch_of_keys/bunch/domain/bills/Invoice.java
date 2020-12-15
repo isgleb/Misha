@@ -2,6 +2,7 @@ package com.bunch_of_keys.bunch.domain.bills;
 
 import com.bunch_of_keys.bunch.domain.contragents.Contragent;
 import com.bunch_of_keys.bunch.domain.contragents.Stuff;
+import com.bunch_of_keys.bunch.domain.documents.InvoiceRelatedDocument;
 import com.bunch_of_keys.bunch.domain.documents.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,8 +30,8 @@ public class Invoice {
 
 //            later it will be Document
     @ManyToOne
-    @JoinColumn(name="order_id", nullable=false)
-    Order order;
+    @JoinColumn(name="invoice_related_document_id", nullable=false)
+    InvoiceRelatedDocument invoiceRelatedDocument;
 
     int sum;
 }

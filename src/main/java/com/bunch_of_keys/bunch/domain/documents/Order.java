@@ -19,11 +19,11 @@ import java.util.List;
 @Table(name = "orders")
 @DiscriminatorValue("order")
 @EnableAutoConfiguration
-public class Order {
+public class Order extends InvoiceRelatedDocument{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private long id;
     private String status;
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable=false)

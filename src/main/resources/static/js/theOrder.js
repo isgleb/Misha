@@ -97,11 +97,15 @@ $(document).ready(function() {
 
 
         onAddRow: function(datatable, rowdata, success, error) {
+
+        invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
+
+        console.log(invoiceDto);
             $.ajax({
                 url: '/invoice/request',
                 type: 'POST',
                 contentType: "application/json",
-                data: JSON.stringify(rowdata),
+                data: JSON.stringify(invoiceDto),
                 success: success,
                 error: error
             });

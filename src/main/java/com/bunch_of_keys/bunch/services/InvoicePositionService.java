@@ -77,4 +77,19 @@ public class InvoicePositionService {
 
         return invoicePositionDto;
     }
+
+
+    public void addInvoicePositionFromOrderInvoice (int sum, Invoice invoice) {
+
+        InvoicePosition invoicePosition = new InvoicePosition();
+
+        CostType defaultCostTypeForOrders = costTypeRepository.getOne((long) 37);
+
+
+        invoicePosition.setCostType(defaultCostTypeForOrders);
+        invoicePosition.setPrice(sum);
+        invoicePosition.setInvoice(invoice);
+
+        invoicePositionRepository.save(invoicePosition);
+    }
 }

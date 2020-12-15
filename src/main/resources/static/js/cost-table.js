@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-    var table = $('#example').DataTable( {
+    var table = $('#cost-table').DataTable( {
     responsive: true,
      "ajax": {
-                 "url": "orders-table",
+                 "url": "costs-table",
                  "dataSrc": ""
              },
      "columns": [

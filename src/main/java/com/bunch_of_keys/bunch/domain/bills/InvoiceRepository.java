@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
-    List<Invoice> getByOrder_id(Long orderId);
+    List<Invoice> getByInvoiceRelatedDocument_id(Long IrdId);
 
 }

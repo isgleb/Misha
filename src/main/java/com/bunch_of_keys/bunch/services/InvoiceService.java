@@ -1,6 +1,10 @@
 package com.bunch_of_keys.bunch.services;
 
 import com.bunch_of_keys.bunch.domain.bills.*;
+import com.bunch_of_keys.bunch.domain.contragents.Stuff;
+import com.bunch_of_keys.bunch.domain.contragents.StuffRepository;
+import com.bunch_of_keys.bunch.domain.documents.InvoiceRelatedDocument;
+import com.bunch_of_keys.bunch.domain.documents.IrdRepository;
 import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
 import com.bunch_of_keys.bunch.dto.InvoiceDto;
 import com.bunch_of_keys.bunch.dto.PositionDto;
@@ -16,29 +20,16 @@ public class InvoiceService {
     @Autowired
     InvoiceRepository invoiceRepository;
 
-//    public List<PositionDto> getPositions (Long orderId){
-//
-//        List<Position> positions = positionRepository.getByOrder_id(orderId);
-//        List<PositionDto> positionDtos = new ArrayList<>();
-//
-//        for (Position position: positions) {
-//
-//            PositionDto positionDto = new PositionDto();
-//
-//            positionDto.setId(position.getId());
-//            positionDto.setTotalPrice(position.getTotalPrice());
-//            positionDto.setQuantity(position.getQuantity());
-//            positionDto.setServiceId(position.getCleaningService().getId());
-//
-//            positionDtos.add(positionDto);
-//        }
-//
-//        return positionDtos;
-//    }
+    @Autowired
+    IrdRepository irdRepository;
 
-    public List<InvoiceDto> getInvoicesByOrder(Long orderId) {
+    @Autowired
+    StuffRepository stuffRepository;
 
-        List<Invoice> invoices = invoiceRepository.getByOrder_id(orderId);
+
+    public List<InvoiceDto> getInvoicesByOrder(Long IrdId) {
+
+        List<Invoice> invoices = invoiceRepository.getByInvoiceRelatedDocument_id(IrdId);
         List<InvoiceDto> invoiceDtos = new ArrayList<>();
 
         for (Invoice invoice: invoices) {
@@ -46,39 +37,32 @@ public class InvoiceService {
             InvoiceDto invoiceDto = new InvoiceDto();
             invoiceDto.setId(invoice.getId());
             invoiceDto.setStuffId(invoice.getStuff().getId());
-            invoiceDto.setOrderId(orderId);
+            invoiceDto.setInvoiceRelatedDocumentId(IrdId);
             invoiceDto.setSum(invoice.getSum());
 
             invoiceDtos.add(invoiceDto);
         }
 
         return invoiceDtos;
-
     }
 
     public void deleteInvoice(Long id) {
         invoiceRepository.deleteById(id);
     }
 
+
+    @Autowired
+    InvoicePositionService invoicePositionService;
+
     public void newOrderInvoice (InvoiceDto invoiceDto) {
+        Invoice invoice = new Invoice();
 
+        invoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
+        invoice.setStuff(stuffRepository.getOne(invoiceDto.getStuffId()));
+        invoice.setSum(invoiceDto.getSum());
 
+        invoiceRepository.save(invoice);
 
-
+        invoicePositionService.addInvoicePositionFromOrderInvoice(invoice.getSum(), invoice);
     }
-
-
-//    public void addPosition(PositionDto positionDto, Long orderId) {
-//
-//        CleaningService service = cleaningServiceRepository.getOne(positionDto.getServiceId());
-//
-//        Position position = new Position();
-//        position.setQuantity(positionDto.getQuantity());
-//        position.setCleaningService(service);
-//        position.setTotalPrice(positionDto.getTotalPrice());
-//        position.setOrder(orderRepository.getOne(orderId));
-//
-//        positionRepository.save(position);
-//    }
-
 }

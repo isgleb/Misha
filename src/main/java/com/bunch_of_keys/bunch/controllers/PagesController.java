@@ -53,4 +53,9 @@ public class PagesController {
         return "stuff";
     }
 
+    @GetMapping("/cost")
+    public String costs () {
+        return "costs";
+    }
+
 }
