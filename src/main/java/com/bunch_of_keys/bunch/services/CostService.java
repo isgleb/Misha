@@ -15,7 +15,8 @@ public class CostService {
     @Autowired
     CostRepository costRepository;
 
-    public List<CostTableDto> getCosts() {
+
+    public List<CostTableDto> getCostsForTable() {
 
         List<CostTableDto> costTableDtos = new ArrayList<>();
 
@@ -24,11 +25,16 @@ public class CostService {
         for (Cost cost: costs) {
             CostTableDto costTableDto = new CostTableDto();
             costTableDto.setId(cost.getId());
-//            costTableDto.setContragent(cost.getInvoice().getStuff().getName());
+//            costTableDto.setContragent(cost.getInvoice().get(0).getStuff().getName());
+//            costTableDto.setSum(cost.getInvoice().get(0).getSum());
+//            costTableDto.setDate(cost.getInvoice().get(0).getSum());
+
+            costTableDto.setContragent(cost.getInvoice().getStuff().getName());
+            costTableDto.setSum(cost.getInvoice().getSum());
+            costTableDto.setDate(cost.getInvoice().getSum());
+
+            costTableDtos.add(costTableDto);
         }
-
-
-
 
         return costTableDtos;
     }

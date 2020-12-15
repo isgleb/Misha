@@ -18,7 +18,7 @@ public class CostsController {
 
     @GetMapping("/costs-table")
     public ResponseEntity getCosts() {
-        List<CostTableDto> costTableDtos = costService.getCosts();
+        List<CostTableDto> costTableDtos = costService.getCostsForTable();
         return new ResponseEntity(costTableDtos, HttpStatus.OK);
     }
 }

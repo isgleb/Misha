@@ -7,6 +7,13 @@ $(document).ready(function() {
                  "dataSrc": ""
              },
      "columns": [
+
+         private long id;
+         private int date;
+         private String contragent;
+         private int sum;
+
+
                     {
                     "data": "id",
                     "title": "Id",
@@ -14,20 +21,16 @@ $(document).ready(function() {
                     },
 
                     {
-                    "data": "status",
-                    "title": "Статус",
+                    "data": "date",
+                    "title": "Дата",
                     },
                     {
-                    "data": "customerName",
-                    "title": "Имя"
+                    "data": "contragent",
+                    "title": "Контрагент"
                     },
                     {
-                    "data": "customerSurname",
-                    "title": "Фамилия"
-                    },
-                    {
-                    "data": "customerTelephone",
-                    "title": "Телефон"
+                    "data": "sum",
+                    "title": "Сумма"
                     },
                 ],
     })

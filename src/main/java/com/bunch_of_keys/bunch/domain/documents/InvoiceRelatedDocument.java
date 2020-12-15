@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +18,10 @@ public abstract class InvoiceRelatedDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name="invoice_related_document_id")
+//    List<Invoice> invoice;
 
 
 

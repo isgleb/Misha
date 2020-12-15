@@ -1,15 +1,18 @@
 package com.bunch_of_keys.bunch.domain.bills;
 
-import com.bunch_of_keys.bunch.domain.contragents.Contragent;
+
 import com.bunch_of_keys.bunch.domain.contragents.Stuff;
 import com.bunch_of_keys.bunch.domain.documents.InvoiceRelatedDocument;
-import com.bunch_of_keys.bunch.domain.documents.Order;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
+import java.util.Set;
+import javax.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -28,7 +31,10 @@ public class Invoice {
     @ManyToOne
     Stuff stuff;
 
-//            later it will be Document
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "invoice")
+    Set<InvoicePosition> invoicePositionSet;
+
+
     @ManyToOne
     @JoinColumn(name="invoice_related_document_id", nullable=false)
     InvoiceRelatedDocument invoiceRelatedDocument;
