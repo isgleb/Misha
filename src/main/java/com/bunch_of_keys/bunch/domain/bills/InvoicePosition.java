@@ -2,7 +2,7 @@ package com.bunch_of_keys.bunch.domain.bills;
 
 import com.bunch_of_keys.bunch.domain.bills.CostType;
 import com.bunch_of_keys.bunch.domain.contragents.Contragent;
-import com.bunch_of_keys.bunch.domain.documents.Document;
+//import com.bunch_of_keys.bunch.domain.documents.Document;
 import com.bunch_of_keys.bunch.domain.documents.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,8 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "costs")
-public class Cost {
+@Table(name = "invoicePositions")
+public class InvoicePosition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

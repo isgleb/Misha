@@ -44,7 +44,7 @@ public class PagesController {
     }
 
     @GetMapping("/cost/types")
-    public String costs () {
+    public String invoicePositions () {
         return "cost-types";
     }
 

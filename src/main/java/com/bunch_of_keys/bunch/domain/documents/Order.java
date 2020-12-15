@@ -17,8 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
+@DiscriminatorValue("order")
 @EnableAutoConfiguration
-public class Order extends Document {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +33,10 @@ public class Order extends Document {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<Position> positions;
 
+
+
+
 //    @OneToMany(mappedBy = "cost", cascade = CascadeType.ALL)
-//    List<Cost> costs;
+//    List<Cost> invoicePositions;
 
 }

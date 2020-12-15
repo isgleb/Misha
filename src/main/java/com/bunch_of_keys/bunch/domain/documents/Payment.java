@@ -15,7 +15,8 @@
 //@Setter
 //@NoArgsConstructor
 //@Entity
-//@Table(name = "orders")
+//@Table(name = "payments")
+//@DiscriminatorValue("cost")
 //@EnableAutoConfiguration
 //public class Payment extends Document {
 //

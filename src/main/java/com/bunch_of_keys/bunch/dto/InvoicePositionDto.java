@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CostDto {
+public class InvoicePositionDto {
 
     private long id;
 
