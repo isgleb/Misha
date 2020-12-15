@@ -16,7 +16,7 @@ public class CostTypesController {
     @Autowired
     private CostTypeService costTypeService;
 
-    @GetMapping("/invoicePositions-types/request")
+    @GetMapping("/costs-types/request")
     public ResponseEntity getCostTypes () {
 
         List<CostTypeDto> costTypeDtos = costTypeService.getCostTypes();
@@ -24,18 +24,18 @@ public class CostTypesController {
         return new ResponseEntity(costTypeDtos, HttpStatus.OK);
     }
 
-    @PostMapping("/invoicePositions-types/request")
+    @PostMapping("/costs-types/request")
     public ResponseEntity newCostType (@RequestBody CostTypeDto costTypeDto) {
         costTypeService.addCostType(costTypeDto);
         return new ResponseEntity(costTypeDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/invoicePositions-types/request")
+    @DeleteMapping("/costs-types/request")
     public void deleteCostType (@RequestParam Long id) { // работает с postman
         costTypeService.deleteCostType(id);
     }
 
-    @PutMapping("/invoicePositions-types/request")
+    @PutMapping("/costs-types/request")
     public ResponseEntity editCostType (@RequestBody CostTypeDto costTypeDto) {
         return new ResponseEntity(costTypeService.editCostType(costTypeDto), HttpStatus.OK);
     }
