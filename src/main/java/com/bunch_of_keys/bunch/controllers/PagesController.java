@@ -58,4 +58,9 @@ public class PagesController {
         return "costs";
     }
 
+    @GetMapping("/new-order")
+    public String newOrder () {
+        return "new-order";
+    }
+
 }
