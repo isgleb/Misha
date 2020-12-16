@@ -32,20 +32,14 @@ public class InvoiceController {
         return new ResponseEntity(invoiceDto, HttpStatus.OK);
     }
 
-    
-    @DeleteMapping("/invoice/request")
-    public void deleteCustomer (@RequestParam Long id) { // работает с postman
 
-        invoiceService.deleteInvoice(id);
-    }
+    @DeleteMapping("/invoice/request")
+    public void deleteCustomer (@RequestParam Long id) { invoiceService.deleteInvoice(id);}
 
 //    @PutMapping("/customers/request")
 //    public ResponseEntity editCustomer (@RequestBody CustomerDto customerDto) {
 //        return new ResponseEntity(customerService.editCustomer(customerDto), HttpStatus.OK);
 //
 //    }
-
-
-
 
 }
