@@ -37,6 +37,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
+
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -279,6 +280,78 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
+
+
+
+
+        <div class="row" th:fragment="order-result">
+            <div class="col-sm">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width:50%">id</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%">Дата</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"id="date"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"style="width:50%">Клиент </th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true" id="chosen-customer"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"style="width:50%">Адрес</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true" id="address"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width:50%">Статус</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true" id="status"></span</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%" >Доход</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true" id="income"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%" >Затраты</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true" id="expenses"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%" >Прибыль</th>
+                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"id="profit"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success w-100" id="save"> Сохранить изменения</button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->

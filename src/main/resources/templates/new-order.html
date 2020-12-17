@@ -32,139 +32,27 @@
     <div th:insert="~{template :: topbar}"></div>
     <div th:insert="~{template :: sidebar}"></div>
 
-
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-sm">-->
-<!--                id-->
-<!--            </div>-->
-<!--            <div class="col-sm">-->
-<!--                Дата-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-sm">-->
-<!--                Статус-->
-<!--            </div>-->
-<!--            <div class="col-sm">-->
-<!--                Доход-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-sm">-->
-<!--                Клиент-->
-<!--            </div>-->
-<!--            <div class="col-sm">-->
-<!--                Затраты-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="col-sm">-->
-<!--                Адресс-->
-<!--            </div>-->
-<!--            <div class="col-sm">-->
-<!--                прибыль-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--    </div>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="page-wrapper">
                 <div class="card block">
                     <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-sm">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row" style="width:50%">id</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:50%">Дата</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"style="width:50%">Клиент </th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true" id="chosen-customer"></span> Supported</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"style="width:50%">Адрес</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div th:insert="~{template :: order-result}"></div>
 
-                            <div class="col-sm">
-                                <div class="table-responsive">
+<!--                        <button id="choose">выбрать клиента</button>-->
 
-                                    <table class="table table-bordered table-striped">
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row" style="width:50%">Статус</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:50%" >Доход</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:50%" >Затраты</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:50%" >Прибыль</th>
-                                            <td class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Supported</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                        <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="order-customer">
 
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                            <button type="button" class="btn btn-success w-100">Загрузить изменения</button>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-                        <!--                    <button id="choose">выбрать клиента</button>-->
-                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="order-customer">
-
-                </table>
-            </div>
-        </div>
+                        </table>
+                    </div>
+                </div>
 
         hello motherfucker
         <div class="card block">
             <div class="container-fluid">
-                <!--                    <button id="choose">выбрать клиента</button>-->
-                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="positions">
+<!--                &lt;!&ndash;                    <button id="choose">выбрать клиента</button>&ndash;&gt;-->
+<!--                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="positions">-->
 
-                </table>
+<!--                </table>-->
             </div>
         </div>
 
@@ -174,7 +62,7 @@
 
                 hello i am new order
                 <!--                    <button id="choose">выбрать клиента</button>-->
-<!--                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="invoices">-->
+                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="invoices">
 
                 </table>
             </div>
@@ -212,10 +100,11 @@ here is your fucking order
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.js" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" ></script>
 <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.js" ></script>
+
+
+
+<script src="../js/new-order.js" ></script>
 <script src="../js/dataTables.altEditor.free.js" ></script>
-
-
-<script src="../js/theOrder.js" ></script>
 <!--    <script src="js/positions.js" ></script>-->
 
 
