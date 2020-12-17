@@ -29,7 +29,7 @@ $(document).ready(function() {
         orderId = parseInt(currentPage)
     }
 
-    var orderId = 1;
+//    var orderId = 1;
 
     var customer;
 
