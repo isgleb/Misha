@@ -67,21 +67,21 @@ $(document).ready(function() {
         altEditor: true,     // Enable altEditor
         buttons: [
             {
-                text: 'Add',
+                text: 'Новый',
                 name: 'add'        // do not change name
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Edit',
+                text: 'Имзенить данные',
                 name: 'edit'        // do not change name
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Delete',
+                text: 'Удалить',
                 name: 'delete'      // do not change name
             },
             {
-                text: 'Refresh',
+                text: 'Обновить таблицу',
                 name: 'refresh'      // do not change name
             }
         ],

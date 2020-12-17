@@ -33,61 +33,59 @@
         <div th:insert="~{template :: sidebar}"></div>
 
         <div class="page-wrapper">
-            <div class="card block">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm" th:insert="~{template :: order-result-first}"></div>
-                        <div class="col-sm" th:insert="~{template :: order-result-second}"></div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Данные заказа</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm" th:insert="~{template :: order-result-first}"></div>
+                                <div class="col-sm" th:insert="~{template :: order-result-second}"></div>
+                            </div>
+                        </div>
                     </div>
-<!--                    <button id="choose">выбрать клиента</button>-->
-                    <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="order-customer">
+                </div>
 
-                    </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Клиенты</h4>
+                            </div>
+                            <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="order-customer">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Услуги</h4>
+                            </div>
+                            <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="positions">
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Оплата труда</h4>
+                            </div>
+                            <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="invoices">
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            hello motherfucker
-            <div class="card block">
-                <div class="container-fluid">
-                    <!--                    <button id="choose">выбрать клиента</button>-->
-                    <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="positions">
-
-                    </table>
-                </div>
-            </div>
-
-            hello again
-            <div class="card block">
-                <div class="container-fluid">
-                    <!--                    <button id="choose">выбрать клиента</button>-->
-                    <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="invoices">
-
-                    </table>
-                </div>
-            </div>
-
-
         </div>
-
-
     </div>
-
-here is your fucking order
-<!--<span th:text=${param.id[0]}></span>-->
-
-
-<div class="container">
-    <!--th onclick-->
-
-
-<!--    <output id="chosen-customer"></output>-->
-<!--    <button id="choose">выбрать клиента</button>-->
-<!--    <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="order-customer">-->
-
-<!--    </table>-->
-
-</div>
-
 
 
 
