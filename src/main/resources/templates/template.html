@@ -285,7 +285,7 @@
 
 
         <div class="row" th:fragment="order-result">
-            <div class="col-sm">
+            <div class="col-sm" th:fragment="order-result-first">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <tbody>
@@ -311,14 +311,14 @@
                 </div>
             </div>
 
-            <div class="col-sm">
+            <div class="col-sm" th:fragment="order-result-second">
                 <div class="table-responsive">
 
                     <table class="table table-bordered table-striped">
                         <tbody>
                         <tr>
                             <th scope="row" style="width:50%">Статус</th>
-                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="status"></span</td>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="status"></span></td>
                         </tr>
                         <tr>
                             <th scope="row" style="width:50%" >Доход</th>
@@ -338,7 +338,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12" th:fragment="order-result-button">
                 <button type="button" class="btn btn-info w-100" id="save"> Заполните данные заказа</button>
             </div>
         </div>

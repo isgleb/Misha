@@ -1,5 +1,7 @@
 package com.bunch_of_keys.bunch.controllers;
 
+import com.bunch_of_keys.bunch.dto.CustomerDto;
+import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import com.bunch_of_keys.bunch.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +39,17 @@ public class OrdersController {
         orderService.changeCustomer(orderId, customerId);
     }
 
-    @GetMapping("/create-new-order")
-    public void createOrder() {
+    @PostMapping("/create-new-order")
+    public ResponseEntity createOrder(@RequestBody OrderDto orderDto) {
 //@RequestBody OrderDto orderDto
-        System.out.println("here i am");
+
+
+        orderDto = orderService.createNewOrder(orderDto);
+
+        System.out.println(orderDto);
 //
-//        return "redirect:http://www.yahoo.com";
+//        OrderDto orderDto = null;
+
+        return new ResponseEntity(orderDto, HttpStatus.OK);
     }
 }

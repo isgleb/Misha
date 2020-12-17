@@ -21,25 +21,24 @@ $(document).ready(function() {
 
     $("#save").click(function() {
         if (readyToSave) {
+            orderPage = window.location.protocol + "/order/";
+            orderDto = {customerId:customer["id"], status: "принят"};
 
             $.ajax({
                     url: "/create-new-order",
-                    type: 'GET',
-//                    contentType: "application/json",
-//                    data: JSON.stringify(customer)
-//                    success: success,
+                    type: 'POST',
+                    contentType: "application/json",
+                    data: JSON.stringify(orderDto),
+                    success: function(response){
+                                        orderPage = orderPage + response["id"].toString();
+                                        window.location.replace(orderPage);
+                                }
 //                    error: error
                 });
 
 
 
 
-
-
-
-
-
-            window.location.replace("http://yandex.ru");
 
 //            $.ajax({
 //                    url: '/customers/request',

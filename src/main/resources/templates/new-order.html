@@ -36,7 +36,13 @@
                 <div class="card block">
                     <div class="container-fluid">
 
-                        <div th:insert="~{template :: order-result}"></div>
+                        <div class="row">
+                            <div class="col-sm" th:insert="~{template :: order-result-first}"></div>
+                            <div class="col-sm" th:insert="~{template :: order-result-second}"></div>
+                            <div class="col-md-12" th:insert="~{template :: order-result-button}"></div>
+                        </div>
+
+
 
 <!--                        <button id="choose">выбрать клиента</button>-->
 
