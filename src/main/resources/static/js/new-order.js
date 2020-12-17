@@ -1,50 +1,61 @@
 
 $(document).ready(function() {
 
-//    var invoices = new Array;
-//    var positions = new Array;
-//
-//    var order = {
-//                id: null,
-//                status:"принят",
-//                customerId: null,
-//                invoices: invoices,
-//                positions: null,
-//                income: null,
-//                outlay: null,
-//                profit: null
-//                };
 
+    var saveButton = document.querySelector('#save');
+    var readyToSave = false;
 
+    function updateResultTable(customer) {
+        if (customer !== null) {
 
+            saveButton.classList.add("btn-success");
+            saveButton.classList.remove("btn-info");
 
+            saveButton.innerText = "Сохранить заказ";
+            readyToSave = true;
+        }
 
-
-
-    var currentPage = (window.location.href.split("/").pop());
-
-    if (currentPage == "new-order") {
-        orderId = null;
-    } else {
-        orderId = parseInt(currentPage)
+        $("#chosen-customer").text(customer["name"] + " " + customer["telephone"]);
     }
 
-//    var orderId = 1;
+
+    $("#save").click(function() {
+        if (readyToSave) {
+
+            $.ajax({
+                    url: "/create-new-order",
+                    type: 'GET',
+//                    contentType: "application/json",
+//                    data: JSON.stringify(customer)
+//                    success: success,
+//                    error: error
+                });
+
+
+
+
+
+
+
+
+
+            window.location.replace("http://yandex.ru");
+
+//            $.ajax({
+//                    url: '/customers/request',
+//                    type: 'POST',
+//                    contentType: "application/json",
+//                    data: JSON.stringify(client),
+//                    success: success,
+//                    error: error
+//                });
+
+        }
+//        console.log(invoicesArr)
+
+        });
 
     var customer;
-
-    if (orderId !== null) {
-        $.ajax({
-                     type: 'GET',
-                     url: '/order/customer?' + $.param({orderId: orderId}),
-                     async: false,
-                     success: function (response) {customer = response;}
-                     });
-
-            $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-    }
-
-
 
     var clientColumns = [
 
@@ -70,7 +81,6 @@ $(document).ready(function() {
         title: "Телефон"
         },
     ];
-
     var clientsTable;
 
     clientsTable = $('#order-customer').DataTable({
@@ -144,47 +154,11 @@ $(document).ready(function() {
     });
 
     function changeClient () {
-            var selectedCustomerId = clientsTable.row('.selected').data().id;
-            if (orderId !== null) {
-                $.ajax({
-                       url: '/order/customer?' + $.param({orderId: orderId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
-                       type: 'PUT',
-                       success: function(){
-                            customer = clientsTable.row('.selected').data();
-                            $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-                       }
-                });
-            } else {
-                customer = clientsTable.row('.selected').data();
-                $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-            }
+
+        customer = clientsTable.row('.selected').data();
+        updateResultTable(customer);
+
     }
-
-
-//    function createOrder(customer) {
-//        $.ajax({
-//          url: '/order/create-new_order?' + $.param({customerId: customer["id"]}),
-//          type: "POST",
-//          data: data,
-//          success: success,
-//          dataType: dataType
-//        });
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -232,7 +206,6 @@ $(document).ready(function() {
 
     invoiceFrontId = 1;
 
-
     invoiceTable = $('#invoices').DataTable({
         "sPaginationType": "full_numbers",
 
@@ -242,24 +215,23 @@ $(document).ready(function() {
         select: 'single',
         responsive: true,
         altEditor: true,     // Enable altEditor
-        buttons: [{
+        buttons: [
+                {
                 text: 'Add',
                 name: 'add',        // do not change name
-              },
-
-              {
+                },
+                {
                 extend: 'selected', // Bind to Selected row
                 text: 'Edit',
                 name: 'edit'        // do not change name
-              },
+                },
 
-              {
+                {
                 extend: 'selected', // Bind to Selected row
                 text: 'Delete',
                 name: 'delete'      // do not change name
-             }],
-             onAddRow: function(datatable, rowdata, success, error) {
-
+                }],
+        onAddRow: function(datatable, rowdata, success, error) {
 
                 newId = "new" + invoiceFrontId.toString();
                 theRow = {id: newId,
@@ -273,7 +245,7 @@ $(document).ready(function() {
                 success(theRow);
              },
 
-             onDeleteRow: function(datatable, rowdata, success, error) {
+        onDeleteRow: function(datatable, rowdata, success, error) {
 
                 if (rowdata["id"].includes('new')) {
                     const index = invoicesArr.findIndex(n => n.id === rowdata["id"]);
@@ -282,7 +254,6 @@ $(document).ready(function() {
                     }
                 }
                 success(rowdata);
-
              }
 
 
@@ -299,11 +270,6 @@ $(document).ready(function() {
 //             //            });
 //                     }
       });
-
-    $("#save").click(function() {
-                //действия
-                console.log(invoicesArr)
-            });
 
 
 
