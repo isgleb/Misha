@@ -63,4 +63,9 @@ public class PagesController {
         return "new-order";
     }
 
+    @GetMapping("/grid")
+    public String grid () {
+        return "grid";
+    }
+
 }
