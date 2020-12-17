@@ -27,9 +27,18 @@ public class InvoiceController {
     }
 
     @PostMapping("/invoice/request")
-    public ResponseEntity newInvoice (@RequestBody InvoiceDto invoiceDto) {
+    public ResponseEntity newOrderInvoice (@RequestBody InvoiceDto invoiceDto) {
         invoiceService.newOrderInvoice(invoiceDto);
         return new ResponseEntity(invoiceDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/new-invoices/array")
+    public ResponseEntity newOrderInvoices (@RequestBody List<InvoiceDto> invoiceDtos) {
+
+        for (InvoiceDto invoiceDto : invoiceDtos) {
+            invoiceService.newOrderInvoice(invoiceDto);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 

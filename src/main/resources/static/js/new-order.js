@@ -4,24 +4,41 @@ $(document).ready(function() {
 
     var saveButton = document.querySelector('#save');
     var readyToSave = false;
+    var customer = null;
 
-    function updateResultTable(customer) {
-        if (customer !== null) {
+    function updateResultTable() {
+        if (customer !== null && invoicesArr.length !== 0) {
 
             saveButton.classList.add("btn-success");
             saveButton.classList.remove("btn-info");
 
             saveButton.innerText = "Сохранить заказ";
             readyToSave = true;
-        }
+        };
 
-        $("#chosen-customer").text(customer["name"] + " " + customer["telephone"]);
+        costsSum = function () {
+                        sum = 0;
+                        invoicesArr.forEach(function(invoice, i, invoicesArr) {
+                            sum += parseInt(invoicesArr[i].sum);
+                            });
+                        return sum;
+                        }
+
+        $("#expenses").text(costsSum);
+        if (customer !== null) {
+            $("#chosen-customer").text(customer["name"] + " " + customer["telephone"]);
+        }
     }
 
 
+
     $("#save").click(function() {
+
+
         if (readyToSave) {
-            orderPage = window.location.protocol + "/order/";
+
+            var orderId = 0;
+            var orderPage = window.location.protocol + "/order/";
             orderDto = {customerId:customer["id"], status: "принят"};
 
             $.ajax({
@@ -29,32 +46,36 @@ $(document).ready(function() {
                     type: 'POST',
                     contentType: "application/json",
                     data: JSON.stringify(orderDto),
+                    async: false,
                     success: function(response){
-                                        orderPage = orderPage + response["id"].toString();
-                                        window.location.replace(orderPage);
+                                        orderId = parseInt(response["id"]);
+                                        orderPage = orderPage + orderId.toString();
                                 }
 //                    error: error
+                });
+            }
+
+            invoicesArr.forEach(function(invoice, i, invoicesArr) {
+                  invoicesArr[i].id = null;
+                  invoicesArr[i].invoiceRelatedDocumentId = orderId;
                 });
 
 
 
-
-
-//            $.ajax({
-//                    url: '/customers/request',
-//                    type: 'POST',
-//                    contentType: "application/json",
-//                    data: JSON.stringify(client),
+            $.ajax({
+                url: "/new-invoices/array",
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(invoicesArr)
 //                    success: success,
 //                    error: error
-//                });
+            });
 
-        }
-//        console.log(invoicesArr)
+            window.location.replace(orderPage);
 
         });
 
-    var customer;
+
 
     var clientColumns = [
 
@@ -155,10 +176,9 @@ $(document).ready(function() {
     function changeClient () {
 
         customer = clientsTable.row('.selected').data();
-        updateResultTable(customer);
+        updateResultTable();
 
     }
-
 
 
     var stuff;
@@ -235,121 +255,41 @@ $(document).ready(function() {
                 newId = "new" + invoiceFrontId.toString();
                 theRow = {id: newId,
                           stuffId: rowdata["stuffId"],
-                          sum: rowdata["sum"]
+                          sum: rowdata["sum"],
+                          invoiceRelatedDocumentId: null
                           };
 
                 invoiceFrontId += 1;
 
                 invoicesArr.push(theRow);
+                updateResultTable();
                 success(theRow);
              },
 
         onDeleteRow: function(datatable, rowdata, success, error) {
 
-                if (rowdata["id"].includes('new')) {
-                    const index = invoicesArr.findIndex(n => n.id === rowdata["id"]);
-                    if (index !== -1) {
-                      invoicesArr.splice(index, 1);
-                    }
-                }
+                const index = invoicesArr.findIndex(n => n.id === rowdata["id"]);
+                if (index !== -1) {invoicesArr.splice(index, 1);}
+
+                updateResultTable();
                 success(rowdata);
-             }
+             },
 
+        onEditRow: function(datatable, rowdata, success, error) {
 
-//             //        invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
-//             //
-//             //        console.log(invoiceDto);
-//             //            $.ajax({
-//             //                url: '/invoice/request',
-//             //                type: 'POST',
-//             //                contentType: "application/json",
-//             //                data: JSON.stringify(invoiceDto),
-//             //                success: success,
-//             //                error: error
-//             //            });
-//                     }
+                const index = invoicesArr.findIndex(n => n.id === rowdata["id"]);
+
+                theRow = {id: rowdata["id"],
+                          stuffId: rowdata["stuffId"],
+                          sum: rowdata["sum"],
+                          invoiceRelatedDocumentId: null
+                          };
+
+                invoicesArr[index] =  theRow;
+                success(rowdata);
+
+                }
       });
-
-
-
-//        ajax: {
-//            url : '/invoice/request?' + $.param({orderId: orderId}),
-//            // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
-//            dataSrc : ''
-//        },
-//
-//
-//        data: invoicesArr,
-////        columns: invoiceColumns,
-//        dom: 'Bfrtip',        // Needs button container
-//        select: 'single',
-//        responsive: true,
-//        altEditor: true,     // Enable altEditor
-//        buttons: [
-//            {
-//                text: 'Add',
-//                name: 'add'        // do not change name
-//            },
-//            {
-//                extend: 'selected', // Bind to Selected row
-//                text: 'Edit',
-//                name: 'edit'        // do not change name
-//            },
-//            {
-//                extend: 'selected', // Bind to Selected row
-//                text: 'Delete',
-//                name: 'delete'      // do not change name
-//            }
-////            {
-////                text: 'Refresh',
-////                name: 'refresh'      // do not change name
-////            }
-//        ],
-//
-////        onDeleteRow: function(datatable, rowdata, success, error) {
-////                    $.ajax({
-////                        url: '/invoice/request?' + $.param({id: rowdata.id}), // выдает null
-////                        type: 'DELETE',
-////                        success: success,
-////                        error: error
-////                    });
-////                },
-////
-////
-////        onAddRow: function(datatable, rowdata, success, error) {
-////        console.log("why")
-//
-////        invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
-////
-////        console.log(invoiceDto);
-////            $.ajax({
-////                url: '/invoice/request',
-////                type: 'POST',
-////                contentType: "application/json",
-////                data: JSON.stringify(invoiceDto),
-////                success: success,
-////                error: error
-////            });
-////        },
-//
-//
-////        onEditRow: function(datatable, rowdata, success, error) {
-////            $.ajax({
-////                url: '/invoice/request?',
-//                type: 'PUT',
-//                contentType: "application/json",
-//                data: JSON.stringify(rowdata),
-//                success: success,
-//                error: error
-////            });
-////        }
-//    });
-
-
-
-
-
-
 
 
 //
