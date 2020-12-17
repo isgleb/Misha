@@ -16,15 +16,26 @@ $(document).ready(function() {
             readyToSave = true;
         };
 
-        costsSum = function () {
-                        sum = 0;
-                        invoicesArr.forEach(function(invoice, i, invoicesArr) {
-                            sum += parseInt(invoicesArr[i].sum);
-                            });
-                        return sum;
-                        }
 
+        var costsSum = 0;
+        var incomeSum = 0;
+
+        invoicesArr.forEach(function(invoice, i, invoicesArr) {
+            costsSum += parseInt(invoicesArr[i].sum);
+            });
+
+     
+        servicesArr.forEach(function(aService, i, servicesArr) {
+            incomeSum += parseInt(servicesArr[i].totalPrice);
+            });
+
+        var profitSum = incomeSum - costsSum;
+
+
+        $("#profit").text(profitSum);
         $("#expenses").text(costsSum);
+        $("#income").text(incomeSum);
+
         if (customer !== null) {
             $("#chosen-customer").text(customer["name"] + " " + customer["telephone"]);
         }
