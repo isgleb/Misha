@@ -24,7 +24,7 @@ $(document).ready(function() {
             costsSum += parseInt(invoicesArr[i].sum);
             });
 
-     
+
         servicesArr.forEach(function(aService, i, servicesArr) {
             incomeSum += parseInt(servicesArr[i].totalPrice);
             });
