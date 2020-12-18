@@ -783,7 +783,8 @@
                     rowDataArray[$(this).attr('id')] = this.checked;
                 });
 
-                console.log(rowDataArray); //DEBUG
+
+//                console.log(rowDataArray); //DEBUG
 
                 var checkFilesQueued = function() {
                     if (numFilesQueued == 0) {

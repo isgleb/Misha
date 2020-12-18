@@ -1,6 +1,7 @@
 package com.bunch_of_keys.bunch.controllers;
 
 import com.bunch_of_keys.bunch.dto.PositionDto;
+import com.bunch_of_keys.bunch.dto.ServiceDto;
 import com.bunch_of_keys.bunch.services.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,14 @@ public class PositionsController {
     public ResponseEntity newPosition(@RequestBody PositionDto positionDto, @RequestParam Long orderId) {
         positionService.addPosition(positionDto, orderId);
         return new ResponseEntity(positionDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/positions-array/request")
+    public ResponseEntity newPositions (@RequestBody List<PositionDto> positionDtos, @RequestParam Long orderId) {
+        for (PositionDto positionDto : positionDtos) {
+            positionService.addPosition(positionDto, orderId);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("/positions/request")

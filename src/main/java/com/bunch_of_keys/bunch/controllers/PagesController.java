@@ -58,4 +58,14 @@ public class PagesController {
         return "costs";
     }
 
+    @GetMapping("/new-order")
+    public String newOrder () {
+        return "new-order";
+    }
+
+    @GetMapping("/grid")
+    public String grid () {
+        return "grid";
+    }
+
 }

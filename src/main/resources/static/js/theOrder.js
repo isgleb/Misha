@@ -67,21 +67,21 @@ $(document).ready(function() {
         altEditor: true,     // Enable altEditor
         buttons: [
             {
-                text: 'Add',
+                text: 'Новый',
                 name: 'add'        // do not change name
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Edit',
+                text: 'Имзенить данные',
                 name: 'edit'        // do not change name
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Delete',
+                text: 'Удалить',
                 name: 'delete'      // do not change name
             },
             {
-                text: 'Refresh',
+                text: 'Обновить таблицу',
                 name: 'refresh'      // do not change name
             }
         ],
@@ -98,17 +98,17 @@ $(document).ready(function() {
 
         onAddRow: function(datatable, rowdata, success, error) {
 
-        invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
+            invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
 
-        console.log(invoiceDto);
-            $.ajax({
-                url: '/invoice/request',
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(invoiceDto),
-                success: success,
-                error: error
-            });
+            console.log(invoiceDto);
+                $.ajax({
+                    url: '/invoice/request',
+                    type: 'POST',
+                    contentType: "application/json",
+                    data: JSON.stringify(invoiceDto),
+                    success: success,
+                    error: error
+                });
         },
 
 
@@ -262,35 +262,6 @@ $(document).ready(function() {
             });
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//   console.log(window.location.href.split("/").pop());
-
-//   document.location.href.substring( document.location.href.lastIndexOf( '/' ) )
-
-
-
-
-
 
 
     var customer;

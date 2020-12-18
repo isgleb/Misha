@@ -37,6 +37,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
+
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -243,11 +244,11 @@
                             </ul>
                         </li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Icons </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="icon-material.html" class="sidebar-link"><i class="mdi mdi-emoticon"></i><span class="hide-menu"> Material Icons </span></a></li>
-                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Font Awesome Icons </span></a></li>
-                            </ul>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/grid" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">grid </span></a>
+<!--                            <ul aria-expanded="false" class="collapse  first-level">-->
+<!--                                <li class="sidebar-item"><a href="icon-material.html" class="sidebar-link"><i class="mdi mdi-emoticon"></i><span class="hide-menu"> Material Icons </span></a></li>-->
+<!--                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Font Awesome Icons </span></a></li>-->
+<!--                            </ul>-->
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Elements</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Addons </span></a>
@@ -279,6 +280,79 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
+
+
+
+
+        <div class="row" th:fragment="order-result">
+            <div class="col-sm" th:fragment="order-result-first">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width:50%">id</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+<!--                            class="text-success"-->
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%">Дата</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"id="date"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"style="width:50%">Клиент </th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="chosen-customer"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"style="width:50%">Адрес</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="address"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm" th:fragment="order-result-second">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width:50%">Статус</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="status"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%" >Доход</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="income"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%" >Затраты</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="expenses"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width:50%" >Прибыль</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"id="profit"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="col-md-12" th:fragment="order-result-button">
+                <button type="button" class="btn btn-info w-100" id="save"> Заполните данные заказа</button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->

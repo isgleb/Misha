@@ -11,9 +11,18 @@ public class OrderDto {
 
     private long id;
     private String status;
-    private long customerID;
+    private long customerId;
 
 
+
+    @Override
+    public String toString() {
+        return "OrderDto{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", customerID=" + customerId +
+                '}';
+    }
 }
 
 
