@@ -82,17 +82,19 @@ $(document).ready(function() {
 //                    error: error
             });
 
+            servicesArr.forEach(function(invoice, i, invoicesArr) {
+                  servicesArr[i].id = null;
+                });
 
 
-
-//            $.ajax({
-//                url: '/positions/request?' + $.param({orderId: ordersId}),
-//                type: 'POST',
-//                contentType: "application/json",
-//                data: JSON.stringify(position),
+            $.ajax({
+                url: "/positions-array/request?" + $.param({orderId: orderId}),
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(servicesArr)
 //                success: success,
 //                error: error
-//            });
+            });
 
 
 
@@ -321,13 +323,6 @@ $(document).ready(function() {
       });
 
 
-
-
-
-
-
-
-
     var services;
     var serviceMap = new Map();
 
@@ -449,10 +444,5 @@ $(document).ready(function() {
             success(rowdata);
         }
     });
-
-
-
-
-
 
 });
