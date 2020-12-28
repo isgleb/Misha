@@ -200,10 +200,8 @@ $(document).ready(function() {
     });
 
     function changeClient () {
-
         customer = clientsTable.row('.selected').data();
         updateResultTable();
-
     }
 
 

@@ -54,11 +54,15 @@ $(document).ready(function() {
 
     invoiceTable = $('#invoices').DataTable({
         "sPaginationType": "full_numbers",
+        "initComplete": function() {
+            updateInvoicesSum(invoiceTable.data().toArray());
+        },
+
 
         ajax: {
             url : '/invoice/request?' + $.param({orderId: ordersId}),
-            // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
-            dataSrc : ''
+            dataSrc : '',
+
         },
         columns: invoiceColumns,
         dom: 'Bfrtip',        // Needs button container
@@ -72,7 +76,7 @@ $(document).ready(function() {
             },
             {
                 extend: 'selected', // Bind to Selected row
-                text: 'Имзенить данные',
+                text: 'Изменить данные',
                 name: 'edit'        // do not change name
             },
             {
@@ -91,7 +95,8 @@ $(document).ready(function() {
                         url: '/invoice/request?' + $.param({id: rowdata.id}), // выдает null
                         type: 'DELETE',
                         success: success,
-                        error: error
+                        error: error,
+                        complete: function() {updateInvoicesSum(invoiceTable.data().toArray());}
                     });
                 },
 
@@ -100,14 +105,15 @@ $(document).ready(function() {
 
             invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
 
-            console.log(invoiceDto);
+//            console.log(invoiceDto);
                 $.ajax({
                     url: '/invoice/request',
                     type: 'POST',
                     contentType: "application/json",
                     data: JSON.stringify(invoiceDto),
                     success: success,
-                    error: error
+                    error: error,
+                    complete: function() {updateInvoicesSum(invoiceTable.data().toArray());}
                 });
         },
 
@@ -119,7 +125,8 @@ $(document).ready(function() {
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
                 success: success,
-                error: error
+                error: error,
+                complete: function() {updateInvoicesSum(invoiceTable.data().toArray());}
             });
         }
     });
@@ -189,6 +196,7 @@ $(document).ready(function() {
 
     serviceTable = $('#positions').DataTable({
         "sPaginationType": "full_numbers",
+        "initComplete": function() {updateIncomeSum(serviceTable.data().toArray());},
         ajax: {
             url : '/positions/request?' + $.param({orderId: ordersId}),
             // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
@@ -232,7 +240,8 @@ $(document).ready(function() {
                 contentType: "application/json",
                 data: JSON.stringify(position),
                 success: success,
-                error: error
+                error: error,
+                complete: function() {updateIncomeSum(serviceTable.data().toArray());}
             });
         },
 
@@ -241,7 +250,8 @@ $(document).ready(function() {
                 url: '/positions/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
                 success: success,
-                error: error
+                error: error,
+                complete: function() {updateIncomeSum(serviceTable.data().toArray());}
             });
         },
 
@@ -258,14 +268,14 @@ $(document).ready(function() {
                 contentType: "application/json",
                 data: JSON.stringify(position),
                 success: success,
-                error: error
+                error: error,
+                complete: function() {updateIncomeSum(serviceTable.data().toArray());}
             });
         }
     });
 
 
     var customer;
-
 
     $.ajax({
           type: 'GET',
@@ -275,7 +285,47 @@ $(document).ready(function() {
           });
 
 
-    $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+    function updateClient() {
+        $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+    }
+
+    updateClient();
+    var costsSum = 0;
+    var incomeSum = 0;
+
+    function updateInvoicesSum(invoicesArr) {
+        costsSum = 0;
+
+        invoicesArr.forEach(function(invoice, i, invoicesArr) {
+                    costsSum += parseInt(invoicesArr[i].sum);
+                    });
+
+        var profitSum = incomeSum - costsSum;
+
+        $("#expenses").text(costsSum);
+        $("#profit").text(profitSum);
+    }
+
+
+    function updateIncomeSum(servicesArr) {
+            incomeSum = 0;
+
+            servicesArr.forEach(function(aService, i, servicesArr) {
+                        incomeSum += parseInt(servicesArr[i].totalPrice);
+                        });
+
+            var profitSum = incomeSum - costsSum;
+
+            $("#income").text(incomeSum);
+            $("#profit").text(profitSum);
+        }
+
+
+
+
+
+
+
 
     var columnDefs = [
 
@@ -381,8 +431,10 @@ $(document).ready(function() {
                    type: 'PUT',
                    success: function(){
                         customer = myTable.row('.selected').data();
-                        $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+                        updateClient();
                    }
             });
     }
+
+
 });
