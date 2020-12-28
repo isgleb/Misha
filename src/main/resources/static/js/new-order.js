@@ -44,8 +44,6 @@ $(document).ready(function() {
 
 
     $("#save").click(function() {
-
-
         if (readyToSave) {
 
             var orderId = 0;
@@ -64,12 +62,12 @@ $(document).ready(function() {
                                 }
 //                    error: error
                 });
-            }
 
-            invoicesArr.forEach(function(invoice, i, invoicesArr) {
-                  invoicesArr[i].id = null;
-                  invoicesArr[i].invoiceRelatedDocumentId = orderId;
-                });
+
+        invoicesArr.forEach(function(invoice, i, invoicesArr) {
+              invoicesArr[i].id = null;
+              invoicesArr[i].invoiceRelatedDocumentId = orderId;
+            });
 
 
 
@@ -78,8 +76,8 @@ $(document).ready(function() {
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(invoicesArr)
-//                    success: success,
-//                    error: error
+    //                    success: success,
+    //                    error: error
             });
 
             servicesArr.forEach(function(invoice, i, invoicesArr) {
@@ -92,17 +90,14 @@ $(document).ready(function() {
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(servicesArr)
-//                success: success,
-//                error: error
+    //                success: success,
+    //                error: error
             });
 
 
-
-
-
-
-
+    //        переход на страницу созданного заказа
             window.location.replace(orderPage);
+        }
 
         });
 
@@ -316,9 +311,9 @@ $(document).ready(function() {
                           invoiceRelatedDocumentId: null
                           };
 
-                invoicesArr[index] =  theRow;
+                invoicesArr[index] = theRow;
+                updateResultTable();
                 success(rowdata);
-
                 }
       });
 
@@ -441,6 +436,7 @@ $(document).ready(function() {
                       };
 
             servicesArr[index] =  theRow;
+            updateResultTable();
             success(rowdata);
         }
     });

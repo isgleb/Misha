@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -19,9 +20,9 @@ public abstract class InvoiceRelatedDocument {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name="invoice_related_document_id")
-//    List<Invoice> invoice;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceRelatedDocument")
+    Set<Invoice> invoice;
 
 
 

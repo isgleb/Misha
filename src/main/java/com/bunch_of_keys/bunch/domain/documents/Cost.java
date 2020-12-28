@@ -24,8 +24,8 @@ public class Cost extends InvoiceRelatedDocument {
 //    @OneToOne(mappedBy = "invoice_related_document_id", cascade = CascadeType.ALL)
 //    Invoice invoice;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="invoice_related_document_id")
-    Invoice invoice;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="invoice_related_document_id")
+//    Invoice invoice;
 
 }
