@@ -21,6 +21,9 @@ public class InvoiceService {
     InvoiceRepository invoiceRepository;
 
     @Autowired
+    InvoicePositionRepository invoicePositionRepository;
+
+    @Autowired
     IrdRepository irdRepository;
 
     @Autowired
@@ -64,5 +67,20 @@ public class InvoiceService {
         invoiceRepository.save(invoice);
 
         invoicePositionService.addInvoicePositionFromOrderInvoice(invoice.getSum(), invoice);
+    }
+
+    public InvoiceDto editInvoice(InvoiceDto invoiceDto) {
+
+        Invoice theInvoice = invoiceRepository.getOne(invoiceDto.getId());
+
+        theInvoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
+        theInvoice.setStuff(stuffRepository.getOne(invoiceDto.getStuffId()));
+        theInvoice.setSum(invoiceDto.getSum());
+
+        invoiceRepository.save(theInvoice);
+
+        invoicePositionService.editInvoicePositionFromOrderInvoice(invoiceDto.getSum(), theInvoice);
+
+        return invoiceDto;
     }
 }

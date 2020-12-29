@@ -28,6 +28,7 @@ public class InvoiceController {
 
     @PostMapping("/invoice/request")
     public ResponseEntity newOrderInvoice (@RequestBody InvoiceDto invoiceDto) {
+        System.out.println(invoiceDto);
         invoiceService.newOrderInvoice(invoiceDto);
         return new ResponseEntity(invoiceDto, HttpStatus.OK);
     }
@@ -45,10 +46,9 @@ public class InvoiceController {
     @DeleteMapping("/invoice/request")
     public void deleteCustomer (@RequestParam Long id) { invoiceService.deleteInvoice(id);}
 
-//    @PutMapping("/customers/request")
-//    public ResponseEntity editCustomer (@RequestBody CustomerDto customerDto) {
-//        return new ResponseEntity(customerService.editCustomer(customerDto), HttpStatus.OK);
-//
-//    }
+    @PutMapping("/invoice/request")
+    public ResponseEntity editInvoice (@RequestBody InvoiceDto invoiceDto) {
+        return new ResponseEntity(invoiceService.editInvoice(invoiceDto), HttpStatus.OK);
+    }
 
 }

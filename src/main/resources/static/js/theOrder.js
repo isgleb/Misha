@@ -112,11 +112,9 @@ $(document).ready(function() {
 
 
         onAddRow: function(datatable, rowdata, success, error) {
-            console.log(stuffOptions);
 
-            invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
+            invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId};
 
-//            console.log(invoiceDto);
                 $.ajax({
                     url: '/invoice/request',
                     type: 'POST',
@@ -130,11 +128,14 @@ $(document).ready(function() {
 
 
         onEditRow: function(datatable, rowdata, success, error) {
+
+            invoiceDto = {id: rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId};
+
             $.ajax({
                 url: '/invoice/request',
                 type: 'PUT',
                 contentType: "application/json",
-                data: JSON.stringify(rowdata),
+                data: JSON.stringify(invoiceDto),
                 success: success,
                 error: error,
                 complete: function() {updateInvoicesSum(invoiceTable.data().toArray());}

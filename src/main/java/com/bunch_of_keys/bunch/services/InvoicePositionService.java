@@ -92,4 +92,15 @@ public class InvoicePositionService {
 
         invoicePositionRepository.save(invoicePosition);
     }
+
+    public void editInvoicePositionFromOrderInvoice (int sum, Invoice invoice) {
+
+        InvoicePosition invoicePosition = invoicePositionRepository.findByInvoice(invoice);
+
+        invoicePosition.setPrice(sum);
+
+        invoicePositionRepository.save(invoicePosition);
+    }
+
+
 }
