@@ -2,6 +2,7 @@ package com.bunch_of_keys.bunch.services;
 
 import com.bunch_of_keys.bunch.domain.contragents.Stuff;
 import com.bunch_of_keys.bunch.domain.contragents.StuffRepository;
+import com.bunch_of_keys.bunch.domain.contragents.StuffStatus;
 import com.bunch_of_keys.bunch.dto.StuffDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class StuffService {
     @Autowired
     private StuffRepository stuffRepository;
 
-    public void addStuff(StuffDto stuffDto) {
+    public void addStuff(StuffDto stuffDto) throws Exception {
 
         Stuff stuff = new Stuff();
 
@@ -24,57 +25,137 @@ public class StuffService {
         stuff.setEmail(stuffDto.getEmail());
         stuff.setTelephone(stuffDto.getTelephone());
 
+        switch (stuffDto.getStuffStatus()) {
+            case ("работает"):
+                stuff.setStuffStatus(StuffStatus.active);
+                break;
+            case ("уволен"):
+                stuff.setStuffStatus(StuffStatus.fired);
+            default:
+                throw new Exception();
+        }
+
         stuffRepository.save(stuff);
 
     }
 
-    public List<StuffDto> getStuff () {
-        Iterable<Stuff> allCustomers = stuffRepository.findAll();
+    public List<StuffDto> getAllStuff () throws Exception {
+        Iterable<Stuff> allStuff = stuffRepository.findAll();
         List<StuffDto> respCustomers = new ArrayList<>();
-        for (Stuff customer : allCustomers) {
+        for (Stuff aStuff : allStuff) {
 
-            StuffDto customerDto = new StuffDto();
+            StuffDto stuffDto = new StuffDto();
 
-            customerDto.setId(customer.getId());
-            customerDto.setName(customer.getName());
-            customerDto.setSurname(customer.getSurname());
-            customerDto.setEmail(customer.getEmail());
-            customerDto.setTelephone(customer.getTelephone());
+            stuffDto.setId(aStuff.getId());
+            stuffDto.setName(aStuff.getName());
+            stuffDto.setSurname(aStuff.getSurname());
+            stuffDto.setEmail(aStuff.getEmail());
+            stuffDto.setTelephone(aStuff.getTelephone());
 
-            respCustomers.add(customerDto);
+            switch (aStuff.getStuffStatus()) {
+                case active:
+                    stuffDto.setStuffStatus("работает");
+                    break;
+                case fired:
+                    stuffDto.setStuffStatus("уволен");
+                    break;
+                default:
+                    throw new Exception();
+            }
+
+            respCustomers.add(stuffDto);
         }
-
         return respCustomers;
     }
 
-//    public StuffDto getTheStuff (Long orderId) {
-//        Stuff theCustomer = stuffRepository.findByOrders_id(orderId);
-//
-//        StuffDto theCustomerDto = new StuffDto();
-//
-//        theCustomerDto.setId(theCustomer.getId());
-//        theCustomerDto.setName(theCustomer.getName());
-//        theCustomerDto.setSurname(theCustomer.getSurname());
-//        theCustomerDto.setEmail(theCustomer.getEmail());
-//        theCustomerDto.setTelephone(theCustomer.getTelephone());
-//
-//        return theCustomerDto;
-//    }
+    public List<StuffDto> getActiveStuff () throws Exception {
+        Iterable<Stuff> allStuff = stuffRepository.findByStuffStatusIs(StuffStatus.active);
+        List<StuffDto> respCustomers = new ArrayList<>();
+        for (Stuff aStuff : allStuff) {
+
+            StuffDto stuffDto = new StuffDto();
+
+            stuffDto.setId(aStuff.getId());
+            stuffDto.setName(aStuff.getName());
+            stuffDto.setSurname(aStuff.getSurname());
+            stuffDto.setEmail(aStuff.getEmail());
+            stuffDto.setTelephone(aStuff.getTelephone());
+
+            switch (aStuff.getStuffStatus()) {
+                case active:
+                    stuffDto.setStuffStatus("работает");
+                    break;
+                case fired:
+                    stuffDto.setStuffStatus("уволен");
+                    break;
+                default:
+                    throw new Exception();
+            }
+
+            respCustomers.add(stuffDto);
+        }
+        return respCustomers;
+    }
+
+
+
+
+
+
+
+
+
+    public StuffDto getTheStuff (Long stuffId) throws Exception {
+        Stuff theStuff = stuffRepository.getOne(stuffId);
+
+        StuffDto stuffDto = new StuffDto();
+
+        stuffDto.setId(theStuff.getId());
+        stuffDto.setName(theStuff.getName());
+        stuffDto.setSurname(theStuff.getSurname());
+        stuffDto.setEmail(theStuff.getEmail());
+        stuffDto.setTelephone(theStuff.getTelephone());
+
+        switch (theStuff.getStuffStatus()) {
+            case active:
+                stuffDto.setStuffStatus("работает");
+                break;
+            case fired:
+                stuffDto.setStuffStatus("уволен");
+                break;
+            default:
+                throw new Exception();
+        }
+
+        return stuffDto;
+    }
 
 
     public void deleteStuff(Long id) {
         stuffRepository.deleteById(id);
     }
 
-    public StuffDto editStuff(StuffDto customerDto) {
-        long id = customerDto.getId();
-        Stuff customer = stuffRepository.getOne(id);
-        customer.setName(customerDto.getName());
-        customer.setSurname(customerDto.getSurname());
-        customer.setEmail(customerDto.getEmail());
-        customer.setTelephone(customerDto.getTelephone());
-        stuffRepository.save(customer);
+    public StuffDto editStuff(StuffDto stuffDto) throws Exception {
+        long id = stuffDto.getId();
+        Stuff theStuff = stuffRepository.getOne(id);
+        theStuff.setName(stuffDto.getName());
+        theStuff.setSurname(stuffDto.getSurname());
+        theStuff.setEmail(stuffDto.getEmail());
+        theStuff.setTelephone(stuffDto.getTelephone());
 
-        return customerDto;
+        switch (stuffDto.getStuffStatus()) {
+            case ("работает"):
+                theStuff.setStuffStatus(StuffStatus.active);
+                break;
+            case ("уволен"):
+                theStuff.setStuffStatus(StuffStatus.fired);
+                break;
+            default:
+                throw new Exception();
+        }
+
+        stuffRepository.save(theStuff);
+
+        return stuffDto;
     }
 }

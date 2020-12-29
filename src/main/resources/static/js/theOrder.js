@@ -11,14 +11,13 @@ $(document).ready(function() {
     var stuffMap = new Map();
     $.ajax({
             type: 'GET',
-            url: "/stuff/request",
+            url: "/active-stuff/request",
             async: false,
             success: function (response) {stuff = response;}
             });
 
 
     stuff.forEach(function(theStuff){
-
         stuffMap.set(theStuff.id, theStuff.name);
         })
 
@@ -38,7 +37,18 @@ $(document).ready(function() {
         options : stuffOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
-            if (data == null || !(data in stuffOptions)) { return null;}
+            if (data == null || !(data in stuffOptions)) {
+                    $.ajax({
+                            type: 'GET',
+                            url: "/get-the-stuff/request?" + $.param({stuffId: data}),
+                            async: false,
+                            success: function (response) {
+                                stuffMap.set(response.id, response.name)
+                                stuffOptions = Object.fromEntries(stuffMap.entries());
+                                }
+                            });
+//            return null;
+            }
             return stuffOptions[data];
             }
         },
@@ -102,6 +112,7 @@ $(document).ready(function() {
 
 
         onAddRow: function(datatable, rowdata, success, error) {
+            console.log(stuffOptions);
 
             invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: ordersId}
 
@@ -120,7 +131,7 @@ $(document).ready(function() {
 
         onEditRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/invoice/request?',
+                url: '/invoice/request',
                 type: 'PUT',
                 contentType: "application/json",
                 data: JSON.stringify(rowdata),
@@ -289,7 +300,7 @@ $(document).ready(function() {
         $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
     }
 
-    updateClient();
+
     var costsSum = 0;
     var incomeSum = 0;
 
@@ -435,6 +446,9 @@ $(document).ready(function() {
                    }
             });
     }
+
+    updateClient();
+    $("#order-id").text(ordersId);
 
 
 });

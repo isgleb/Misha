@@ -209,7 +209,7 @@ $(document).ready(function() {
     var stuffMap = new Map();
     $.ajax({
             type: 'GET',
-            url: "/stuff/request",
+            url: "/active-stuff/request",
             async: false,
             success: function (response) {stuff = response;}
             });
@@ -232,7 +232,7 @@ $(document).ready(function() {
         options : stuffOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
-            if (data == null || !(data in stuffOptions)) { return null;}
+            if (data == null || !(data in stuffOptions)) {return null;}
             return stuffOptions[data];
             }
         },

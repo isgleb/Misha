@@ -5,11 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,4 +16,5 @@ public class StuffDto {
     private String surname;
     private String email;
     private String telephone;
+    private String stuffStatus;
 }

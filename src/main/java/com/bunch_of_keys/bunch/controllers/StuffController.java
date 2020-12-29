@@ -15,15 +15,31 @@ public class StuffController {
     private StuffService stuffService;
 
     @GetMapping("/stuff/request")
-    public ResponseEntity getStuff () {
+    public ResponseEntity getAllStuff () throws Exception {
 
-        Iterable<StuffDto> stuffResp = stuffService.getStuff();
+        Iterable<StuffDto> stuffResp = stuffService.getAllStuff();
+
+        return new ResponseEntity(stuffResp, HttpStatus.OK);
+    }
+
+    @GetMapping("/active-stuff/request")
+    public ResponseEntity getActiveStuff () throws Exception {
+
+        Iterable<StuffDto> stuffResp = stuffService.getActiveStuff();
+
+        return new ResponseEntity(stuffResp, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-the-stuff/request")
+    public ResponseEntity getTheStuff (@RequestParam Long stuffId) throws Exception {
+
+        StuffDto stuffResp = stuffService.getTheStuff(stuffId);
 
         return new ResponseEntity(stuffResp, HttpStatus.OK);
     }
 
     @PostMapping("/stuff/request")
-    public ResponseEntity newStuff (@RequestBody StuffDto stuffDto) {
+    public ResponseEntity newStuff (@RequestBody StuffDto stuffDto) throws Exception {
         stuffService.addStuff(stuffDto);
         return new ResponseEntity(stuffDto, HttpStatus.OK); // статусы поменять в соответствии с RESTful
     }
@@ -34,7 +50,7 @@ public class StuffController {
     }
 
     @PutMapping("/stuff/request")
-    public ResponseEntity editStuff (@RequestBody StuffDto customerDto) {
+    public ResponseEntity editStuff (@RequestBody StuffDto customerDto) throws Exception {
         return new ResponseEntity(stuffService.editStuff(customerDto), HttpStatus.OK);
 
     }
