@@ -8,10 +8,21 @@ function init() {
             controls: []
         });
 
+        var zoomControl = new ymaps.control.ZoomControl({
+                options: {
+                    size: "large"
+                }
+            });
+        myMap.controls.add(zoomControl);
+
+        var trafficControl = new ymaps.control.TrafficControl({state: {trafficShown: false}});
+        myMap.controls.add(trafficControl, {top: 10, left: 10});
+
 
         var searchControl = new ymaps.control.SearchControl({
                     options: {
-                    provider: 'yandex#map'
+                    provider: 'yandex#map',
+                    noPlacemark: true
                     }
                 });
 
@@ -26,33 +37,54 @@ function init() {
 
                 coords = res.geometry.getCoordinates();
 
-
-                console.log(coords);
-
-
                 var myPlacemark = new ymaps.Placemark(coords, {}, {
-                draggable: true,
-                preset: "islands#circleDotIcon",
-                // Задаем цвет метки (в формате RGB).
-                iconColor: '#ff0000'});
+                    draggable: true,
+                    // Задаем цвет метки (в формате RGB).
+                    iconColor: '#ff0000'
+                    });
+
+
+                myMap.geoObjects.removeAll();
                 myMap.geoObjects.add(myPlacemark);
+
+
+                getAddress(coords);
+                myPlacemark.balloon.open();
 
                 myPlacemark.events.add('dragend', function(e) {
                    // Получение ссылки на объект, который был передвинут.
-                   var thisPlacemark = e.get('target');
+                   myPlacemark = e.get('target');
                    // Определение координат метки
-                   var coords = thisPlacemark.geometry.getCoordinates();
-                   // и вывод их при щелчке на метке
-                   thisPlacemark.properties.set('balloonContent', coords);
+                   coords = myPlacemark.geometry.getCoordinates();
+
+                   getAddress(coords);
+                   myPlacemark.balloon.open();
                 });
 
 
+                function getAddress(coords) {
+                    myPlacemark.properties.set('iconCaption', 'поиск...');
+                    ymaps.geocode(coords).then(function (res) {
+                        var firstGeoObject = res.geoObjects.get(0);
+
+                        myPlacemark.properties
+                            .set({
+                                // Формируем строку с данными об объекте.
+                                iconCaption: [
+                                    // Название населенного пункта или вышестоящее административно-территориальное образование.
+                                    firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
+                                    // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+                                    firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                                ].filter(Boolean).join(', '),
+                                // В качестве контента балуна задаем строку с адресом объекта.
+                                balloonContent: firstGeoObject.getAddressLine()
+                            });
+
+                        console.log(firstGeoObject.getAddressLine());
+                    });
+                }
             });
         });
 }
 
 ymaps.ready(init);
-
-
-
-
