@@ -67,6 +67,17 @@ function init() {
                     ymaps.geocode(coords).then(function (res) {
                         var firstGeoObject = res.geoObjects.get(0);
 
+
+
+//                    var MyBalloonContent = firstGeoObject.getAddressLine()
+
+
+
+
+
+
+
+
                         myPlacemark.properties
                             .set({
                                 // Формируем строку с данными об объекте.
@@ -77,7 +88,10 @@ function init() {
                                     firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
                                 ].filter(Boolean).join(', '),
                                 // В качестве контента балуна задаем строку с адресом объекта.
-                                balloonContent: firstGeoObject.getAddressLine()
+//                                balloonContent: firstGeoObject.getAddressLine()
+
+                                balloonContent: firstGeoObject.getAddressLine() + '<br> <button>Выбрать адрес</button>'
+
                             });
 
                         console.log(firstGeoObject.getAddressLine());
