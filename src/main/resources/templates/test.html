@@ -1,53 +1,86 @@
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
     <title>Website Title</title>
+
+
+    <link rel="stylesheet" type="text/css" href="../css/jquery.datetimepicker.min.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../js/jquery.datetimepicker.full.js"></script>
+
+
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=fffe81d2-ffa1-455a-a0c6-7b3574cfd3fc&lang=ru_RU" type="text/javascript">
+    </script>
+
+    <script src="../js/yandex-map.js"></script>
+
+
+
+
+
+
 </head>
 <body>
-<!--<div id="content" />-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--        <ul class="navbar-nav mr-auto">-->
 
 
-<!--            <li class="nav-item dropdown">-->
-<!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                    Dropdown-->
-<!--                </a>-->
+<div id="map" style="width: 600px; height: 400px"></div>
 
 
 
-<!--                <div class="dropdown-menu" >-->
-
-<!--                    <a class="dropdown-item" href="#">Action</a>-->
-<!--                    <a class="dropdown-item" href="#">Another action</a>-->
-<!--                    <div class="dropdown-divider"></div>-->
-<!--                    <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                </div>-->
-<!--            </li>-->
 
 
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
+    <input type="text" id="demo" readonly/>
+
+    <input type="text" id="out" readonly/>
+
+    <script>
+    var now = new Date();
+
+    datet = $('#demo').datetimepicker({
+
+
+  yearStart: 2020,
+  dayOfWeekStart : 1,
+  step: 5,
+  defaultTime: now.getHours()+":"+now.getMinutes()+":0",
+  lang:'ru',
+  inline: true,
+  onChangeDateTime:function(dp,$input){
+            theDate = $('#demo').datetimepicker('getValue');
+            document.getElementById("out").value = theDate.toLocaleString();
+            },
+
+
+});
+
+$.datetimepicker.setLocale('ru');
 
 
 
-<div class="dropdown show">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Выпадающая ссылка
-    </a>
+document.getElementById("out").value = $('#demo').datetimepicker('getValue').toLocaleString();
+    </script>
 
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-</div>
+
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--    <script src="../js/jquery.datetimepicker.full.js"></script>-->
+
+
 </body>
+
+
+
+
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--<script src="../js/jquery.datetimepicker.full.js"></script>-->
+
 </html>
+
+
+
+
+
+
+
