@@ -4,48 +4,33 @@ var customer = null;
 
 var invoicesArr = [];
 
+var date = new Date();
+
 var address = {
-    yandexAddr: "",
+    yandexAddress: "",
     entrance : "",
     level: "",
     accommodation: "",
     intercom: "",
 }
 
-$(document).ready(function() {
+var meters = document.getElementById('meters').value;;
 
+$(document).ready(function() {
 
     var saveButton = document.querySelector('#save');
     var readyToSave = false;
 
-
-
-
-
-//    $('#dropdownMenuLink').on('click', function(){
-//        //$('#datebox').val($(this).text());
-////        alert($(this).text());
-//        console.log($(this).text())
-//    });
-
-
-
-
     $("#edit-address").click(function() {
 
-            address.yandexAddr = document.getElementById('ya-address').innerHTML;
+            address.yandexAddress = document.getElementById('ya-address').innerHTML;
             address.entrance = document.getElementById('entrance').value;
             address.level = document.getElementById('level').value;
             address.accommodation = document.getElementById('accommodation').value;
             address.intercom = document.getElementById('intercom').value;
 
-            console.log(orderStatus);
             updateResultTable();
         });
-
-
-
-
 
     function updateResultTable() {
         if (customer !== null && invoicesArr.length !== 0) {
@@ -72,8 +57,8 @@ $(document).ready(function() {
 
         var profitSum = incomeSum - costsSum;
 
-        if (address.yandexAddr !== null) {
-            $("#address").text(address.yandexAddr);
+        if (address.yandexAddress !== null) {
+            $("#address").text(address.yandexAddress);
         };
         $("#profit").text(profitSum);
         $("#expenses").text(costsSum);
@@ -85,15 +70,20 @@ $(document).ready(function() {
     }
 
 
-
-
-
     $("#save").click(function() {
         if (readyToSave) {
 
+            meters = document.getElementById('meters').value;
+
             var orderId = 0;
             var orderPage = window.location.protocol + "/order/";
-            orderDto = {customerId:customer["id"], status: "принят"};
+            orderDto = {customerId:customer["id"],
+                        status: orderStatus,
+                        address: address,
+                        meters: meters,
+                        date: date};
+
+            meters = document.getElementById('meters').value;
 
             $.ajax({
                     url: "/create-new-order",
@@ -108,40 +98,40 @@ $(document).ready(function() {
 //                    error: error
                 });
 
-
-        invoicesArr.forEach(function(invoice, i, invoicesArr) {
-              invoicesArr[i].id = null;
-              invoicesArr[i].invoiceRelatedDocumentId = orderId;
-            });
-
-
-
-            $.ajax({
-                url: "/new-invoices/array",
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(invoicesArr)
-    //                    success: success,
-    //                    error: error
-            });
-
-            servicesArr.forEach(function(invoice, i, invoicesArr) {
-                  servicesArr[i].id = null;
-                });
-
-
-            $.ajax({
-                url: "/positions-array/request?" + $.param({orderId: orderId}),
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(servicesArr)
-    //                success: success,
-    //                error: error
-            });
-
-
-    //        переход на страницу созданного заказа
-            window.location.replace(orderPage);
+//
+//        invoicesArr.forEach(function(invoice, i, invoicesArr) {
+//              invoicesArr[i].id = null;
+//              invoicesArr[i].invoiceRelatedDocumentId = orderId;
+//            });
+//
+//
+//
+//            $.ajax({
+//                url: "/new-invoices/array",
+//                type: 'POST',
+//                contentType: "application/json",
+//                data: JSON.stringify(invoicesArr)
+//    //                    success: success,
+//    //                    error: error
+//            });
+//
+//            servicesArr.forEach(function(invoice, i, invoicesArr) {
+//                  servicesArr[i].id = null;
+//                });
+//
+//
+//            $.ajax({
+//                url: "/positions-array/request?" + $.param({orderId: orderId}),
+//                type: 'POST',
+//                contentType: "application/json",
+//                data: JSON.stringify(servicesArr)
+//    //                success: success,
+//    //                error: error
+//            });
+//
+//
+//    //        переход на страницу созданного заказа
+//            window.location.replace(orderPage);
         }
 
         });

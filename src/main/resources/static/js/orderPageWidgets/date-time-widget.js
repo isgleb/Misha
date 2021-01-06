@@ -1,11 +1,10 @@
-var now = new Date();
 
 datet = $('#date-time-selector').datetimepicker({
 
     yearStart: 2020,
     dayOfWeekStart : 1,
     step: 5,
-    defaultTime: now.getHours()+":"+now.getMinutes()+":0",
+    defaultTime: date.getHours()+":"+date.getMinutes()+":0",
     lang:'ru',
     inline: true,
     onChangeDateTime: function(dp,$input){

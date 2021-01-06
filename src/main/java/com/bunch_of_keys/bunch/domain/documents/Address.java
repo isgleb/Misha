@@ -22,7 +22,20 @@ public class Address {
     String yandexAddress;
 
     String entrance;
-    int level;
+    String level;
     String accommodation;
     String intercom;
+
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", yandexAddress='" + yandexAddress + '\'' +
+                ", entrance='" + entrance + '\'' +
+                ", level='" + level + '\'' +
+                ", accommodation='" + accommodation + '\'' +
+                ", intercom='" + intercom + '\'' +
+                '}';
+    }
 }
