@@ -1,10 +1,11 @@
-
 $(document).ready(function() {
 
 
     var saveButton = document.querySelector('#save');
     var readyToSave = false;
     var customer = null;
+
+    var invoicesArr = [];
 
     function updateResultTable() {
         if (customer !== null && invoicesArr.length !== 0) {
@@ -245,7 +246,6 @@ $(document).ready(function() {
     ];
 
     var invoiceTable;
-    var invoicesArr = [];
 
     invoiceFrontId = 1;
 

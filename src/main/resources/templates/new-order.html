@@ -24,13 +24,21 @@
     <!--основной стиль меню итд-->
     <link href="../../dist/css/style.min.css" rel="stylesheet">
 
+
+<!--    datetime скрипты-->
+    <link rel="stylesheet" type="text/css" href="../css/jquery.datetimepicker.min.css"/>
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.0.0.js" ></script>
+    <script src="../js/jquery.datetimepicker.full.js"></script>
+
+
 </head>
 <body>
 
     <div id="main-wrapper">
 
-        <div th:insert="~{template :: topbar}"></div>
-        <div th:insert="~{template :: sidebar}"></div>
+        <div th:insert="~{fragments/topbar :: topbar}"></div>
+        <div th:insert="~{fragments/sidebar :: sidebar}"></div>
 
         <div class="page-wrapper">
 
@@ -43,16 +51,16 @@
                                 <h4 class="card-title">Данные заказа</h4>
                             </div>
                             <div class="row">
-                                <div class="col-sm" th:insert="~{template :: order-result-first}"></div>
-                                <div class="col-sm" th:insert="~{template :: order-result-second}"></div>
-                                <div class="col-md-12" style = "margin-bottom: 10px;" th:insert="~{template :: order-result-button}"></div>
+                                <div th:replace="~{fragments/result-table :: order-result-first}"></div>
+                                <div th:replace="~{fragments/result-table :: order-result-second}"></div>
+                                <div th:replace="~{fragments/result-table :: order-result-button}"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-8">
                         <div class="card" >
                             <div class="card-body" style = "margin: 10px;">
                                 <h4 class="card-title">Клиенты</h4>
@@ -63,7 +71,37 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="card" >
+                            <div class="card-body" style = "margin: 10px;">
+                                <h4 class="card-title">Дата, время</h4>
+                            </div>
+                            <div>
+                                <input id="date-time-selector" type="text" >
+                                <script src="../js/orderPageWidgets/date-time-widget.js"></script>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Адрес</h4>
+                            </div>
+                            <div class="row">
+                                <div th:replace="~{fragments/address-and-map :: ya-map}"></div>
+                                <div th:replace="~{fragments/address-and-map :: address-details}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
                 <div class="row">
                     <div class="col-md-6">
@@ -71,7 +109,7 @@
                             <div class="card-body" style = "margin: 10px;">
                                 <h4 class="card-title">Услуги</h4>
                             </div>
-                            <div style = "margin: 10px;">
+                            <div style = "margin-bottom: 10px">
                                 <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="positions">
                                 </table>
                             </div>
@@ -80,7 +118,7 @@
 
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-body" style = "margin: 10px;">
+                            <div class="card-body" style = "margin-bottom: 10px">
                                 <h4 class="card-title">Оплата труда</h4>
                             </div>
                             <div style = "margin: 10px;">
@@ -95,7 +133,7 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.0.0.js" ></script>
+<!--    <script src="https://code.jquery.com/jquery-3.0.0.js" ></script>-->
     <script src="https://code.jquery.com/jquery-migrate-3.3.0.js" ></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js" ></script>
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.js" ></script>
