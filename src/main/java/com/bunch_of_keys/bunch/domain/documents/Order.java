@@ -23,15 +23,18 @@ import java.util.List;
 @EnableAutoConfiguration
 public class Order extends InvoiceRelatedDocument{
 
-//    private OrderStatus status;
-//    private Address address;
-//
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date date;
-//
-//    private int meters;
-    
-    String status;
+    private OrderStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    private int meters;
+
+//    String status;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable=false)

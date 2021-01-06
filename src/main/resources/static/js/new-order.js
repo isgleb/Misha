@@ -1,11 +1,51 @@
+var orderStatus = "accepted";
+
+var customer = null;
+
+var invoicesArr = [];
+
+var address = {
+    yandexAddr: "",
+    entrance : "",
+    level: "",
+    accommodation: "",
+    intercom: "",
+}
+
 $(document).ready(function() {
 
 
     var saveButton = document.querySelector('#save');
     var readyToSave = false;
-    var customer = null;
 
-    var invoicesArr = [];
+
+
+
+
+//    $('#dropdownMenuLink').on('click', function(){
+//        //$('#datebox').val($(this).text());
+////        alert($(this).text());
+//        console.log($(this).text())
+//    });
+
+
+
+
+    $("#edit-address").click(function() {
+
+            address.yandexAddr = document.getElementById('ya-address').innerHTML;
+            address.entrance = document.getElementById('entrance').value;
+            address.level = document.getElementById('level').value;
+            address.accommodation = document.getElementById('accommodation').value;
+            address.intercom = document.getElementById('intercom').value;
+
+            console.log(orderStatus);
+            updateResultTable();
+        });
+
+
+
+
 
     function updateResultTable() {
         if (customer !== null && invoicesArr.length !== 0) {
@@ -32,15 +72,19 @@ $(document).ready(function() {
 
         var profitSum = incomeSum - costsSum;
 
-
+        if (address.yandexAddr !== null) {
+            $("#address").text(address.yandexAddr);
+        };
         $("#profit").text(profitSum);
         $("#expenses").text(costsSum);
         $("#income").text(incomeSum);
 
         if (customer !== null) {
-            $("#chosen-customer").text(customer["name"] + " " + customer["telephone"]);
+            $("#chosen-customer").text(customer["name"] + ", " + customer["telephone"]);
         }
     }
+
+
 
 
 

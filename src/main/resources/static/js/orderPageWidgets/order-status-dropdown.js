@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
     var orderStatusButton = document.querySelector('#dropdownMenuLink');
-    var orderStatus = "accepted";
+//    var orderStatus = "accepted";
+
 
     let statusOptions = new Map();
 

@@ -1,9 +1,11 @@
 package com.bunch_of_keys.bunch.services;
 
+import com.bunch_of_keys.bunch.domain.bills.Invoice;
 import com.bunch_of_keys.bunch.domain.contragents.Customer;
 import com.bunch_of_keys.bunch.domain.contragents.CustomerRepository;
 import com.bunch_of_keys.bunch.domain.documents.Order;
 import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
+import com.bunch_of_keys.bunch.domain.documents.OrderStatus;
 import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderService {
@@ -28,12 +31,39 @@ public class OrderService {
         List<TableOrderDto> ordersResponse = new ArrayList<>();
 
         for (Order order : orders) {
-            ordersResponse.add(new TableOrderDto(
-                    order.getId(),
-                    order.getStatus(),
-                    order.getCustomer().getName(),
-                    order.getCustomer().getSurname(),
-                    order.getCustomer().getTelephone()));
+            TableOrderDto tableOrderDto = new TableOrderDto();
+
+            tableOrderDto.setId(order.getId());
+
+            switch (order.getStatus()) {
+                case accepted:
+                    tableOrderDto.setStatus("accepted");
+                    break;
+                case done:
+                    tableOrderDto.setStatus("done");
+                    break;
+                case canceled:
+                    tableOrderDto.setStatus("canceled");
+                    break;
+            }
+
+            tableOrderDto.setDate(order.getDate());
+            tableOrderDto.setMeters(order.getMeters());
+
+            tableOrderDto.setCustomerNameAndTelephone(order.getCustomer().getName() +
+                                                        ", " +
+                                                        order.getCustomer().getTelephone());
+
+            StringBuilder stringBuilder = new StringBuilder();
+            Set<Invoice> invoiceSet = order.getInvoice();
+
+            for (Invoice invoice: invoiceSet) {
+                stringBuilder.append(invoice.getStuff().getName() + ", ");
+            }
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length()-1);
+
+            tableOrderDto.setStuff(stringBuilder.toString());
+
         }
         return ordersResponse;
     }
@@ -60,7 +90,18 @@ public class OrderService {
         Order order = new Order();
         Customer customer = customerRepository.getOne(orderDto.getCustomerId());
         order.setCustomer(customer);
-        order.setStatus(orderDto.getStatus());
+
+        switch (orderDto.getStatus()) {
+            case "accepted":
+                order.setStatus(OrderStatus.accepted);
+                break;
+            case "canceled":
+                order.setStatus(OrderStatus.canceled);
+                break;
+            case "done":
+                order.setStatus(OrderStatus.done);
+                break;
+        }
 
         orderRepository.save(order);
 
