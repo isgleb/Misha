@@ -6,12 +6,14 @@ import com.bunch_of_keys.bunch.domain.contragents.CustomerRepository;
 import com.bunch_of_keys.bunch.domain.documents.Order;
 import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
 import com.bunch_of_keys.bunch.domain.documents.OrderStatus;
+import com.bunch_of_keys.bunch.dto.CustomerDto;
 import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +26,24 @@ public class OrderService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private CustomerService customerService;
 
+    public OrderDto getTheOrder(long orderId){
+
+        OrderDto orderDto = new OrderDto();
+        Order order = orderRepository.getOne(orderId);
+
+        orderDto.setId(order.getId());
+        orderDto.setAddress(order.getAddress());
+
+        orderDto.setCustomerDto(customerService.getTheCustomer(orderId));
+        orderDto.setDate(order.getDate());
+        orderDto.setMeters(order.getMeters());
+        orderDto.setStatus(order.getStatus().toString());
+
+        return orderDto;
+    }
 
 
 
@@ -97,7 +116,7 @@ public class OrderService {
 
 
         Order order = new Order();
-        Customer customer = customerRepository.getOne(orderDto.getCustomerId());
+        Customer customer = customerRepository.getOne(orderDto.getCustomerDto().getId());
         order.setCustomer(customer);
 
         switch (orderDto.getStatus()) {
@@ -120,6 +139,12 @@ public class OrderService {
         orderDto.setId(order.getId());
 
         return orderDto;
+    }
+
+    public void changeDate(Long orderId, Date date) {
+        Order order = orderRepository.getOne(orderId);
+        order.setDate(date);
+        orderRepository.save(order);
     }
 
 //    public OrderDto editOrder(OrderDto orderDto) {

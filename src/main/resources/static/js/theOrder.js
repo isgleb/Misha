@@ -47,7 +47,6 @@ $(document).ready(function() {
                                 stuffOptions = Object.fromEntries(stuffMap.entries());
                                 }
                             });
-//            return null;
             }
             return stuffOptions[data];
             }
@@ -163,12 +162,12 @@ $(document).ready(function() {
     var servicesOptions = Object.fromEntries(serviceMap.entries());
 
 
-    $.ajax({
-          type: 'GET',
-          url: '/order/customer?' + $.param({orderId: ordersId}),
-          async: false,
-          success: function (response) {customer = response;}
-          });
+//    $.ajax({
+//          type: 'GET',
+//          url: '/order/customer?' + $.param({orderId: ordersId}),
+//          async: false,
+//          success: function (response) {customer = response;}
+//          });
 
     var columnDefs = [
 
@@ -297,9 +296,9 @@ $(document).ready(function() {
           });
 
 
-    function updateClient() {
-        $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
-    }
+//    function updateClient() {
+//        $("#chosen-customer").text("id " + customer["id"] + ", " + "name " + customer["name"]);
+//    }
 
 
     var costsSum = 0;
@@ -337,119 +336,119 @@ $(document).ready(function() {
 
 
 
-
-
-    var columnDefs = [
-
-        {
-        data: "id",
-        title: "id",
-        type: "readonly"
-        },
-        {
-        data: "name",
-        title: "Имя",
-        },
-        {
-        data: "surname",
-        title: "Фамилия"
-        },
-        {
-        data: "email",
-        title: "email"
-        },
-        {
-        data: "telephone",
-        title: "Телефон"
-        },
-    ];
-
-    var myTable;
-
-    myTable = $('#order-customer').DataTable({
-        "sPaginationType": "full_numbers",
-        ajax: {
-            url : '/customers/request',
-            // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
-            dataSrc : ''
-        },
-        columns: columnDefs,
-        dom: 'Bfrtip',        // Needs button container
-        select: 'single',
-        responsive: true,
-        altEditor: true,     // Enable altEditor
-        buttons: [
-            {
-                text: 'Новый',
-                name: 'add'        // do not change name
-            },
-            {
-                extend: 'selected', // Bind to Selected row
-                text: 'Изменить данные',
-                name: 'edit'        // do not change name
-            },
-            {
-                extend: 'selected', // Bind to Selected row
-                text: 'Удалить',
-                name: 'delete'      // do not change name
-            },
-            {
-                text: 'Обновить таблицу',
-                name: 'refresh'      // do not change name
-            },
-            {
-                text: 'Выбрать клиента',
-                name: 'choose',
-                action: changeClient
-            }
-        ],
-
-        onAddRow: function(datatable, rowdata, success, error) {
-            $.ajax({
-                url: '/customers/request',
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(rowdata),
-                success: success,
-                error: error
-            });
-        },
-
-        onDeleteRow: function(datatable, rowdata, success, error) {
-            $.ajax({
-                url: '/customers/request?' + $.param({id: rowdata.id}), // выдает null
-                type: 'DELETE',
-                success: success,
-                error: error
-            });
-        },
-
-        onEditRow: function(datatable, rowdata, success, error) {
-            $.ajax({
-                url: '/customers/request',
-                type: 'PUT',
-                contentType: "application/json",
-                data: JSON.stringify(rowdata),
-                success: success,
-                error: error
-            });
-        }
-    });
-
-    function changeClient () {
-            var selectedCustomerId = myTable.row('.selected').data().id;
-            $.ajax({
-                   url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
-                   type: 'PUT',
-                   success: function(){
-                        customer = myTable.row('.selected').data();
-                        updateClient();
-                   }
-            });
-    }
-
-    updateClient();
-    $("#order-id").text(ordersId);
+//
+//
+//    var columnDefs = [
+//
+//        {
+//        data: "id",
+//        title: "id",
+//        type: "readonly"
+//        },
+//        {
+//        data: "name",
+//        title: "Имя",
+//        },
+//        {
+//        data: "surname",
+//        title: "Фамилия"
+//        },
+//        {
+//        data: "email",
+//        title: "email"
+//        },
+//        {
+//        data: "telephone",
+//        title: "Телефон"
+//        },
+//    ];
+//
+//    var myTable;
+//
+//    myTable = $('#order-customer').DataTable({
+//        "sPaginationType": "full_numbers",
+//        ajax: {
+//            url : '/customers/request',
+//            // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
+//            dataSrc : ''
+//        },
+//        columns: columnDefs,
+//        dom: 'Bfrtip',        // Needs button container
+//        select: 'single',
+//        responsive: true,
+//        altEditor: true,     // Enable altEditor
+//        buttons: [
+//            {
+//                text: 'Новый',
+//                name: 'add'        // do not change name
+//            },
+//            {
+//                extend: 'selected', // Bind to Selected row
+//                text: 'Изменить данные',
+//                name: 'edit'        // do not change name
+//            },
+//            {
+//                extend: 'selected', // Bind to Selected row
+//                text: 'Удалить',
+//                name: 'delete'      // do not change name
+//            },
+//            {
+//                text: 'Обновить таблицу',
+//                name: 'refresh'      // do not change name
+//            },
+//            {
+//                text: 'Выбрать клиента',
+//                name: 'choose',
+//                action: changeClient
+//            }
+//        ],
+//
+//        onAddRow: function(datatable, rowdata, success, error) {
+//            $.ajax({
+//                url: '/customers/request',
+//                type: 'POST',
+//                contentType: "application/json",
+//                data: JSON.stringify(rowdata),
+//                success: success,
+//                error: error
+//            });
+//        },
+//
+//        onDeleteRow: function(datatable, rowdata, success, error) {
+//            $.ajax({
+//                url: '/customers/request?' + $.param({id: rowdata.id}), // выдает null
+//                type: 'DELETE',
+//                success: success,
+//                error: error
+//            });
+//        },
+//
+//        onEditRow: function(datatable, rowdata, success, error) {
+//            $.ajax({
+//                url: '/customers/request',
+//                type: 'PUT',
+//                contentType: "application/json",
+//                data: JSON.stringify(rowdata),
+//                success: success,
+//                error: error
+//            });
+//        }
+//    });
+//
+//    function changeClient () {
+//            var selectedCustomerId = myTable.row('.selected').data().id;
+//            $.ajax({
+//                   url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: selectedCustomerId}), // выдает null
+//                   type: 'PUT',
+//                   success: function(){
+//                        customer = myTable.row('.selected').data();
+//                        updateClient();
+//                   }
+//            });
+//    }
+//
+//    updateClient();
+//    $("#order-id").text(ordersId);
 
 
 });

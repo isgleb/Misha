@@ -1,4 +1,4 @@
-$(document).ready(function() {
+//$(document).ready(function() {
 
     var orderStatusButton = document.querySelector('#dropdownMenuLink');
 //    var orderStatus = "accepted";
@@ -10,7 +10,7 @@ $(document).ready(function() {
                     .set("done", {"buttonText": "Выполнен", "buttonClass" : "btn-success"})
                     .set("canceled", {"buttonText": "Отменен", "buttonClass" : "btn-danger"});
 
-    updateStatus(orderStatus);
+    updateStatus(orderDetails.status);
 
     function updateStatus(status){
         orderStatusButton.className = statusOptions.get(status).buttonClass;
@@ -33,4 +33,4 @@ $(document).ready(function() {
         orderStatus = "canceled";
         updateStatus(orderStatus);
     });
-});
+//});

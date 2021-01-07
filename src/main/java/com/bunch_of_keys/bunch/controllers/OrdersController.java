@@ -1,6 +1,5 @@
 package com.bunch_of_keys.bunch.controllers;
 
-import com.bunch_of_keys.bunch.dto.CustomerDto;
 import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import com.bunch_of_keys.bunch.services.OrderService;
@@ -8,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 // @RestController работает как @Controller но как бы добавляет к каждому методу аннотацию  @ResponceBody
@@ -28,6 +27,13 @@ public class OrdersController {
         return new ResponseEntity(tableOrderDtos, HttpStatus.OK);
     }
 
+    @GetMapping("/the-order")
+    public ResponseEntity getTheOrder(@RequestParam Long orderId) {
+        OrderDto orderDto = orderService.getTheOrder(orderId);
+//        System.out.println(orderDto.getDate());
+        return new ResponseEntity(orderDto, HttpStatus.OK);
+    }
+
     @DeleteMapping("/orders/request")
     public void deleteOrder(@RequestParam Long id) { // работает с postman
         orderService.deleteOrder(id);
@@ -37,6 +43,15 @@ public class OrdersController {
     @PutMapping("/order/customer")
     public void editClientId (@RequestParam Long orderId, Long customerId) {
         orderService.changeCustomer(orderId, customerId);
+    }
+
+    @PutMapping("/the-order/update-date")
+    public ResponseEntity editCDate (@RequestParam Long orderId, @RequestBody Date date) {
+
+        System.out.println(date);
+        return new ResponseEntity(HttpStatus.OK);
+
+//        orderService.changeDate(orderId, date);
     }
 
     @PostMapping("/create-new-order")

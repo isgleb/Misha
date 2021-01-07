@@ -76,14 +76,10 @@ function init() {
                                     // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
                                     firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
                                 ].filter(Boolean).join(', '),
-                                // В качестве контента балуна задаем строку с адресом объекта.
-//                                balloonContent: firstGeoObject.getAddressLine()
 
                                 balloonContent: firstGeoObject.getAddressLine() + '<br> <button id="choose-address">Выбрать адрес</button>'
 
                             });
-
-//                        console.log(firstGeoObject.getAddressLine());
 
                         $("#choose-address").click(function() {
                             $("#ya-address").text(firstGeoObject.getAddressLine());
