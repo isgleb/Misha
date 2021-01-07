@@ -25,8 +25,8 @@ public class Order extends InvoiceRelatedDocument{
 
     private OrderStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -25,6 +25,10 @@ public class OrderService {
     private CustomerRepository customerRepository;
 
 
+
+
+
+
     public List<TableOrderDto> getOrders () {
 
         Iterable<Order> orders = orderRepository.getOrdersForTable();
@@ -37,13 +41,13 @@ public class OrderService {
 
             switch (order.getStatus()) {
                 case accepted:
-                    tableOrderDto.setStatus("accepted");
+                    tableOrderDto.setStatus("Принят");
                     break;
                 case done:
-                    tableOrderDto.setStatus("done");
+                    tableOrderDto.setStatus("Выполнен");
                     break;
                 case canceled:
-                    tableOrderDto.setStatus("canceled");
+                    tableOrderDto.setStatus("Отменен");
                     break;
             }
 
@@ -60,11 +64,13 @@ public class OrderService {
             for (Invoice invoice: invoiceSet) {
                 stringBuilder.append(invoice.getStuff().getName() + ", ");
             }
-            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length()-1);
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 
             tableOrderDto.setStuff(stringBuilder.toString());
 
+            ordersResponse.add(tableOrderDto);
         }
+
         return ordersResponse;
     }
 
@@ -87,6 +93,9 @@ public class OrderService {
     }
 
     public OrderDto createNewOrder(OrderDto orderDto) {
+
+
+
         Order order = new Order();
         Customer customer = customerRepository.getOne(orderDto.getCustomerId());
         order.setCustomer(customer);
@@ -102,15 +111,15 @@ public class OrderService {
                 order.setStatus(OrderStatus.done);
                 break;
         }
+        order.setAddress(orderDto.getAddress());
+        order.setDate(orderDto.getDate());
+        order.setMeters(orderDto.getMeters());
 
         orderRepository.save(order);
 
         orderDto.setId(order.getId());
 
         return orderDto;
-
-
-
     }
 
 //    public OrderDto editOrder(OrderDto orderDto) {

@@ -24,8 +24,8 @@ public class OrdersController {
 
     @GetMapping("/orders-table")
     public ResponseEntity getOrders() {
-        List<TableOrderDto> tableOrderDto = orderService.getOrders();
-        return new ResponseEntity(tableOrderDto, HttpStatus.OK);
+        List<TableOrderDto> tableOrderDtos = orderService.getOrders();
+        return new ResponseEntity(tableOrderDtos, HttpStatus.OK);
     }
 
     @DeleteMapping("/orders/request")
@@ -41,8 +41,7 @@ public class OrdersController {
 
     @PostMapping("/create-new-order")
     public ResponseEntity createOrder(@RequestBody OrderDto orderDto) {
-        System.out.println(orderDto);
-//        orderDto = orderService.createNewOrder(orderDto);
+        orderDto = orderService.createNewOrder(orderDto);
         return new ResponseEntity(orderDto, HttpStatus.OK);
     }
 }
