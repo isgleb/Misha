@@ -1,5 +1,7 @@
 package com.bunch_of_keys.bunch.controllers;
 
+import com.bunch_of_keys.bunch.domain.documents.Address;
+import com.bunch_of_keys.bunch.domain.documents.OrderStatus;
 import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
 import com.bunch_of_keys.bunch.services.OrderService;
@@ -46,13 +48,26 @@ public class OrdersController {
     }
 
     @PutMapping("/the-order/update-date")
-    public ResponseEntity editCDate (@RequestParam Long orderId, @RequestBody Date date) {
+    public ResponseEntity editDate (@RequestParam Long orderId, @RequestBody Date date) {
 
-        System.out.println(date);
+        orderService.changeDate(orderId, date);
         return new ResponseEntity(HttpStatus.OK);
-
-//        orderService.changeDate(orderId, date);
     }
+
+    @PutMapping("/the-order/update-status")
+    public ResponseEntity editStatus (@RequestParam Long orderId, @RequestBody OrderStatus orderStatus) {
+
+        orderService.changeStatus(orderId, orderStatus);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping("/the-order/update-address")
+    public ResponseEntity editAddress (@RequestParam Long orderId, @RequestBody Address address) {
+
+        orderService.changeAddress(orderId, address);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
     @PostMapping("/create-new-order")
     public ResponseEntity createOrder(@RequestBody OrderDto orderDto) {

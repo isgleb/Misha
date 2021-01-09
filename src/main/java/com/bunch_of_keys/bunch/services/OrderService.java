@@ -3,9 +3,8 @@ package com.bunch_of_keys.bunch.services;
 import com.bunch_of_keys.bunch.domain.bills.Invoice;
 import com.bunch_of_keys.bunch.domain.contragents.Customer;
 import com.bunch_of_keys.bunch.domain.contragents.CustomerRepository;
-import com.bunch_of_keys.bunch.domain.documents.Order;
-import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
-import com.bunch_of_keys.bunch.domain.documents.OrderStatus;
+import com.bunch_of_keys.bunch.domain.documents.*;
+import com.bunch_of_keys.bunch.dto.AddressDto;
 import com.bunch_of_keys.bunch.dto.CustomerDto;
 import com.bunch_of_keys.bunch.dto.OrderDto;
 import com.bunch_of_keys.bunch.dto.TableOrderDto;
@@ -27,6 +26,9 @@ public class OrderService {
     private CustomerRepository customerRepository;
 
     @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
     private CustomerService customerService;
 
     public OrderDto getTheOrder(long orderId){
@@ -35,8 +37,7 @@ public class OrderService {
         Order order = orderRepository.getOne(orderId);
 
         orderDto.setId(order.getId());
-        orderDto.setAddress(order.getAddress());
-
+        orderDto.setAddressDto(AddressDto.dtoFromAddress(order.getAddress()));
         orderDto.setCustomerDto(customerService.getTheCustomer(orderId));
         orderDto.setDate(order.getDate());
         orderDto.setMeters(order.getMeters());
@@ -130,7 +131,7 @@ public class OrderService {
                 order.setStatus(OrderStatus.done);
                 break;
         }
-        order.setAddress(orderDto.getAddress());
+        order.setAddress(AddressDto.addressFromDto(orderDto.getAddressDto()));
         order.setDate(orderDto.getDate());
         order.setMeters(orderDto.getMeters());
 
@@ -147,20 +148,17 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-//    public OrderDto editOrder(OrderDto orderDto) {
-//
-//        Order order = new Order(
-//                orderDto.getStatus(),
-//                orderDto.getCustomerID(),
-//                orderDto.getCleaningServicesID(),
-//                orderDto.getAddress(),
-//                orderDto.getDateReceived(),
-//                orderDto.getDateTimeOrder(),
-//                orderDto.getTotalPrice()
-//        );
-//
-//        orderRepository.save(order);
-//
-//        return orderDto;
-//    }
+    public void changeStatus(Long orderId, OrderStatus status) {
+        Order order = orderRepository.getOne(orderId);
+        order.setStatus(status);
+        orderRepository.save(order);
+    }
+
+    public void changeAddress(Long orderId, Address address) {
+
+        Address orderAddress = addressRepository.findByOrder_id(orderId);
+        orderAddress = address;
+        addressRepository.save(orderAddress);
+
+    }
 }

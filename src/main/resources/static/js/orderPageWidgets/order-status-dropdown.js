@@ -1,4 +1,4 @@
-//$(document).ready(function() {
+$(document).ready(function() {
 
     var orderStatusButton = document.querySelector('#dropdownMenuLink');
 //    var orderStatus = "accepted";
@@ -13,6 +13,8 @@
     updateStatus(orderDetails.status);
 
     function updateStatus(status){
+        updateOrderStatus(status);
+
         orderStatusButton.className = statusOptions.get(status).buttonClass;
         orderStatusButton.classList.add("btn");
         orderStatusButton.classList.add("dropdown-toggle");
@@ -33,4 +35,4 @@
         orderStatus = "canceled";
         updateStatus(orderStatus);
     });
-//});
+});

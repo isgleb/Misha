@@ -4,6 +4,10 @@ package com.bunch_of_keys.bunch.domain.documents;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
@@ -19,12 +23,18 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    String yandexAddress;
+    private String yandexAddress;
 
-    String entrance;
-    String level;
-    String accommodation;
-    String intercom;
+    private String entrance;
+    private String level;
+    private String accommodation;
+    private String intercom;
+
+    @OneToOne(mappedBy = "address")
+    private Order order;
+
+
+
 
 
     @Override

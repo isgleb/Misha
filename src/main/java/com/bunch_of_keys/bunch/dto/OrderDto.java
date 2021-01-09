@@ -20,13 +20,14 @@ public class OrderDto {
     private long id;
     private String status;
     private CustomerDto customerDto;
-    private Address address;
+    private AddressDto addressDto;
     private int meters;
 
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX"
 
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
+
 
 
 //    @Override

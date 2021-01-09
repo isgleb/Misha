@@ -1,29 +1,33 @@
-var ordersId = parseInt((window.location.href.split("/").pop()));
+var orderId = parseInt((window.location.href.split("/").pop()));
 
+var costsSum = 0;
+var incomeSum = 0;
 
-orderDetails = {id: "",
+var orderDetails = {id: "",
                 status: "",
                 customerDto: "",
-                address: "",
+                addressDto: "",
                 meters: "",
                 date: ""
                 };
 
 
 $.ajax({
-          type: 'GET',
-          url: '/the-order?' + $.param({orderId: ordersId}),
-          async: false,
-          success: function (response) {
-                orderDetails = response;
-                orderDetails.date = new Date(response.date)
-                console.log(response.date);
+        type: 'GET',
+        url: '/the-order?' + $.param({orderId: orderId}),
+        async: true,
+        success: function (response) {
+            orderDetails = response;
+            orderDetails.date = new Date(response.date)
 
-                $("#order-id").text(orderDetails.id);
-                $("#date-time").text(orderDetails.date.toLocaleString());
-                $("#chosen-customer").text(orderDetails.customerDto.name + ", " + orderDetails.customerDto.telephone);
-                $("#address").text(orderDetails.address.yandexAddress);
-                $("#meters").val(orderDetails.meters);
+            $("#order-id").text(orderDetails.id);
+            $("#date-time").text(orderDetails.date.toLocaleString());
+            $("#date-time-selector").text(orderDetails.date.toLocaleString());
+
+            $("#chosen-customer").text(orderDetails.customerDto.name + ", " + orderDetails.customerDto.telephone);
+//            $("#address").text(orderDetails.address.yandexAddress);
+            $("#meters").val(orderDetails.meters);
+
         }
 });
 
@@ -31,72 +35,98 @@ $.ajax({
 function updateOrderCustomer(customer) {
 
         $.ajax({
-               url: '/order/customer?' + $.param({orderId: ordersId}) + "&" +$.param({customerId: customer.id}), // выдает null
+               url: '/order/customer?' + $.param({orderId: orderId}) + "&" +$.param({customerId: customer.id}), // выдает null
                type: 'PUT',
                success: function(){
                     orderDetails.customerDto = customer;
                     $("#chosen-customer").text(orderDetails.customerDto.name + ", " + orderDetails.customerDto.telephone);
                }
         });
-}
+};
 
 
-function updateOrderDate(date) {
-//        console.log(date);
-//        console.log(orderDetails.date);
+function updateOrderDate(newDate) {
 
-    if (date != orderDetails.date) {
+    $.ajax({
+            url: '/the-order/update-date?' + $.param({orderId: orderId}), // выдает null
+            type: 'PUT',
+            async: false,
+            contentType: "application/json",
+            data: JSON.stringify(newDate),
+            success: function() {
+//                        console.log(newDate);
+//                        console.log(orderDetails.date);
+                    orderDetails.date = newDate;
+                    $("#date-time").text(orderDetails.date.toLocaleString());
+            },
+    });
+
+    orderDetails.date = newDate;
+    $("#date-time").text(orderDetails.date.toLocaleString());
+};
+
+
+function updateOrderStatus(status) {
+    if (status != orderDetails.status) {
 
         $.ajax({
-                url: '/the-order/update-date?' + $.param({orderId: ordersId}), // выдает null
+                url: '/the-order/update-status?' + $.param({orderId: orderId}),
                 type: 'PUT',
                 async: false,
                 contentType: "application/json",
-                data: date.toJSON(),
-                success: function() {
+                data: JSON.stringify(status),
+                success: function(){ orderDetails.status = status; }
+                });
+    };
+};
 
-                        console.log(date);
-                        console.log(orderDetails.date);
 
-                        orderDetails.date = date;
-                        $("#date-time").text(orderDetails.date.toLocaleString());
-                }
-        });
-    }
+function updateOrderAddress(address) {
+    if (address != orderDetails.address) {
+
+            $.ajax({
+                    url: '/the-order/update-address?' + $.param({orderId: orderId}),
+                    type: 'PUT',
+                    async: false,
+                    contentType: "application/json",
+                    data: JSON.stringify(address),
+                    success: function(){ orderDetails.address = address; }
+                    });
+        };
+};
+
+
+function updateInvoicesSum(invoicesArr) {
+
+    costsSum = 0;
+
+    invoicesArr.forEach(function(invoice, i, invoicesArr) {
+                costsSum += parseInt(invoicesArr[i].sum);
+                });
+
+    updateOrderCalculations();
+};
+
+
+function updateIncomeSum(servicesArr) {
+    incomeSum = 0;
+
+    servicesArr.forEach(function(aService, i, servicesArr) {
+                incomeSum += parseInt(servicesArr[i].totalPrice);
+                });
+
+    updateOrderCalculations();
 }
 
 
+function updateOrderCalculations() {
 
+    profitSum = incomeSum - costsSum;
 
-//
-//
-//function updateOrderStatus(status) {
-//    if (status != orderDetails.status) {
-//
-//        $.ajax({
-////                url: '/the-order/update-status?' + $.param({orderId: ordersId}) + "&" +$.param({status: status}), // выдает null
-//                url: '/the-order/update-status?' + $.param({orderId: ordersId})
-//                type: 'PUT',
-//                async: false,
-//                contentType: "application/json",
-//                data: JSON.stringify({status: status}),
-//                success: function(){ orderDetails.status = status; }
-//                });
-//    }
-//}
-//
-
-//
-//function updateOrderAddress(address) {
-//
-//}
-//
-
-
-//
-//function updateOrderCalculations(income, expenses, profit) {
-//
-//}
+    $("#income").text(incomeSum);
+    $("#expenses").text(costsSum);
+    $("#profit").text(profitSum);
+}
 
 
 //$( "#meters" ).change(function() {
@@ -104,4 +134,3 @@ function updateOrderDate(date) {
 //
 ////    ajax
 //});
-

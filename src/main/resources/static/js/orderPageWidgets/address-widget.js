@@ -1,6 +1,3 @@
-
-
-
 $("#edit-address").click(function() {
 
             address.yandexAddress = document.getElementById('ya-address').innerHTML;
@@ -9,5 +6,5 @@ $("#edit-address").click(function() {
             address.accommodation = document.getElementById('accommodation').value;
             address.intercom = document.getElementById('intercom').value;
 
-            updateResultTable();
+            updateOrderAddress(address);
         });
