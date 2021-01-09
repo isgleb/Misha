@@ -50,11 +50,6 @@ var servicesColumns = [
 ];
 
 
-
-
-
-
-
 var serviceTable;
 
 serviceTable = $('#positions').DataTable({

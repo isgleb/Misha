@@ -150,11 +150,5 @@ $( "#meters" ).change(function() {
             async: false,
             contentType: "application/json",
             data: JSON.stringify(meters),
-//            success: function(){
-//                    meters = document.getElementById('meters').value;
-//                    orderDetails.addressDto = address;
-//                    $("#address").text(orderDetails.addressDto.yandexAddress);
-//                    }
             });
-
 });
