@@ -161,4 +161,10 @@ public class OrderService {
         addressRepository.save(orderAddress);
 
     }
+
+    public void changeMeters(Long orderId, Integer meters) {
+        Order order = orderRepository.getOne(orderId);
+        order.setMeters(meters);
+        orderRepository.save(order);
+    }
 }

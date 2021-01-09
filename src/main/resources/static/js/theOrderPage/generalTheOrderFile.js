@@ -25,8 +25,15 @@ $.ajax({
             $("#date-time-selector").text(orderDetails.date.toLocaleString());
 
             $("#chosen-customer").text(orderDetails.customerDto.name + ", " + orderDetails.customerDto.telephone);
-//            $("#address").text(orderDetails.address.yandexAddress);
+            $("#address").text(orderDetails.addressDto.yandexAddress);
             $("#meters").val(orderDetails.meters);
+
+
+            $("#ya-address").text(orderDetails.addressDto.yandexAddress);
+            $("#entrance").val(orderDetails.addressDto.entrance);
+            $("#level").val(orderDetails.addressDto.level);
+            $("#accommodation").val(orderDetails.addressDto.accommodation);
+            $("#intercom").val(orderDetails.addressDto.intercom);
 
         }
 });
@@ -82,6 +89,7 @@ function updateOrderStatus(status) {
 
 
 function updateOrderAddress(address) {
+
     if (address != orderDetails.address) {
 
             $.ajax({
@@ -90,9 +98,12 @@ function updateOrderAddress(address) {
                     async: false,
                     contentType: "application/json",
                     data: JSON.stringify(address),
-                    success: function(){ orderDetails.address = address; }
+                    success: function(){
+                            orderDetails.addressDto = address;
+                            $("#address").text(orderDetails.addressDto.yandexAddress);
+                            }
                     });
-        };
+    };
 };
 
 
@@ -129,8 +140,21 @@ function updateOrderCalculations() {
 }
 
 
-//$( "#meters" ).change(function() {
-//    meters = document.getElementById('meters').value;
-//
-////    ajax
-//});
+$( "#meters" ).change(function() {
+
+    meters = document.getElementById('meters').value;
+
+    $.ajax({
+            url: '/the-order/update-meters?' + $.param({orderId: orderId}),
+            type: 'PUT',
+            async: false,
+            contentType: "application/json",
+            data: JSON.stringify(meters),
+//            success: function(){
+//                    meters = document.getElementById('meters').value;
+//                    orderDetails.addressDto = address;
+//                    $("#address").text(orderDetails.addressDto.yandexAddress);
+//                    }
+            });
+
+});

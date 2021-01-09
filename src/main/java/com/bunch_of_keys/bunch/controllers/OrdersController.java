@@ -68,6 +68,13 @@ public class OrdersController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PutMapping("/the-order/update-meters")
+    public ResponseEntity editMeters (@RequestParam Long orderId, @RequestBody Integer meters) {
+
+        orderService.changeMeters(orderId, meters);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
     @PostMapping("/create-new-order")
     public ResponseEntity createOrder(@RequestBody OrderDto orderDto) {
