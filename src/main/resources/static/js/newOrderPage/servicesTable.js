@@ -48,7 +48,6 @@
     ];
 
     var serviceTable;
-    var servicesArr = [];
     var serviceFrontId = 1;
 
     serviceTable = $('#positions').DataTable({
@@ -79,19 +78,19 @@
 
         onAddRow: function(datatable, rowdata, success, error) {
 
-                newId = "new" + serviceFrontId.toString();
-                theRow = {id: newId,
-                          serviceId: rowdata["serviceId"],
-                          stuffId: rowdata["stuffId"],
-                          quantity : rowdata["quantity"],
-                          totalPrice : rowdata["totalPrice"]
-                          };
+            newId = "new" + serviceFrontId.toString();
+            theRow = {id: newId,
+                      serviceId: rowdata["serviceId"],
+                      stuffId: rowdata["stuffId"],
+                      quantity : rowdata["quantity"],
+                      totalPrice : rowdata["totalPrice"]
+                      };
 
-                serviceFrontId += 1;
+            serviceFrontId += 1;
 
-                servicesArr.push(theRow);
-                updateResultTable();
-                success(theRow);
+            servicesArr.push(theRow);
+            updateIncomeSum(servicesArr);
+            success(theRow);
 
         },
 
@@ -100,7 +99,7 @@
             const index = servicesArr.findIndex(n => n.id === rowdata["id"]);
             if (index !== -1) {servicesArr.splice(index, 1);}
 
-            updateResultTable();
+            updateIncomeSum(servicesArr);
             success(rowdata);
 
         },
@@ -117,7 +116,7 @@
                       };
 
             servicesArr[index] =  theRow;
-            updateResultTable();
+            updateIncomeSum(servicesArr);
             success(rowdata);
         }
     });
