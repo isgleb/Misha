@@ -2,138 +2,183 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>DataTable-AltEditor - Example #3</title>
+    <title>DataTable-AltEditor - Example #3</title>
 
-        <!--стили для таблицы-->
-        <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />-->
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" />
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.css" />
-        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.css" />
-        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.css" />
-        <style type="text/css"> .block {margin: 2% auto;}</style>
+    <!--стили для таблицы-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.css" />
+    <style type="text/css"> .block {margin: 2% auto;}</style>
 
-        <!--скрипты из template-->
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!--    &lt;!&ndash;скрипты из template&ndash;&gt;-->
+    <!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
 
 
-        <!--основной стиль меню итд-->
-        <link href="../../dist/css/style.min.css" rel="stylesheet">
+    <!--основной стиль меню итд-->
+    <link href="../../dist/css/style.min.css" rel="stylesheet">
+
+
+    <!--    datetime скрипты-->
+    <link rel="stylesheet" type="text/css" href="../css/jquery.datetimepicker.min.css"/>
+    <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.0.0.js" ></script>
+    <script src="../js/jquery.datetimepicker.full.js"></script>
+
 
 </head>
 <body>
 
-    <div id="main-wrapper">
+<div id="main-wrapper">
 
-        <div th:insert="~{template :: topbar}"></div>
-        <div th:insert="~{template :: sidebar}"></div>
+    <div th:insert="~{fragments/topbar :: topbar}"></div>
+    <div th:insert="~{fragments/sidebar :: sidebar}"></div>
 
-        <div class="page-wrapper">
+    <div class="page-wrapper">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Данные заказа</h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm" th:insert="~{template :: order-result-first}"></div>
-                                <div class="col-sm" th:insert="~{template :: order-result-second}"></div>
-                            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Данные заказа</h4>
+                        </div>
+                        <div class="row">
+                            <div th:replace="~{fragments/result-table :: order-result-first}"></div>
+                            <div th:replace="~{fragments/result-table :: order-result-second}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card" >
+                        <div class="card-body" style = "margin: 10px;">
+                            <h4 class="card-title">Клиенты</h4>
+                        </div>
+                        <div style = "margin: 10px;">
+                            <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%;" id="order-customer">
+                            </table>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card" >
-                            <div class="card-body" style = "margin: 10px;">
-                                <h4 class="card-title">Клиенты</h4>
-                            </div>
-                            <div style = "margin: 10px;">
-                                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%;" id="order-customer">
-                                </table>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card" >
+                        <div class="card-body" style = "margin: 10px;">
+                            <h4 class="card-title">Дата, время</h4>
+                        </div>
+                        <div>
+                            <input id="date-time-selector" type="text" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Адрес</h4>
+                        </div>
+                        <div class="row">
+                            <div th:replace="~{fragments/address-and-map :: ya-map}"></div>
+                            <div th:replace="~{fragments/address-and-map :: address-details}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body" style = "margin: 10px;">
+                            <h4 class="card-title">Услуги</h4>
+                        </div>
+                        <div style = "margin-bottom: 10px">
+                            <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="positions">
+                            </table>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body" style = "margin: 10px;">
-                                <h4 class="card-title">Услуги</h4>
-                            </div>
-                            <div style = "margin: 10px;">
-                                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="positions">
-                                </table>
-                            </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body" style = "margin-bottom: 10px">
+                            <h4 class="card-title">Оплата труда</h4>
                         </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body" style = "margin: 10px;">
-                                <h4 class="card-title">Оплата труда</h4>
-                            </div>
-                            <div style = "margin: 10px;">
-                                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="invoices">
-                                </table>
-                            </div>
+                        <div style = "margin: 10px;">
+                            <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="invoices">
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
+<!--    <script src="https://code.jquery.com/jquery-3.0.0.js" ></script>-->
+<script src="https://code.jquery.com/jquery-migrate-3.3.0.js" ></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js" ></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.js" ></script>
+<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" ></script>
+<script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.js" ></script>
+
+
+<!--    <script src="../js/orderPageWidgets/order-status-dropdown.js" ></script>-->
+<!--<script src="../js/theOrder.js" ></script>-->
 
 
 
-    <script src="https://code.jquery.com/jquery-3.0.0.js" ></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.3.0.js" ></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js" ></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.js" ></script>
-    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.js" ></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" ></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.js" ></script>
-    <script src="../js/dataTables.altEditor.free.js" ></script>
+<script src="../js/theOrderPage/generalTheOrderFile.js" ></script>
+<script src="../js/orderPageWidgets/clients-table.js" ></script>
+
+<script src="../js/dataTables.altEditor.free.js" ></script>
+<script src="../js/orderPageWidgets/order-status-dropdown.js" ></script>
+<script src="../js/orderPageWidgets/date-time-widget.js"></script>
+<script src="../js/orderPageWidgets/address-widget.js"></script>
+
+<script src="../js/theOrderPage/invoicesTable.js" ></script>
+<script src="../js/theOrderPage/servicesTable.js" ></script>
 
 
-    <script src="../js/theOrder.js" ></script>
-<!--    <script src="js/positions.js" ></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
 
 
 
 
-
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../../assets/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="../../dist/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="../../dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="../../dist/js/custom.min.js"></script>
-    <!-- this page js -->
-    <script src="../../assets/libs/moment/min/moment.min.js"></script>
-    <script src="../../assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../../dist/js/pages/calendar/cal-init.js"></script>
+<script src="../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="../../assets/extra-libs/sparkline/sparkline.js"></script>
+<!--Wave Effects -->
+<script src="../../dist/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="../../dist/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="../../dist/js/custom.min.js"></script>
+<!-- this page js -->
+<script src="../../assets/libs/moment/min/moment.min.js"></script>
+<script src="../../assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="../../dist/js/pages/calendar/cal-init.js"></script>
 
 
 
 </body>
-
-
 </html>

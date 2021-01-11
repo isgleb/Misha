@@ -24,6 +24,12 @@ $(document).ready(function() {
         data: "telephone",
         title: "Телефон"
         },
+        {
+        data: "stuffStatus",
+        title: "Статус",
+        type : "select",
+        options : {"работает" : "работает", "уволен" : "уволен"},
+        },
     ];
 
     var myTable;

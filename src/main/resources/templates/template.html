@@ -250,7 +250,7 @@
 <!--                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Font Awesome Icons </span></a></li>-->
 <!--                            </ul>-->
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Elements</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="test" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Elements</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Addons </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="index2.html" class="sidebar-link"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu"> Dashboard-2 </span></a></li>
@@ -291,12 +291,12 @@
                         <tbody>
                         <tr>
                             <th scope="row" style="width:50%">id</th>
-                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="order-id"></span></td>
 <!--                            class="text-success"-->
                         </tr>
                         <tr>
-                            <th scope="row" style="width:50%">Дата</th>
-                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"id="date"></span></td>
+                            <th scope="row" style="width:50%">Дата, время</th>
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="date-time"></span></td>
                         </tr>
                         <tr>
                             <th scope="row"style="width:50%">Клиент </th>
@@ -318,7 +318,19 @@
                         <tbody>
                         <tr>
                             <th scope="row" style="width:50%">Статус</th>
-                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="status"></span></td>
+                            <td>
+<!--                                <span class="glyphicon glyphicon-ok" aria-hidden="true" id="status""></span>-->
+                                <div class="dropdown show" style="margin:-7px">
+                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#" id="accepted"> Принят </a>
+                                        <a class="dropdown-item" href="#" id = "done" > Выполнен</a>
+                                        <a class="dropdown-item" href="#" id = "canceled"> Отменен</a>
+                                    </div>
+                                </div>
+
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row" style="width:50%" >Доход</th>
@@ -338,7 +350,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12" th:fragment="order-result-button">
+            <div class="col-md-12" style = "margin-bottom: 10px;" th:fragment="order-result-button">
                 <button type="button" class="btn btn-info w-100" id="save"> Заполните данные заказа</button>
             </div>
         </div>

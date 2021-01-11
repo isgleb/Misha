@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<div class="row" th:fragment="address-map">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Адрес</h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-8" th:fragment="ya-map">
+                    <script src="https://api-maps.yandex.ru/2.1/?apikey=fffe81d2-ffa1-455a-a0c6-7b3574cfd3fc&lang=ru_RU" type="text/javascript">
+                    </script>
+
+                    <script src="../js/orderPageWidgets/yandex-map.js"></script>
+                    <div id="map" style="width: 100; height: 350px" ></div>
+                </div>
+
+                <div class="col-sm-4" style = "max-width: 100%;" th:fragment="address-details">
+                    <div class="table-responsive" style = "max-width: 100%;">
+
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr>
+                                <th scope="row" style="width:50%" > Адрес Yandex</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="ya-address"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Подъезд</th>
+                                <td><input class="glyphicon glyphicon-ok" aria-hidden="true" id="entrance"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Этаж</th>
+                                <td><input class="glyphicon glyphicon-ok" aria-hidden="true"id="level"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Квартира/Офис</th>
+                                <td><input class="glyphicon glyphicon-ok" aria-hidden="true"id="accommodation"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Домофон</th>
+                                <td><input class="glyphicon glyphicon-ok" aria-hidden="true"id="intercom"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-info w-100" id="edit-address"> Обновить адрес</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

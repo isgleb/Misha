@@ -3,12 +3,14 @@ package com.bunch_of_keys.bunch.domain.documents;
 //import com.bunch_of_keys.bunch.domain.bills.Cost;
 import com.bunch_of_keys.bunch.domain.contragents.Customer;
 import com.bunch_of_keys.bunch.domain.bills.Position;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,14 +23,22 @@ import java.util.List;
 @EnableAutoConfiguration
 public class Order extends InvoiceRelatedDocument{
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private long id;
-    private String status;
+    private OrderStatus status;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    private int meters;
+
+//    String status;
+
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable=false)
     private Customer customer;
-
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<Position> positions;

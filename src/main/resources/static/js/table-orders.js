@@ -18,16 +18,20 @@ $(document).ready(function() {
                     "title": "Статус",
                     },
                     {
-                    "data": "customerName",
-                    "title": "Имя"
+                    "data": "date",
+                    "title": "Дата, время"
                     },
                     {
-                    "data": "customerSurname",
-                    "title": "Фамилия"
+                    "data": "meters",
+                    "title": "Метраж"
                     },
                     {
-                    "data": "customerTelephone",
-                    "title": "Телефон"
+                    "data": "customerNameAndTelephone",
+                    "title": "Клиент"
+                    },
+                    {
+                    "data": "stuff",
+                    "title": "Сотрудники"
                     },
                 ],
     })

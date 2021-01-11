@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="card-body">
+                <h4 class="card-title">Данные заказа</h4>
+            </div>
+
+            <div class="row" th:fragment="order-result">
+                <div class="col-sm" th:fragment="order-result-first">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr>
+                                <th scope="row" style="width:50%">id</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="order-id"></span></td>
+                                <!--                            class="text-success"-->
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%">Дата, время</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="date-time"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"style="width:50%">Клиент </th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="chosen-customer"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"style="width:50%">Адрес</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="address"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"style="width:50%">Метраж</th>
+                                <td><input class="glyphicon glyphicon-ok" aria-hidden="true"id="meters"> м2</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-sm" th:fragment="order-result-second">
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr>
+                                <th scope="row" style="width:50%">Статус</th>
+                                <td>
+                                    <!--                                <span class="glyphicon glyphicon-ok" aria-hidden="true" id="status""></span>-->
+                                    <div class="dropdown show" style="margin:-7px">
+                                        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="#" id="accepted"> Принят </a>
+                                            <a class="dropdown-item" href="#" id = "done" > Выполнен</a>
+                                            <a class="dropdown-item" href="#" id = "canceled"> Отменен</a>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Доход</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="income"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Затраты</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" id="expenses"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:50%" >Прибыль</th>
+                                <td><span class="glyphicon glyphicon-ok" aria-hidden="true"id="profit"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12" style = "margin-bottom: 10px;" th:fragment="order-result-button">
+                    <button type="button" class="btn btn-info w-100" id="save"> Заполните данные заказа</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

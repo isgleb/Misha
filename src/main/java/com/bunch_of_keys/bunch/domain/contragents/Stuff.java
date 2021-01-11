@@ -23,7 +23,6 @@ public class Stuff extends Contragent {
     private String surname;
     private String email;
     private String telephone;
-
-//    many to many with orders
-
+    private StuffStatus stuffStatus;
 }
+

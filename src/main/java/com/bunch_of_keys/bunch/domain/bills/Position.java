@@ -24,7 +24,7 @@ public class Position {
     @ManyToOne
     @JoinColumn(name = "service_id", nullable=false)
     CleaningService cleaningService;
-    int quantity;
+//    int quantity;
     int totalPrice;
 
     @ManyToOne
@@ -34,7 +34,7 @@ public class Position {
 
     public Position(CleaningService cleaningService, int quantity, int totalPrice) {
         this.cleaningService = cleaningService;
-        this.quantity = quantity;
+//        this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
 
@@ -43,7 +43,7 @@ public class Position {
         return "Position{" +
                 "id=" + id +
                 ", cleaningService=" + cleaningService +
-                ", quantity=" + quantity +
+//                ", quantity=" + quantity +
                 ", totalPrice=" + totalPrice +
                 '}';
     }

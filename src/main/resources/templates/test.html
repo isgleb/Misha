@@ -1,0 +1,91 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">>
+<head>
+    <meta charset="utf-8">
+
+
+    <title>Website Title</title>
+
+
+    <link rel="stylesheet" type="text/css" href="../css/jquery.datetimepicker.min.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../js/jquery.datetimepicker.full.js"></script>
+
+
+
+<!--    <script src="https://api-maps.yandex.ru/2.1/?apikey=fffe81d2-ffa1-455a-a0c6-7b3574cfd3fc&lang=ru_RU" type="text/javascript">-->
+<!--    </script>-->
+
+<!--    <script src="../js/yandex-map.js"></script>-->
+
+
+
+
+
+
+</head>
+<body>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=fffe81d2-ffa1-455a-a0c6-7b3574cfd3fc&lang=ru_RU" type="text/javascript">
+</script>
+
+<script src="../js/yandex-map.js"></script>
+
+
+<div id="map" style="width: 600px; height: 400px"></div>
+
+
+<button type="button" class="btn btn-default w-100" id="save-date-time"> Заполните данные заказа</button>
+
+
+    <input type="text" id="demo" readonly/>
+
+    <input type="text" id="out" readonly/>
+
+    <script>
+    var now = new Date();
+
+    datet = $('#demo').datetimepicker({
+
+
+  yearStart: 2020,
+  dayOfWeekStart : 1,
+  step: 5,
+  defaultTime: now.getHours()+":"+now.getMinutes()+":0",
+  lang:'ru',
+  inline: true,
+  onChangeDateTime:function(dp,$input){
+            theDate = $('#demo').datetimepicker('getValue');
+            document.getElementById("out").value = theDate.toLocaleString();
+            },
+
+
+});
+
+$.datetimepicker.setLocale('ru');
+
+
+
+document.getElementById("out").value = $('#demo').datetimepicker('getValue').toLocaleString();
+    </script>
+
+
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--    <script src="../js/jquery.datetimepicker.full.js"></script>-->
+
+
+</body>
+
+
+
+
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--<script src="../js/jquery.datetimepicker.full.js"></script>-->
+
+</html>
+
+
+
+
+
+
+

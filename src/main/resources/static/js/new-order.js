@@ -1,10 +1,36 @@
+var orderStatus = "accepted";
+
+var customer = null;
+
+var invoicesArr = [];
+
+var date = new Date();
+
+var address = {
+    yandexAddress: "",
+    entrance : "",
+    level: "",
+    accommodation: "",
+    intercom: "",
+}
+
+var meters = document.getElementById('meters').value;;
 
 $(document).ready(function() {
 
-
     var saveButton = document.querySelector('#save');
     var readyToSave = false;
-    var customer = null;
+
+    $("#edit-address").click(function() {
+
+            address.yandexAddress = document.getElementById('ya-address').innerHTML;
+            address.entrance = document.getElementById('entrance').value;
+            address.level = document.getElementById('level').value;
+            address.accommodation = document.getElementById('accommodation').value;
+            address.intercom = document.getElementById('intercom').value;
+
+            updateResultTable();
+        });
 
     function updateResultTable() {
         if (customer !== null && invoicesArr.length !== 0) {
@@ -31,26 +57,32 @@ $(document).ready(function() {
 
         var profitSum = incomeSum - costsSum;
 
-
+        if (address.yandexAddress !== null) {
+            $("#address").text(address.yandexAddress);
+        };
         $("#profit").text(profitSum);
         $("#expenses").text(costsSum);
         $("#income").text(incomeSum);
 
         if (customer !== null) {
-            $("#chosen-customer").text(customer["name"] + " " + customer["telephone"]);
+            $("#chosen-customer").text(customer["name"] + ", " + customer["telephone"]);
         }
     }
 
 
-
     $("#save").click(function() {
-
-
         if (readyToSave) {
+
+            meters = document.getElementById('meters').value;
 
             var orderId = 0;
             var orderPage = window.location.protocol + "/order/";
-            orderDto = {customerId:customer["id"], status: "принят"};
+            orderDto = {customerId:customer["id"],
+                        status: orderStatus,
+                        address: address,
+                        meters: meters,
+                        date: date};
+
 
             $.ajax({
                     url: "/create-new-order",
@@ -64,12 +96,12 @@ $(document).ready(function() {
                                 }
 //                    error: error
                 });
-            }
 
-            invoicesArr.forEach(function(invoice, i, invoicesArr) {
-                  invoicesArr[i].id = null;
-                  invoicesArr[i].invoiceRelatedDocumentId = orderId;
-                });
+
+        invoicesArr.forEach(function(invoice, i, invoicesArr) {
+              invoicesArr[i].id = null;
+              invoicesArr[i].invoiceRelatedDocumentId = orderId;
+            });
 
 
 
@@ -78,8 +110,8 @@ $(document).ready(function() {
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(invoicesArr)
-//                    success: success,
-//                    error: error
+    //                    success: success,
+    //                    error: error
             });
 
             servicesArr.forEach(function(invoice, i, invoicesArr) {
@@ -92,17 +124,14 @@ $(document).ready(function() {
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(servicesArr)
-//                success: success,
-//                error: error
+    //                success: success,
+    //                error: error
             });
 
 
-
-
-
-
-
+    //        переход на страницу созданного заказа
             window.location.replace(orderPage);
+        }
 
         });
 
@@ -205,10 +234,8 @@ $(document).ready(function() {
     });
 
     function changeClient () {
-
         customer = clientsTable.row('.selected').data();
         updateResultTable();
-
     }
 
 
@@ -216,7 +243,7 @@ $(document).ready(function() {
     var stuffMap = new Map();
     $.ajax({
             type: 'GET',
-            url: "/stuff/request",
+            url: "/active-stuff/request",
             async: false,
             success: function (response) {stuff = response;}
             });
@@ -239,7 +266,7 @@ $(document).ready(function() {
         options : stuffOptions,
         select1 : { width: "100%"},
         render: function (data, type, row, meta) {
-            if (data == null || !(data in stuffOptions)) { return null;}
+            if (data == null || !(data in stuffOptions)) {return null;}
             return stuffOptions[data];
             }
         },
@@ -252,7 +279,6 @@ $(document).ready(function() {
     ];
 
     var invoiceTable;
-    var invoicesArr = [];
 
     invoiceFrontId = 1;
 
@@ -316,9 +342,9 @@ $(document).ready(function() {
                           invoiceRelatedDocumentId: null
                           };
 
-                invoicesArr[index] =  theRow;
+                invoicesArr[index] = theRow;
+                updateResultTable();
                 success(rowdata);
-
                 }
       });
 
@@ -441,6 +467,7 @@ $(document).ready(function() {
                       };
 
             servicesArr[index] =  theRow;
+            updateResultTable();
             success(rowdata);
         }
     });

@@ -68,4 +68,9 @@ public class PagesController {
         return "grid";
     }
 
+    @GetMapping("/test")
+    public String test () {
+        return "test";
+    }
+
 }
