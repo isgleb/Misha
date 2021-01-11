@@ -37,12 +37,12 @@ var servicesColumns = [
         return servicesOptions[data];
         }
     },
-    {
-    data: "quantity",
-    title: "Количество",
-    type: "number",
-    required: true,
-    },
+//    {
+//    data: "quantity",
+//    title: "Количество",
+//    type: "number",
+//    required: true,
+//    },
     {
     data: "totalPrice",
     title: "сумма",
@@ -89,7 +89,7 @@ serviceTable = $('#positions').DataTable({
     onAddRow: function(datatable, rowdata, success, error) {
 
     var position = {serviceId: rowdata.serviceId,
-                    quantity : rowdata.quantity,
+//                    quantity : rowdata.quantity,
                     totalPrice : rowdata.totalPrice};
 
         $.ajax({
@@ -117,7 +117,7 @@ serviceTable = $('#positions').DataTable({
 
         var position = {id: rowdata.id,
                         serviceId: rowdata.serviceId,
-                        quantity : rowdata.quantity,
+//                        quantity : rowdata.quantity,
                         totalPrice : rowdata.totalPrice};
 
         $.ajax({

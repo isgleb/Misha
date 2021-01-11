@@ -37,7 +37,7 @@ public class PositionService {
 
             positionDto.setId(position.getId());
             positionDto.setTotalPrice(position.getTotalPrice());
-            positionDto.setQuantity(position.getQuantity());
+//            positionDto.setQuantity(position.getQuantity());
             positionDto.setServiceId(position.getCleaningService().getId());
 
             positionDtos.add(positionDto);
@@ -51,7 +51,7 @@ public class PositionService {
         CleaningService service = cleaningServiceRepository.getOne(positionDto.getServiceId());
 
         Position position = new Position();
-        position.setQuantity(positionDto.getQuantity());
+//        position.setQuantity(positionDto.getQuantity());
         position.setCleaningService(service);
         position.setTotalPrice(positionDto.getTotalPrice());
         position.setOrder(orderRepository.getOne(orderId));
@@ -74,7 +74,7 @@ public class PositionService {
 
         Order order = orderRepository.getOne(orderId);
 
-        position.setQuantity(positionDto.getQuantity());
+//        position.setQuantity(positionDto.getQuantity());
         position.setTotalPrice(positionDto.getTotalPrice());
         position.setCleaningService(cleaningService);
         position.setOrder(order);

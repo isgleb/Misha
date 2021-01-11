@@ -14,7 +14,7 @@ public class PositionDto {
 
     private long id;
     long serviceId;
-    int quantity;
+//    int quantity;
     int totalPrice;
 
 }

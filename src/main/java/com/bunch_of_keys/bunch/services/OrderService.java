@@ -79,6 +79,7 @@ public class OrderService {
                                                         order.getCustomer().getTelephone());
 
             StringBuilder stringBuilder = new StringBuilder();
+
             Set<Invoice> invoiceSet = order.getInvoice();
 
             for (Invoice invoice: invoiceSet) {
@@ -101,12 +102,6 @@ public class OrderService {
         orderToUpdate.setCustomer(anotherCustomer);
         orderRepository.save(orderToUpdate);
     }
-
-//    public Long getCustomerId (Long orderId) {
-//        Order theOrder= orderRepository.findById(orderId).get();
-//        Long customerId = theOrder.getCustomerID();
-//        return customerId;
-//    }
 
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);

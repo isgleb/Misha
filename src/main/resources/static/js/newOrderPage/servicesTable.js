@@ -36,12 +36,6 @@
             }
         },
         {
-        data: "quantity",
-        title: "Количество",
-        type: "number",
-        required: true,
-        },
-        {
         data: "totalPrice",
         title: "сумма",
         },
@@ -82,7 +76,6 @@
             theRow = {id: newId,
                       serviceId: rowdata["serviceId"],
                       stuffId: rowdata["stuffId"],
-                      quantity : rowdata["quantity"],
                       totalPrice : rowdata["totalPrice"]
                       };
 
@@ -111,7 +104,6 @@
             theRow = {id: newId,
                       serviceId: rowdata["serviceId"],
                       stuffId: rowdata["stuffId"],
-                      quantity : rowdata["quantity"],
                       totalPrice : rowdata["totalPrice"]
                       };
 
