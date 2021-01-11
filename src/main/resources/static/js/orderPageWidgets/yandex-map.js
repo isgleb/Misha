@@ -31,6 +31,35 @@ function init() {
         myMap.controls.add(searchControl);
 
 
+
+        if (orderDetails.addressDto.yandexAddress != null) {
+
+            var myGeocoder = ymaps.geocode(orderDetails.addressDto.yandexAddress);
+
+            myGeocoder.then(
+                function (res) {
+
+                    coords = res.geoObjects.get(0).geometry.getCoordinates();
+
+                    var firstPlacemark = new ymaps.Placemark(coords, {}, {
+                                        balloonContent: 'hello',
+                                        draggable: true,
+                                        // Задаем цвет метки (в формате RGB).
+                                        iconColor: '#ff0000'
+                                        });
+
+                    myMap.geoObjects.removeAll();
+                    myMap.geoObjects.add(firstPlacemark);
+
+                },
+                function (err) {
+                    alert('Ошибка');
+                }
+            );
+        };
+
+
+
 //      Нужное нам событие (выбор результата поиска)
         searchControl.events.add('resultselect', function(e) {
             var index = e.get('index');

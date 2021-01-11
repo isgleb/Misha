@@ -68,8 +68,8 @@ function updateOrderDate(newDate) {
             },
     });
 
-    orderDetails.date = newDate;
-    $("#date-time").text(orderDetails.date.toLocaleString());
+//    orderDetails.date = newDate;
+//    $("#date-time").text(orderDetails.date.toLocaleString());
 };
 
 
@@ -142,13 +142,13 @@ function updateOrderCalculations() {
 
 $( "#meters" ).change(function() {
 
-    meters = document.getElementById('meters').value;
+    orderDetails.meters = document.getElementById('meters').value;
 
     $.ajax({
             url: '/the-order/update-meters?' + $.param({orderId: orderId}),
             type: 'PUT',
             async: false,
             contentType: "application/json",
-            data: JSON.stringify(meters),
+            data: JSON.stringify(orderDetails.meters),
             });
 });
