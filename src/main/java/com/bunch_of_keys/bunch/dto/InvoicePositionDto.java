@@ -20,13 +20,8 @@ import javax.persistence.ManyToOne;
 public class InvoicePositionDto {
 
     private long id;
-
-    Long costTypeId;
-
-
-    Long invoiceID;
-
-    int price;
-
-    String good;
+    private Long costTypeId;
+    private Long invoiceID;
+    private int price;
+    private String good;
 }

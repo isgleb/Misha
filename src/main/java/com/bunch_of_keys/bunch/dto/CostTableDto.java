@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,7 +15,9 @@ import lombok.Setter;
 public class CostTableDto {
 
     private long id;
-    private int date;
+    private Date date;
     private String contragent;
     private int sum;
+//    private String costTypes;
+
 }

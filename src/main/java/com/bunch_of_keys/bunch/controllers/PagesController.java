@@ -53,9 +53,14 @@ public class PagesController {
         return "stuff";
     }
 
-    @GetMapping("/cost")
-    public String costs () {
-        return "costs";
+    @GetMapping("/costs-table-page")
+    public String costsTable () {
+        return "costsPages/costsTablePage";
+    }
+
+    @GetMapping("/newCostPage")
+    public String newCost () {
+        return "costsPages/newCostPage";
     }
 
     @GetMapping("/new-order")

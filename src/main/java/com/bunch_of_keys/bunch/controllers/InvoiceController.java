@@ -28,7 +28,6 @@ public class InvoiceController {
 
     @PostMapping("/invoice/request")
     public ResponseEntity newOrderInvoice (@RequestBody InvoiceDto invoiceDto) {
-        System.out.println(invoiceDto);
         invoiceService.newOrderInvoice(invoiceDto);
         return new ResponseEntity(invoiceDto, HttpStatus.OK);
     }

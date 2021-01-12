@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DataTable-AltEditor - Example #3</title>
+
+    <!--стили для таблицы-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.css" />
+    <style type="text/css"> .block {margin: 2% auto;}</style>
+
+    <!--скрипты из template-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
+    <!--основной стиль меню итд-->
+    <link href="../../dist/css/style.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="main-wrapper">
+
+    <div th:insert="~{fragments/topbar :: topbar}"></div>
+    <div th:insert="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="page-wrapper">
+
+        <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body" style = "margin: 10px;">
+                                <h4 class="card-title">Услуги</h4>
+                            </div>
+                            <div style = "margin-bottom: 10px">
+                                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="invoice-positions">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="cost-table">-->
+<!--                &lt;!&ndash;                </table>&ndash;&gt;-->
+<!--                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="stuff-table">-->
+<!--                </table>-->
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.0.0.js" ></script>
+<script src="https://code.jquery.com/jquery-migrate-3.3.0.js" ></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js" ></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.js" ></script>
+<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" ></script>
+<script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.js" ></script>
+<script src="../js/dataTables.altEditor.free.js" ></script>
+<script src="../js/costsPage/generalNewCostFile.js" ></script>
+<script src="../js/costsPage/newCostInvoicePositions.js" ></script>
+
+
+
+
+
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="../../assets/extra-libs/sparkline/sparkline.js"></script>
+<!--Wave Effects -->
+<script src="../../dist/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="../../dist/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="../../dist/js/custom.min.js"></script>
+<!-- this page js -->
+<script src="../../assets/libs/moment/min/moment.min.js"></script>
+<script src="../../assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="../../dist/js/pages/calendar/cal-init.js"></script>
+
+
+
+</body>
+
+
+</html>
