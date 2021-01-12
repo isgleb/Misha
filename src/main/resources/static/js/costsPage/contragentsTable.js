@@ -31,9 +31,9 @@ $(document).ready(function() {
         },
     ];
 
-    var myTable;
+    var contragentsTable;
 
-    myTable = $('#stuff-table').DataTable({
+    contragentsTable = $('#contragents-table').DataTable({
         "sPaginationType": "full_numbers",
         ajax: {
             url : '/stuff/request',
@@ -64,6 +64,11 @@ $(document).ready(function() {
                 text: 'Обновить таблицу',
                 name: 'refresh'      // do not change name
             },
+            {
+                text: 'Выбрать контрагента',
+                name: 'choose',
+                action: function() { updateCostContragent(contragentsTable.row('.selected').data());}
+            }
         ],
 
         onAddRow: function(datatable, rowdata, success, error) {

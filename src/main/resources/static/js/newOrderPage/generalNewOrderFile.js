@@ -62,7 +62,6 @@ function updateInvoicesSum(invoicesArr) {
 
 function updateIncomeSum(servicesArr) {
 
-    console.log("here i am");
     incomeSum = 0;
 
     servicesArr.forEach(function(aService, i, servicesArr) {

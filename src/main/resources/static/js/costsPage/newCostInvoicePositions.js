@@ -92,7 +92,7 @@ serviceTable = $('#invoice-positions').DataTable({
         serviceFrontId += 1;
 
         cost.invoicePositionsArr.push(theRow);
-//            updateIncomeSum(cost.invoicePositionsArr);
+        updateInvoicesSum(cost.invoicePositionsArr);
         success(theRow);
 
     },
@@ -102,7 +102,7 @@ serviceTable = $('#invoice-positions').DataTable({
         const index = cost.invoicePositionsArr.findIndex(n => n.id === rowdata["id"]);
         if (index !== -1) {cost.invoicePositionsArr.splice(index, 1);}
 
-//            updateIncomeSum(cost.invoicePositionsArr);
+        updateInvoicesSum();
         success(rowdata);
 
     },
@@ -119,7 +119,7 @@ serviceTable = $('#invoice-positions').DataTable({
                   };
 
         cost.invoicePositionsArr[index] =  theRow;
-//            updateIncomeSum(cost.invoicePositionsArr);
+        updateInvoicesSum(cost.invoicePositionsArr);
         success(rowdata);
     }
 });

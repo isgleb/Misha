@@ -36,14 +36,43 @@
 
         <div class="container-fluid">
 
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Данные затрат</h4>
+                            </div>
+                            <div class="row">
+                                <div th:replace="~{fragments/cost-result-table :: cost-result-first}"></div>
+                                <div th:replace="~{fragments/cost-result-table :: cost-result-button}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body" style = "margin: 10px;">
-                                <h4 class="card-title">Услуги</h4>
+                                <h4 class="card-title">Покупки</h4>
                             </div>
                             <div style = "margin-bottom: 10px">
                                 <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="invoice-positions">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body" style = "margin: 10px;">
+                                <h4 class="card-title">Контрагент</h4>
+                            </div>
+                            <div style = "margin-bottom: 10px">
+                                <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" style="width:100%" id="contragents-table">
                                 </table>
                             </div>
                         </div>
@@ -77,6 +106,7 @@
 <script src="../js/dataTables.altEditor.free.js" ></script>
 <script src="../js/costsPage/generalNewCostFile.js" ></script>
 <script src="../js/costsPage/newCostInvoicePositions.js" ></script>
+<script src="../js/costsPage/contragentsTable.js" ></script>
 
 
 
