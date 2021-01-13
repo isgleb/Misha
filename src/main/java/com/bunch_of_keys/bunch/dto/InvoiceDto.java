@@ -18,10 +18,8 @@ import javax.persistence.ManyToOne;
 public class InvoiceDto {
 
     private long id;
-    Long stuffId;
-
-    //            later it will be Document
-    Long invoiceRelatedDocumentId;
+    long stuffId;
+    long invoiceRelatedDocumentId;
     int sum;
 
     @Override

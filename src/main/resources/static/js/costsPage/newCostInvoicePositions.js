@@ -9,7 +9,6 @@ $.ajax({
         success: function (response) {costTypes = response;}
         });
 
-//console.log(costTypes);
 
 costTypes.forEach(function(costType){
     costTypesMap.set(costType.id, costType.costType);
@@ -114,7 +113,7 @@ serviceTable = $('#invoice-positions').DataTable({
         theRow = {id: newId,
                   costTypeId: rowdata["costTypeId"],
                   good: rowdata["good"],
-                  price : rowdata["price"],
+                  price : parseInt(rowdata["price"]),
                   invoiceID : ""
                   };
 

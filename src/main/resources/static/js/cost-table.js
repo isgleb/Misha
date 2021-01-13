@@ -10,9 +10,7 @@ $(document).ready(function() {
         },
         {
         data: "date",
-        title: "Дата",
-        required: true,
-        unique: true
+        title: "Дата"
         },
         {
         data: "Contragent",

@@ -1,3 +1,32 @@
+var costId = parseInt((window.location.href.split("/").pop()));
+
+var costDto;
+var invoiceDto;
+
+$.ajax({
+        type: 'GET',
+        url: '/the-cost?' + $.param({costId: costId}),
+        async: true,
+        success: function (response) {
+            costDto = response;
+            console.log(costDto);
+        }
+});
+
+
+$.ajax({
+        type: 'GET',
+        url: '/the-invoice?' + $.param({costId: costId}),
+        async: true,
+        success: function (response) {
+            invoiceDto = response;
+            initServiceTable(invoiceDto);
+
+            console.log(invoiceDto);
+        }
+});
+
+
 var cost = {id: null,
             date: new Date,
             contragent: null,
@@ -5,6 +34,11 @@ var cost = {id: null,
             };
 
 var comments = "";
+
+
+
+
+
 
 var costSum = 0;
 

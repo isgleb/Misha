@@ -9,8 +9,7 @@ var costsColumns = [
     },
     {
     data: "date",
-    title: "Дата",
-    required: true,
+    title: "Дата"
     },
     {
     data: "contragent",
@@ -46,46 +45,32 @@ var costsColumns = [
         buttons: [
             {
                 text: 'Новый',
-//                name: 'add'        // do not change name
+
                 action: function(){window.location.replace("/newCostPage");}
             },
             {
                 extend: 'selected', // Bind to Selected row
                 text: 'Изменить данные',
-//                name: 'edit'        // do not change name
-
-//    $('#edit').click( function () {
-//        var id = table.row('.selected').data().id;
-//        return location.href = '/order/' + table.row('.selected').data().id
-//
-//    } );
-
+                action: function(){window.location.replace(window.location.protocol + "/cost/" + table.row('.selected').data().id)}
             },
             {
                 extend: 'selected', // Bind to Selected row
                 text: 'Удалить',
-                name: 'delete'      // do not change name
-
-//                  $('#delete').click( function () {
-//
-//                        $.ajax({
-//                                url: '/orders/request?' + $.param({id: table.row('.selected').data().id}), // выдает null
-//                                type: 'DELETE',
-//                //                success: success;
-//                //                error: error
-//                                });
-//                        table.row('.selected').remove().draw( false );
-//                    } );
-
-
-
-
+                action: function () {
+                                $.ajax({
+                                        url: '/cost/delete?' + $.param({id: table.row('.selected').data().id}), // выдает null
+                                        type: 'DELETE',
+                                        success: function() {table.row('.selected').remove().draw( false );}
+                        //                error: error
+                                        });
+//                                table.row('.selected').remove().draw( false );
+                                }
             },
             {
                 text: 'Обновить таблицу',
                 name: 'refresh'      // do not change name
             }
         ],
-    })
+    });
 
 })

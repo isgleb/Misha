@@ -1,5 +1,6 @@
 package com.bunch_of_keys.bunch.controllers;
 
+import com.bunch_of_keys.bunch.domain.bills.InvoicePosition;
 import com.bunch_of_keys.bunch.dto.InvoicePositionDto;
 import com.bunch_of_keys.bunch.dto.CostTypeDto;
 import com.bunch_of_keys.bunch.services.InvoicePositionService;
@@ -25,10 +26,29 @@ public class InvoicePositionController {
         return new ResponseEntity(invoicePositionDtos, HttpStatus.OK);
     }
 
+    @GetMapping("/invoicePositions/byInvoice")
+    public ResponseEntity getCosts (@RequestParam long invoiceId) {
+
+        List<InvoicePositionDto> invoicePositionDtos = invoicePositionService.getPositions(invoiceId);
+
+        return new ResponseEntity(invoicePositionDtos, HttpStatus.OK);
+    }
+
+
+
     @PostMapping("/invoicePositions/request")
     public ResponseEntity newCost (@RequestBody InvoicePositionDto invoicePositionDto) {
         invoicePositionService.addInvoicePosition(invoicePositionDto);
         return new ResponseEntity(invoicePositionDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/new-invoice-positions")
+    public ResponseEntity newPositions (@RequestBody List<InvoicePositionDto> invoicePositionDtos) {
+
+        for (InvoicePositionDto invoicePosition : invoicePositionDtos) {
+            invoicePositionService.addInvoicePosition(invoicePosition);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("/invoicePositions/request")

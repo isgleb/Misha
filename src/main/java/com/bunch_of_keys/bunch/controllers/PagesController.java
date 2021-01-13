@@ -63,6 +63,11 @@ public class PagesController {
         return "costsPages/newCostPage";
     }
 
+    @GetMapping("/cost/{costId}")
+    public String theCost () {
+        return "costsPages/theCostPage";
+    }
+
     @GetMapping("/new-order")
     public String newOrder () {
         return "new-order";

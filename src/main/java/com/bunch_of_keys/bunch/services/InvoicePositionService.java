@@ -46,7 +46,7 @@ public class InvoicePositionService {
 
         InvoicePosition invoicePosition = new InvoicePosition();
 
-        invoicePosition.setId(invoicePositionDto.getId());
+//        invoicePosition.setId(invoicePositionDto.getId());
         invoicePosition.setCostType(costTypeRepository.getOne(invoicePositionDto.getCostTypeId()));
         invoicePosition.setPrice(invoicePositionDto.getPrice());
         invoicePosition.setGood(invoicePositionDto.getGood());
@@ -103,4 +103,17 @@ public class InvoicePositionService {
     }
 
 
+    public List<InvoicePositionDto> getPositions(long invoiceId) {
+        List<InvoicePosition> positions = invoicePositionRepository.findByInvoice_id(invoiceId);
+
+        List<InvoicePositionDto> positionDtos = new ArrayList<>();
+
+        positions.forEach(position -> positionDtos.add(new InvoicePositionDto(position.getId(),
+                                                                                position.getCostType().getId(),
+                                                                                position.getInvoice().getId(),
+                                                                                position.getPrice(),
+                                                                                position.getGood())));
+
+        return positionDtos;
+    }
 }
