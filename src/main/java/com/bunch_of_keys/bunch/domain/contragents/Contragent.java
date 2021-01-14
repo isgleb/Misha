@@ -13,5 +13,4 @@ import javax.persistence.Entity;
 public class Contragent extends InvoiceRelatedContragent {
 
 
-
 }

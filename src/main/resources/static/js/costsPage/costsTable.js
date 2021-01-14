@@ -28,7 +28,7 @@ var costsColumns = [
 
        "sPaginationType": "full_numbers",
 //        "initComplete": function() {
-//            updateInvoicesSum(invoiceTable.data().toArray());
+//            updateContragent(invoiceTable.data().toArray());
 //        },
 
 

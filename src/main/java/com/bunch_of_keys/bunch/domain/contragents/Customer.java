@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @EnableAutoConfiguration
 @Table(name = "customers")
-public class Customer extends Contragent {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -35,7 +35,7 @@ public class InvoiceService {
 
             InvoiceDto invoiceDto = new InvoiceDto();
             invoiceDto.setId(invoice.getId());
-            invoiceDto.setStuffId(invoice.getInvoiceRelatedContragent().getId());
+            invoiceDto.setContragentId(invoice.getInvoiceRelatedContragent().getId());
             invoiceDto.setInvoiceRelatedDocumentId(IrdId);
             invoiceDto.setSum(invoice.getSum());
 
@@ -57,7 +57,7 @@ public class InvoiceService {
         Invoice invoice = new Invoice();
 
         invoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
-        invoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getStuffId()));
+        invoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getContragentId()));
         invoice.setSum(invoiceDto.getSum());
 
         invoiceRepository.save(invoice);
@@ -70,7 +70,7 @@ public class InvoiceService {
         Invoice theInvoice = invoiceRepository.getOne(invoiceDto.getId());
 
         theInvoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
-        theInvoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getStuffId()));
+        theInvoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getContragentId()));
         theInvoice.setSum(invoiceDto.getSum());
 
         invoiceRepository.save(theInvoice);
@@ -85,7 +85,7 @@ public class InvoiceService {
         Invoice newInvoice = new Invoice();
 
         newInvoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
-        newInvoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getStuffId()));
+        newInvoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getContragentId()));
         newInvoice.setSum(invoiceDto.getSum());
 
         invoiceRepository.save(newInvoice);

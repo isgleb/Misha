@@ -21,8 +21,8 @@ $.ajax({
             invoiceDto = response;
             initPositionsTable(invoiceDto);
 
-//            console.log(invoiceDto);
-//            updateCostContragent(invoiceDto.stuffId);
+            $("#chosen-contragent").text(invoiceDto.contragentId);
+
         }
 });
 
@@ -42,9 +42,20 @@ $("#date-time").text(cost.date.toLocaleString());
 
 
 function updateCostContragent(contragent) {
-    cost.contragent = contragent;
-    $("#chosen-contragent").text(cost.contragent.name);
-    updateResultTable()
+    invoiceDto.contragentId = contragent.id;
+    $("#chosen-contragent").text(invoiceDto.contragentId);
+
+    $.ajax({
+            type: 'PUT',
+            url: "/invoice/request",
+            contentType: "application/json",
+            data: JSON.stringify(invoiceDto),
+            async: true,
+            success: function () {
+                $("#chosen-contragent").text(invoiceDto.contragentId);
+
+            }
+    });
 };
 
 
@@ -57,5 +68,5 @@ function updateInvoicesSum(theArray) {
                 });
 
     $("#sum").text(costSum);
-//    updateResultTable()
 };
+

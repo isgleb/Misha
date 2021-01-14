@@ -34,15 +34,21 @@ public class CostService {
 
         for (Cost cost: costs) {
 
-            Invoice theInvoice = invoiceRepository.getByInvoiceRelatedDocument_id(cost.getId()).get(0);
-            CostTableDto costTableDto = new CostTableDto();
 
-            costTableDto.setId(cost.getId());
-            costTableDto.setDate(cost.getDate());
-            costTableDto.setContragent(theInvoice.getInvoiceRelatedContragent().getName());
-            costTableDto.setSum(theInvoice.getSum());
+            if (invoiceRepository.getByInvoiceRelatedDocument_id(cost.getId()).size() > 0) {
 
-            costTableDtos.add(costTableDto);
+                Invoice theInvoice = invoiceRepository.getByInvoiceRelatedDocument_id(cost.getId()).get(0);
+                CostTableDto costTableDto = new CostTableDto();
+
+                costTableDto.setId(cost.getId());
+                costTableDto.setDate(cost.getDate());
+                costTableDto.setContragent(theInvoice.getInvoiceRelatedContragent().getName());
+                costTableDto.setSum(theInvoice.getSum());
+
+                costTableDtos.add(costTableDto);
+
+
+            }
         }
 
         return costTableDtos;
