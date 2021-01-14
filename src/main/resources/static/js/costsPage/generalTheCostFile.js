@@ -9,7 +9,6 @@ $.ajax({
         async: true,
         success: function (response) {
             costDto = response;
-            console.log(costDto);
         }
 });
 
@@ -20,9 +19,10 @@ $.ajax({
         async: true,
         success: function (response) {
             invoiceDto = response;
-            initServiceTable(invoiceDto);
+            initPositionsTable(invoiceDto);
 
-            console.log(invoiceDto);
+//            console.log(invoiceDto);
+//            updateCostContragent(invoiceDto.stuffId);
         }
 });
 
@@ -35,16 +35,7 @@ var cost = {id: null,
 
 var comments = "";
 
-
-
-
-
-
 var costSum = 0;
-
-
-var saveButton = document.querySelector('#save');
-var readyToSave = false;
 
 
 $("#date-time").text(cost.date.toLocaleString());
@@ -66,94 +57,5 @@ function updateInvoicesSum(theArray) {
                 });
 
     $("#sum").text(costSum);
-    updateResultTable()
+//    updateResultTable()
 };
-
-
-function updateResultTable() {
-    if (cost.date !== null &&
-        cost.contragent !== null &&
-        cost.invoicePositionsArr.length !== 0) {
-
-        saveButton.classList.add("btn-success");
-        saveButton.classList.remove("btn-info");
-
-        saveButton.innerText = "Сохранить затраты";
-        readyToSave = true;
-    };
-};
-
-
-$("#save").click(function() {
-
-    if (readyToSave) {
-
-//      создание Cost
-        costDto = {id: cost.id,
-                   date: cost.date,
-                   comments: comments
-                   };
-
-//        console.log(costDto);
-
-        $.ajax({
-                url: "/new-cost",
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(costDto),
-                async: false,
-                success: function(response){
-                                    costDto = response;
-//                                    console.log(costDto);
-                            }
-//                    error: error
-        });
-
-
-////        создание Invoice
-        invoiceDto = {id: null,
-                      stuffId: cost.contragent.id,
-                      invoiceRelatedDocumentId: costDto.id,
-                      sum: costSum
-                      };
-
-//        console.log(invoiceDto);
-
-        $.ajax({
-                url: "/new-invoice",
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(invoiceDto),
-                async: false,
-                success: function(response){
-                                    invoiceDto = response;
-//                                    console.log(invoiceDto);
-                            }
-//                    error: error
-        });
-
-
-//      создание InvoicePositions
-        invoicePositionsDtos = cost.invoicePositionsArr;
-
-        invoicePositionsDtos.forEach(function(position, i, invoicePositionsDtos) {
-                  invoicePositionsDtos[i].id = null;
-                  invoicePositionsDtos[i].invoiceID = invoiceDto.id;
-                });
-
-
-        $.ajax({
-                url: "/new-invoice-positions",
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(invoicePositionsDtos),
-                async: false,
-                success: function(){
-                    theCostPage = window.location.protocol + "/cost/" + costDto.id;
-                    console.log(theCostPage);
-                    window.location.replace(theCostPage);
-                }
-//                    error: error
-        });
-    }
-});

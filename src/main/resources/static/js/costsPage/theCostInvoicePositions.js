@@ -17,7 +17,7 @@ costTypes.forEach(function(costType){
 var costTypesOptions = Object.fromEntries(costTypesMap.entries());
 
 
-var serviceColumns = [
+var positionsColumns = [
     {
     data: "id",
     title: "id",
@@ -46,21 +46,23 @@ var serviceColumns = [
     },
 ];
 
-var serviceTable;
-//var serviceFrontId = 1;
+var positionsTable;
 
-function initServiceTable(invoiceDto) {
 
-    serviceTable = $('#invoice-positions').DataTable({
+function initPositionsTable(invoiceDto) {
+
+    positionsTable = $('#invoice-positions').DataTable({
             "sPaginationType": "full_numbers",
-    //        "initComplete": function() {updateIncomeSum(serviceTable.data().toArray());},
+            "initComplete": function() {
+            updateInvoicesSum(positionsTable.data().toArray());
+            },
+
             ajax: {
-                async: false,
                 url : '/invoicePositions/byInvoice?' + $.param({invoiceId: invoiceDto.id}),
                 // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
                 dataSrc : ''
             },
-            columns: serviceColumns,
+            columns: positionsColumns,
             dom: 'Bfrtip',        // Needs button container
             select: 'single',
             responsive: true,
@@ -80,60 +82,60 @@ function initServiceTable(invoiceDto) {
                 extend: 'selected', // Bind to Selected row
                 text: 'Удалить',
                 name: 'delete'      // do not change name
+            },
+            {
+                text: 'Обновить таблицу',
+                name: 'refresh'      // do not change name
             }
         ],
 
         onAddRow: function(datatable, rowdata, success, error) {
 
+            var positionDto = { id: rowdata.id,
+                                costTypeId : rowdata.costTypeId,
+                                invoiceID : invoiceDto.id,
+                                price : rowdata.price,
+                                good : rowdata.good
+                                };
 
-//        private long id;
-//            private Long costTypeId;
-//            private Long invoiceID;
-//            private int price;
-//            private String good;
-
-            var positionDto = {id: rowdata.serviceId,
-                                costTypeId : rowdata.quantity,
-                                invoiceID : rowdata.totalPrice,
-                                price : ,
-                                good : };
-
-                $.ajax({
-                    url: '/invoicePositions/request',
-                    type: 'POST',
-                    contentType: "application/json",
-                    data: JSON.stringify(positionDto),
-                    success: success,
-                    error: error,
-                    complete: function() {updateIncomeSum(serviceTable.data().toArray());}
-                });
-            },
+            $.ajax({
+                url: '/invoicePositions/request',
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(positionDto),
+                success: success,
+                error: error,
+                complete: function() {updateInvoicesSum(positionsTable.data().toArray());}
+            });
+        },
 
         onDeleteRow: function(datatable, rowdata, success, error) {
             $.ajax({
-                url: '/positions/request?' + $.param({id: rowdata.id}), // выдает null
+                url: '/invoicePositions/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
                 success: success,
                 error: error,
-                complete: function() {updateIncomeSum(serviceTable.data().toArray());}
+                complete: function() {updateInvoicesSum(positionsTable.data().toArray());}
             });
         },
 
         onEditRow: function(datatable, rowdata, success, error) {
 
-            var position = {id: rowdata.id,
-                            serviceId: rowdata.serviceId,
-    //                        quantity : rowdata.quantity,
-                            totalPrice : rowdata.totalPrice};
+            var positionDto = { id: rowdata.id,
+                                            costTypeId : rowdata.costTypeId,
+                                            invoiceID : invoiceDto.id,
+                                            price : rowdata.price,
+                                            good : rowdata.good
+                                            };
 
             $.ajax({
-                url: '/positions/request?' + $.param({orderId: orderId}),
+                url: '/invoicePositions/request',
                 type: 'PUT',
                 contentType: "application/json",
-                data: JSON.stringify(position),
+                data: JSON.stringify(positionDto),
                 success: success,
                 error: error,
-                complete: function() {updateIncomeSum(serviceTable.data().toArray());}
+                complete: function() {updateInvoicesSum(positionsTable.data().toArray());}
             });
         }
     });
