@@ -1,6 +1,7 @@
 package com.bunch_of_keys.bunch.domain.bills;
 
 
+import com.bunch_of_keys.bunch.domain.contragents.InvoiceRelatedContragent;
 import com.bunch_of_keys.bunch.domain.contragents.Stuff;
 import com.bunch_of_keys.bunch.domain.documents.InvoiceRelatedDocument;
 
@@ -29,7 +30,7 @@ public class Invoice {
 
 //    later it will be Contragent contragent;
     @ManyToOne
-    Stuff stuff;
+    InvoiceRelatedContragent invoiceRelatedContragent;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "invoice")
     Set<InvoicePosition> invoicePositionSet;

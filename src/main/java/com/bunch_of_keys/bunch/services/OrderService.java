@@ -83,7 +83,7 @@ public class OrderService {
             Set<Invoice> invoiceSet = order.getInvoice();
 
             for (Invoice invoice: invoiceSet) {
-                stringBuilder.append(invoice.getStuff().getName() + ", ");
+                stringBuilder.append(invoice.getInvoiceRelatedContragent().getName() + ", ");
             }
             stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 

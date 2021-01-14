@@ -23,12 +23,14 @@ $("#date-time").text(orderDetails.date.toLocaleString());
 function updateOrderCustomer(customer) {
     orderDetails.customerDto = customer;
     $("#chosen-customer").text(orderDetails.customerDto.name + ", " + orderDetails.customerDto.telephone);
+    updateResultTable();
 };
 
 
 function updateOrderDate(newDate) {
     orderDetails.date = newDate;
     $("#date-time").text(orderDetails.date.toLocaleString());
+    updateResultTable();
 };
 
 
@@ -36,6 +38,7 @@ function updateOrderStatus(status) {
     if (status != orderDetails.status) {
         orderDetails.status = status;
     };
+    updateResultTable();
 };
 
 
@@ -57,6 +60,7 @@ function updateInvoicesSum(invoicesArr) {
                 });
 
     updateOrderCalculations();
+    updateResultTable();
 };
 
 
@@ -70,6 +74,7 @@ function updateIncomeSum(servicesArr) {
 
 
     updateOrderCalculations();
+    updateResultTable();
 }
 
 
@@ -85,6 +90,7 @@ function updateOrderCalculations() {
 
 $( "#meters" ).change(function() {
     orderDetails.meters = document.getElementById('meters').value;
+    updateResultTable();
 });
 
 

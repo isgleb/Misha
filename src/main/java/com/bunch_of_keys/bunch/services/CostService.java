@@ -39,7 +39,7 @@ public class CostService {
 
             costTableDto.setId(cost.getId());
             costTableDto.setDate(cost.getDate());
-            costTableDto.setContragent(theInvoice.getStuff().getName());
+            costTableDto.setContragent(theInvoice.getInvoiceRelatedContragent().getName());
             costTableDto.setSum(theInvoice.getSum());
 
             costTableDtos.add(costTableDto);

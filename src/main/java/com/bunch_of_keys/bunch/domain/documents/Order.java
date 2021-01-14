@@ -25,6 +25,7 @@ public class Order extends InvoiceRelatedDocument{
 
     private OrderStatus status;
 
+//    не удаляется при удалении заказа
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
