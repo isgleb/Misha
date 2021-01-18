@@ -1,66 +1,95 @@
+// вызов базовой функции jQuery
 $(document).ready(function() {
 
-    var table = $('#cost-table').DataTable( {
-    responsive: true,
-     "ajax": {
-                 "url": "costs-table",
-                 "dataSrc": ""
-             },
-     "columns": [
+    var columnDefs = [
 
-         private long id;
-         private int date;
-         private String contragent;
-         private int sum;
+        {
+        data: "id",
+        title: "id",
+        type: "readonly"
+        },
+        {
+        data: "date",
+        title: "Дата"
+        },
+        {
+        data: "Contragent",
+        title: "Контрагент",
+        required: true,
+        unique: true
+        },
+        {
+        data: "Sum",
+        title: "Сумма",
+        required: true,
+        unique: true
+        },
+    ];
 
+    var myTable;
 
-                    {
-                    "data": "id",
-                    "title": "Id",
-                    "type": "readonly"
-                    },
+    myTable = $('#cost-table').DataTable({
+        "sPaginationType": "full_numbers",
+        ajax: {
+            url : '/costs-types/request',
+            // our data is an array of objects, in the root node instead of /data node, so we need 'dataSrc' parameter
+            dataSrc : ''
+        },
+        columns: columnDefs,
+        dom: 'Bfrtip',        // Needs button container
+        select: 'single',
+        responsive: true,
+        altEditor: true,     // Enable altEditor
+        buttons: [
+            {
+                text: 'Новый',
+                name: 'add'        // do not change name
+            },
+            {
+                extend: 'selected', // Bind to Selected row
+                text: 'Изменить данные',
+                name: 'edit'        // do not change name
+            },
+            {
+                extend: 'selected', // Bind to Selected row
+                text: 'Удалить',
+                name: 'delete'      // do not change name
+            },
+            {
+                text: 'Обновить таблицу',
+                name: 'refresh'      // do not change name
+            },
+        ],
 
-                    {
-                    "data": "date",
-                    "title": "Дата",
-                    },
-                    {
-                    "data": "contragent",
-                    "title": "Контрагент"
-                    },
-                    {
-                    "data": "sum",
-                    "title": "Сумма"
-                    },
-                ],
-    })
+        onAddRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                url: '/costs-types/request',
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(rowdata),
+                success: success,
+                error: error
+            });
+        },
 
-
-    $('#example tbody').on( 'click', 'tr', function () {
-            if ( $(this).hasClass('selected') ) {
-                $(this).removeClass('selected');
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        } );
-
-    $('#delete').click( function () {
-
-        $.ajax({
-                url: '/orders/request?' + $.param({id: table.row('.selected').data().id}), // выдает null
+        onDeleteRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                url: '/costs-types/request?' + $.param({id: rowdata.id}), // выдает null
                 type: 'DELETE',
-//                success: success;
-//                error: error
-                });
-        table.row('.selected').remove().draw( false );
-    } );
+                success: success,
+                error: error
+            });
+        },
 
-
-    $('#edit').click( function () {
-        var id = table.row('.selected').data().id;
-        return location.href = '/order/' + table.row('.selected').data().id
-
-    } );
-})
+        onEditRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                url: '/costs-types/request',
+                type: 'PUT',
+                contentType: "application/json",
+                data: JSON.stringify(rowdata),
+                success: success,
+                error: error
+            });
+        }
+    });
+});

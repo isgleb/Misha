@@ -14,11 +14,9 @@ import javax.persistence.*;
 @Entity
 @EnableAutoConfiguration
 @Table(name = "stuff")
-public class Stuff extends Contragent {
+public class Stuff extends InvoiceRelatedContragent {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+
     private String name;
     private String surname;
     private String email;

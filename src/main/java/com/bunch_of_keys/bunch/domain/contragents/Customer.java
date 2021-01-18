@@ -15,9 +15,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@EnableAutoConfiguration
 @Table(name = "customers")
-public class Customer extends Contragent {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,29 +30,19 @@ public class Customer extends Contragent {
     private Set<Order> orders;
 
 
-    public Customer(String name, String surname, String email, String telephone) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.telephone = telephone;
-    }
+//    public Customer(String name, String surname, String email, String telephone) {
+//        this.name = name;
+//        this.surname = surname;
+//        this.email = email;
+//        this.telephone = telephone;
+//    }
+//
+//    public Customer(long id, String name, String surname, String email, String telephone) {
+//        this.id = id;
+//        this.name = name;
+//        this.surname = surname;
+//        this.email = email;
+//        this.telephone = telephone;
+//    }
 
-    public Customer(long id, String name, String surname, String email, String telephone) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.telephone = telephone;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerDao{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                '}';
-    }
 }

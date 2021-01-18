@@ -22,25 +22,8 @@ public class OrderDto {
     private CustomerDto customerDto;
     private AddressDto addressDto;
     private int meters;
-
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX"
-
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
-
-
-//    @Override
-//    public String toString() {
-//        return "OrderDto{" +
-//                "id=" + id +
-//                ", status='" + status + '\'' +
-//                ", customerId=" + customerId +
-//                ", address=" + address +
-//                ", meters=" + meters +
-//                ", date=" + date +
-//                '}';
-//    }
 }
 
 

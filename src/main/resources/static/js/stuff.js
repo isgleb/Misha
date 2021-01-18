@@ -1,4 +1,3 @@
-// вызов базовой функции jQuery
 $(document).ready(function() {
 
     var columnDefs = [

@@ -46,13 +46,12 @@ public class OrderService {
         return orderDto;
     }
 
-
-
-
     public List<TableOrderDto> getOrders () {
 
         Iterable<Order> orders = orderRepository.getOrdersForTable();
         List<TableOrderDto> ordersResponse = new ArrayList<>();
+
+        System.out.println(orders);
 
         for (Order order : orders) {
             TableOrderDto tableOrderDto = new TableOrderDto();
@@ -83,7 +82,7 @@ public class OrderService {
             Set<Invoice> invoiceSet = order.getInvoice();
 
             for (Invoice invoice: invoiceSet) {
-                stringBuilder.append(invoice.getStuff().getName() + ", ");
+                stringBuilder.append(invoice.getInvoiceRelatedContragent().getName() + ", ");
             }
             stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 
@@ -108,8 +107,6 @@ public class OrderService {
     }
 
     public OrderDto createNewOrder(OrderDto orderDto) {
-
-
 
         Order order = new Order();
         Customer customer = customerRepository.getOne(orderDto.getCustomerDto().getId());

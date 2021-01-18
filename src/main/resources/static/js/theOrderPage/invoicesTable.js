@@ -29,7 +29,7 @@ var invoiceColumns = [
     type: "readonly"
     },
     {
-    data: "stuffId",
+    data: "contragentId",
     title: "Сотрудник",
     type : "select",
     options : stuffOptions,
@@ -38,7 +38,7 @@ var invoiceColumns = [
         if (data == null || !(data in stuffOptions)) {
                 $.ajax({
                         type: 'GET',
-                        url: "/get-the-stuff/request?" + $.param({stuffId: data}),
+                        url: "/get-the-stuff/request?" + $.param({contragentId: data}),
                         async: false,
                         success: function (response) {
                             stuffMap.set(response.id, response.name)
@@ -112,7 +112,7 @@ invoiceTable = $('#invoices').DataTable({
 
     onAddRow: function(datatable, rowdata, success, error) {
 
-        invoiceDto = {id:rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: orderId};
+        invoiceDto = {id:rowdata.id, contragentID: rowdata.contragentID, sum: rowdata.sum, invoiceRelatedDocumentId: orderId};
 
             $.ajax({
                 url: '/invoice/request',
@@ -128,7 +128,7 @@ invoiceTable = $('#invoices').DataTable({
 
     onEditRow: function(datatable, rowdata, success, error) {
 
-        invoiceDto = {id: rowdata.id, stuffId: rowdata.stuffId, sum: rowdata.sum, invoiceRelatedDocumentId: orderId};
+        invoiceDto = {id: rowdata.id, contragentID: rowdata.contragentID, sum: rowdata.sum, invoiceRelatedDocumentId: orderId};
 
         $.ajax({
             url: '/invoice/request',

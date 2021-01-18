@@ -21,14 +21,19 @@ public class InvoiceController {
 
 
     @GetMapping("/invoice/request")
-    public ResponseEntity getTheInvoice(@RequestParam Long orderId) {
-        List<InvoiceDto> invoiceDtos = invoiceService.getInvoicesByOrder(orderId);
+    public ResponseEntity getInvoicesByOrder(@RequestParam Long orderId) {
+        List<InvoiceDto> invoiceDtos = invoiceService.getInvoicesByIRD(orderId);
         return new ResponseEntity(invoiceDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/the-invoice")
+    public ResponseEntity getTheInvoiceByCost(@RequestParam Long costId) {
+        InvoiceDto invoiceDto = invoiceService.getInvoicesByIRD(costId).get(0);;
+        return new ResponseEntity(invoiceDto, HttpStatus.OK);
     }
 
     @PostMapping("/invoice/request")
     public ResponseEntity newOrderInvoice (@RequestBody InvoiceDto invoiceDto) {
-        System.out.println(invoiceDto);
         invoiceService.newOrderInvoice(invoiceDto);
         return new ResponseEntity(invoiceDto, HttpStatus.OK);
     }
@@ -40,6 +45,12 @@ public class InvoiceController {
             invoiceService.newOrderInvoice(invoiceDto);
         }
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/new-invoice")
+    public ResponseEntity newCostInvoices (@RequestBody InvoiceDto invoiceDto) {
+        invoiceDto = invoiceService.newInvoice(invoiceDto);
+        return new ResponseEntity(invoiceDto, HttpStatus.OK);
     }
 
 

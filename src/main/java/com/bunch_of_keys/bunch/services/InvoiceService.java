@@ -1,13 +1,9 @@
 package com.bunch_of_keys.bunch.services;
 
 import com.bunch_of_keys.bunch.domain.bills.*;
-import com.bunch_of_keys.bunch.domain.contragents.Stuff;
 import com.bunch_of_keys.bunch.domain.contragents.StuffRepository;
-import com.bunch_of_keys.bunch.domain.documents.InvoiceRelatedDocument;
 import com.bunch_of_keys.bunch.domain.documents.IrdRepository;
-import com.bunch_of_keys.bunch.domain.documents.OrderRepository;
 import com.bunch_of_keys.bunch.dto.InvoiceDto;
-import com.bunch_of_keys.bunch.dto.PositionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +26,7 @@ public class InvoiceService {
     StuffRepository stuffRepository;
 
 
-    public List<InvoiceDto> getInvoicesByOrder(Long IrdId) {
+    public List<InvoiceDto> getInvoicesByIRD(Long IrdId) {
 
         List<Invoice> invoices = invoiceRepository.getByInvoiceRelatedDocument_id(IrdId);
         List<InvoiceDto> invoiceDtos = new ArrayList<>();
@@ -39,7 +35,7 @@ public class InvoiceService {
 
             InvoiceDto invoiceDto = new InvoiceDto();
             invoiceDto.setId(invoice.getId());
-            invoiceDto.setStuffId(invoice.getStuff().getId());
+            invoiceDto.setContragentId(invoice.getInvoiceRelatedContragent().getId());
             invoiceDto.setInvoiceRelatedDocumentId(IrdId);
             invoiceDto.setSum(invoice.getSum());
 
@@ -61,7 +57,7 @@ public class InvoiceService {
         Invoice invoice = new Invoice();
 
         invoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
-        invoice.setStuff(stuffRepository.getOne(invoiceDto.getStuffId()));
+        invoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getContragentId()));
         invoice.setSum(invoiceDto.getSum());
 
         invoiceRepository.save(invoice);
@@ -74,12 +70,27 @@ public class InvoiceService {
         Invoice theInvoice = invoiceRepository.getOne(invoiceDto.getId());
 
         theInvoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
-        theInvoice.setStuff(stuffRepository.getOne(invoiceDto.getStuffId()));
+        theInvoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getContragentId()));
         theInvoice.setSum(invoiceDto.getSum());
 
         invoiceRepository.save(theInvoice);
 
         invoicePositionService.editInvoicePositionFromOrderInvoice(invoiceDto.getSum(), theInvoice);
+
+        return invoiceDto;
+    }
+
+    public InvoiceDto newInvoice(InvoiceDto invoiceDto) {
+
+        Invoice newInvoice = new Invoice();
+
+        newInvoice.setInvoiceRelatedDocument(irdRepository.getOne(invoiceDto.getInvoiceRelatedDocumentId()));
+        newInvoice.setInvoiceRelatedContragent(stuffRepository.getOne(invoiceDto.getContragentId()));
+        newInvoice.setSum(invoiceDto.getSum());
+
+        invoiceRepository.save(newInvoice);
+
+        invoiceDto.setId(newInvoice.getId());
 
         return invoiceDto;
     }
