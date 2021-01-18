@@ -21,7 +21,7 @@ var invoiceColumns = [
     type: "readonly"
     },
     {
-    data: "stuffId",
+    data: "contragentId",
     title: "Сотрудник",
     type : "select",
     options : stuffOptions,
@@ -72,7 +72,7 @@ invoiceTable = $('#invoices').DataTable({
 
             newId = "new" + invoiceFrontId.toString();
             theRow = {id: newId,
-                      stuffId: rowdata["stuffId"],
+                      contragentId: rowdata["contragentId"],
                       sum: rowdata["sum"],
                       invoiceRelatedDocumentId: null
                       };
@@ -98,7 +98,7 @@ invoiceTable = $('#invoices').DataTable({
             const index = invoicesArr.findIndex(n => n.id === rowdata["id"]);
 
             theRow = {id: rowdata["id"],
-                      stuffId: rowdata["stuffId"],
+                      contragentId: rowdata["contragentId"],
                       sum: rowdata["sum"],
                       invoiceRelatedDocumentId: null
                       };

@@ -107,7 +107,7 @@ public class OrderService {
     }
 
     public OrderDto createNewOrder(OrderDto orderDto) {
-        
+
         Order order = new Order();
         Customer customer = customerRepository.getOne(orderDto.getCustomerDto().getId());
         order.setCustomer(customer);

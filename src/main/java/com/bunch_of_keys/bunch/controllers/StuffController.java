@@ -31,9 +31,9 @@ public class StuffController {
     }
 
     @GetMapping("/get-the-stuff/request")
-    public ResponseEntity getTheStuff (@RequestParam Long stuffId) throws Exception {
+    public ResponseEntity getTheStuff (@RequestParam Long contragentId) throws Exception {
 
-        StuffDto stuffResp = stuffService.getTheStuff(stuffId);
+        StuffDto stuffResp = stuffService.getTheStuff(contragentId);
 
         return new ResponseEntity(stuffResp, HttpStatus.OK);
     }
