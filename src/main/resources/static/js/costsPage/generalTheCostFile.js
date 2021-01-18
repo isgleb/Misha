@@ -1,4 +1,5 @@
 var costId = parseInt((window.location.href.split("/").pop()));
+$("#order-id").text(costId);
 
 var costDto;
 var invoiceDto;

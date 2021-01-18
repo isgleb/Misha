@@ -78,12 +78,12 @@ $("#save").click(function() {
 
 ////        создание Invoice
         invoiceDto = {id: null,
-                      stuffId: cost.contragent.id,
+                      contragentId: cost.contragent.id,
                       invoiceRelatedDocumentId: costDto.id,
                       sum: costSum
                       };
 
-//        console.log(invoiceDto);
+        console.log(invoiceDto);
 
         $.ajax({
                 url: "/new-invoice",
