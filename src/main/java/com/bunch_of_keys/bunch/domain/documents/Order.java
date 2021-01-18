@@ -50,4 +50,16 @@ public class Order extends InvoiceRelatedDocument{
 //    @OneToMany(mappedBy = "cost", cascade = CascadeType.ALL)
 //    List<Cost> invoicePositions;
 
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "status=" + status +
+                ", address=" + address +
+                ", date=" + date +
+                ", meters=" + meters +
+                ", customer=" + customer +
+                ", positions=" + positions +
+                '}';
+    }
 }
